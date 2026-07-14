@@ -10,3 +10,7 @@ Intraday/data/*.csv
 *.pbix
 *.bak
 *_backup.py
+# Legacy / root-level research workspace not part of active Intraday system
+/core/
+/scripts/
+/data/
