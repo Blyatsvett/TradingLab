@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+
+Intraday/data/*.db
+Intraday/data/*.xlsx
+Intraday/data/logs/
+Intraday/data/*.csv
+
+*.pbix
+*.bak
+*_backup.py
