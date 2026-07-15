@@ -1,16 +1,22 @@
 import os
 import sqlite3
+
 import pandas as pd
 
-from Intraday.core.paths import PAPER_TRADES, INTRADAY_DB
 from Intraday.core.export_utils import export_csv_for_power_bi
+from Intraday.core.orb_config import ORB_INITIAL_CAPITAL, ORB_POSITION_SIZE
+from Intraday.core.orb_execution import execute_long_orb_trade
+from Intraday.core.paths import INTRADAY_DB, PAPER_TRADES
 
 
 TRADES_FILE = PAPER_TRADES
 DB_FILE = INTRADAY_DB
 
-INITIAL_CAPITAL = 10000
-POSITION_SIZE_PCT = 0.10
+INITIAL_CAPITAL = ORB_INITIAL_CAPITAL
+POSITION_SIZE_PCT = ORB_POSITION_SIZE
+
+EOD_EXIT_TIME = "16:30"
+SAME_BAR_PRIORITY = "STOP"
 
 
 TEXT_COLUMNS = [
@@ -30,10 +36,12 @@ NUMERIC_COLUMNS = [
 ]
 
 
-def ensure_columns(trades):
+def ensure_columns(trades: pd.DataFrame) -> pd.DataFrame:
+    trades = trades.copy()
+
     for col in TEXT_COLUMNS:
         if col not in trades.columns:
-            trades[col] = None
+            trades[col] = ""
 
     for col in NUMERIC_COLUMNS:
         if col not in trades.columns:
@@ -42,125 +50,170 @@ def ensure_columns(trades):
     for col in NUMERIC_COLUMNS:
         trades[col] = pd.to_numeric(trades[col], errors="coerce").fillna(0)
 
-    trades["exit_time"] = trades["exit_time"].astype("object")
-    trades["exit_reason"] = trades["exit_reason"].astype("object")
+    trades["exit_time"] = trades["exit_time"].fillna("").astype("object")
+    trades["exit_reason"] = trades["exit_reason"].fillna("").astype("object")
 
     return trades
 
 
-def calculate_trade_quality(entry_time, exit_time, entry_price, stop_price, exit_price):
-    entry_time_dt = pd.to_datetime(entry_time)
-    exit_time_dt = pd.to_datetime(exit_time)
+def load_prices_from_db() -> pd.DataFrame:
+    if not os.path.exists(DB_FILE):
+        raise FileNotFoundError(f"Missing intraday database: {DB_FILE}")
 
-    trade_duration_minutes = (
-        exit_time_dt - entry_time_dt
-    ).total_seconds() / 60
+    conn = sqlite3.connect(DB_FILE)
 
-    risk_per_share = entry_price - stop_price
+    try:
+        prices = pd.read_sql("SELECT * FROM intraday_prices", conn)
+    finally:
+        conn.close()
 
-    if risk_per_share > 0:
-        r_multiple_achieved = (exit_price - entry_price) / risk_per_share
-    else:
-        r_multiple_achieved = 0
+    if prices.empty:
+        raise ValueError("intraday_prices table is empty.")
 
-    return trade_duration_minutes, risk_per_share, r_multiple_achieved
+    required_columns = [
+        "ticker",
+        "datetime",
+        "high",
+        "low",
+        "close",
+    ]
+
+    for column in required_columns:
+        if column not in prices.columns:
+            raise ValueError(f"intraday_prices missing required column: {column}")
+
+    prices["datetime"] = pd.to_datetime(prices["datetime"], errors="coerce")
+
+    for column in ["high", "low", "close"]:
+        prices[column] = pd.to_numeric(prices[column], errors="coerce")
+
+    prices = prices.dropna(
+        subset=[
+            "ticker",
+            "datetime",
+            "high",
+            "low",
+            "close",
+        ]
+    )
+
+    prices = prices.sort_values(["ticker", "datetime"]).reset_index(drop=True)
+
+    return prices
 
 
-def main():
+def update_open_trade(
+    trades: pd.DataFrame,
+    idx: int,
+    trade: pd.Series,
+    prices: pd.DataFrame,
+) -> bool:
+    ticker = str(trade["ticker"])
+    entry_time = pd.to_datetime(trade["entry_time"], errors="coerce")
+
+    if pd.isna(entry_time):
+        print(f"Skipping trade with invalid entry_time: index={idx}, ticker={ticker}")
+        return False
+
+    ticker_prices = prices[prices["ticker"].astype(str) == ticker].copy()
+
+    if ticker_prices.empty:
+        print(f"No prices found for open trade: ticker={ticker}, entry_time={entry_time}")
+        return False
+
+    entry_price = float(trade["entry_price"])
+    stop_price = float(trade["stop_price"])
+    target_price = float(trade["target_price"])
+
+    result = execute_long_orb_trade(
+        entry_time=entry_time,
+        entry_price=entry_price,
+        stop_price=stop_price,
+        target_price=target_price,
+        bars=ticker_prices,
+        timestamp_col="datetime",
+        close_if_no_hit=True,
+        same_bar_priority=SAME_BAR_PRIORITY,
+        eod_exit_time=EOD_EXIT_TIME,
+    )
+
+    if result.status != "CLOSED":
+        print(
+            "Trade remains open: "
+            f"ticker={ticker}, entry_time={entry_time}, reason={result.exit_reason}"
+        )
+        return False
+
+    position_size_sek = INITIAL_CAPITAL * POSITION_SIZE_PCT
+    pnl_sek = position_size_sek * result.pnl_pct
+
+    trades.loc[idx, "status"] = "CLOSED"
+    trades.loc[idx, "exit_time"] = result.exit_time
+    trades.loc[idx, "exit_price"] = result.exit_price
+    trades.loc[idx, "exit_reason"] = result.exit_reason
+    trades.loc[idx, "pnl_pct"] = result.pnl_pct
+    trades.loc[idx, "position_size_sek"] = position_size_sek
+    trades.loc[idx, "pnl_sek"] = pnl_sek
+    trades.loc[idx, "trade_duration_minutes"] = result.trade_duration_minutes
+    trades.loc[idx, "risk_per_share"] = result.risk_per_share
+    trades.loc[idx, "r_multiple_achieved"] = result.r_multiple_achieved
+
+    print(
+        "Closed trade: "
+        f"ticker={ticker}, "
+        f"entry_time={entry_time}, "
+        f"exit_time={result.exit_time}, "
+        f"exit_reason={result.exit_reason}, "
+        f"pnl_sek={pnl_sek:.2f}"
+    )
+
+    return True
+
+
+def main() -> None:
+    print("\n=== UPDATE PAPER TRADES ===")
+    print("Using shared ORB execution engine.")
+    print(f"EOD exit time: {EOD_EXIT_TIME}")
+    print(f"Same-bar priority: {SAME_BAR_PRIORITY}")
+
     if not os.path.exists(TRADES_FILE):
         print(f"Missing trades file: {TRADES_FILE}")
         return
 
-    trades = pd.read_csv(TRADES_FILE)
+    trades = pd.read_csv(TRADES_FILE, dtype={"trade_id": str})
 
-    if len(trades) == 0:
+    if trades.empty:
         print("No paper trades found.")
         return
 
     trades = ensure_columns(trades)
-
-    conn = sqlite3.connect(DB_FILE)
-    prices = pd.read_sql("SELECT * FROM intraday_prices", conn)
-    conn.close()
-
-    prices["datetime"] = pd.to_datetime(prices["datetime"])
+    prices = load_prices_from_db()
 
     updated = 0
+    open_trades = 0
 
     for idx, trade in trades.iterrows():
-        if trade["status"] != "OPEN":
+        status = str(trade["status"]).upper().strip()
+
+        if status != "OPEN":
             continue
 
-        ticker = trade["ticker"]
-        entry_time = pd.to_datetime(trade["entry_time"])
+        open_trades += 1
 
-        ticker_prices = prices[
-            (prices["ticker"] == ticker)
-            & (prices["datetime"] > entry_time)
-        ].sort_values("datetime")
-
-        if len(ticker_prices) == 0:
-            continue
-
-        stop_price = float(trade["stop_price"])
-        target_price = float(trade["target_price"])
-        entry_price = float(trade["entry_price"])
-
-        exit_time = None
-        exit_price = None
-        exit_reason = None
-
-        for _, row in ticker_prices.iterrows():
-            if row["low"] <= stop_price:
-                exit_time = row["datetime"]
-                exit_price = stop_price
-                exit_reason = "STOP_HIT"
-                break
-
-            if row["high"] >= target_price:
-                exit_time = row["datetime"]
-                exit_price = target_price
-                exit_reason = "TARGET_HIT"
-                break
-
-        if exit_reason is None:
-            last_row = ticker_prices.iloc[-1]
-            exit_time = last_row["datetime"]
-            exit_price = float(last_row["close"])
-            exit_reason = "CLOSED_EOD"
-
-        pnl_pct = exit_price / entry_price - 1
-        position_size_sek = INITIAL_CAPITAL * POSITION_SIZE_PCT
-        pnl_sek = position_size_sek * pnl_pct
-
-        (
-            trade_duration_minutes,
-            risk_per_share,
-            r_multiple_achieved,
-        ) = calculate_trade_quality(
-            entry_time=trade["entry_time"],
-            exit_time=exit_time,
-            entry_price=entry_price,
-            stop_price=stop_price,
-            exit_price=exit_price,
+        was_updated = update_open_trade(
+            trades=trades,
+            idx=idx,
+            trade=trade,
+            prices=prices,
         )
 
-        trades.loc[idx, "status"] = "CLOSED"
-        trades.loc[idx, "exit_time"] = str(exit_time)
-        trades.loc[idx, "exit_price"] = exit_price
-        trades.loc[idx, "exit_reason"] = exit_reason
-        trades.loc[idx, "pnl_pct"] = pnl_pct
-        trades.loc[idx, "position_size_sek"] = position_size_sek
-        trades.loc[idx, "pnl_sek"] = pnl_sek
-        trades.loc[idx, "trade_duration_minutes"] = trade_duration_minutes
-        trades.loc[idx, "risk_per_share"] = risk_per_share
-        trades.loc[idx, "r_multiple_achieved"] = r_multiple_achieved
-
-        updated += 1
+        if was_updated:
+            updated += 1
 
     export_csv_for_power_bi(trades, TRADES_FILE)
 
     print("\n=== PAPER TRADES UPDATED ===")
+    print(f"Open trades checked: {open_trades}")
     print(f"Updated trades: {updated}")
     print(trades.to_string(index=False))
     print(f"\nSaved -> {TRADES_FILE}")
