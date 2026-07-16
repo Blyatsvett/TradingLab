@@ -1,11 +1,11 @@
 import pandas as pd
 
-from Intraday.core.paths import DATA_DIR
-from Intraday.core.orb_strategy import (
-    load_intraday_prices,
-    build_orb_trades,
-    simulate_orb_equity,
+from Intraday.core.orb_research import (
+    load_normalised_intraday_prices,
+    run_research_backtest,
+    summarize_research_backtest,
 )
+from Intraday.core.paths import DATA_DIR
 
 
 ALL_TICKERS = [
@@ -20,93 +20,121 @@ ALL_TICKERS = [
 
 INITIAL_CAPITAL = 10000
 POSITION_SIZE = 0.10
+COST_PER_TRADE = 0.0005
+
+BREAKOUT_START = "09:35"
+BREAKOUT_END = "11:00"
+R_MULTIPLE = 1.0
+MAX_OPENING_RANGE = 0.03
+MIN_GAP = 0.0
+
+SAME_BAR_PRIORITY = "STOP"
+
+# Research/backtest convention:
+# use final available bar of the day for EOD closes.
+EOD_EXIT_TIME = None
 
 OUTPUT_FILE = DATA_DIR / "orb_ticker_optimization.csv"
 
 
-def calculate_max_drawdown(equity_curve):
-    if len(equity_curve) == 0:
-        return None
-
-    rolling_peak = equity_curve["equity"].cummax().clip(lower=INITIAL_CAPITAL)
-    drawdown = equity_curve["equity"] / rolling_peak - 1
-    return drawdown.min()
-
-
-def evaluate_tickers(tickers, label):
-    df = load_intraday_prices()
-
-    trades = build_orb_trades(
-        df=df,
+def evaluate_tickers(
+    prices: pd.DataFrame,
+    tickers: list[str],
+    label: str,
+) -> dict | None:
+    trades, equity_curve = run_research_backtest(
+        prices=prices,
         allowed_tickers=tickers,
-        breakout_start="09:35",
-        breakout_end="11:00",
-        r_multiple=1.0,
-        max_opening_range=0.03,
-        min_gap=0.0,
-        cost_per_trade=0.0005,
-    )
-
-    if len(trades) == 0:
-        return None
-
-    trades = trades.sort_values("entry_time").reset_index(drop=True)
-
-    trades, equity_curve = simulate_orb_equity(
-        trades,
+        breakout_start=BREAKOUT_START,
+        breakout_end=BREAKOUT_END,
+        r_multiple=R_MULTIPLE,
+        max_opening_range=MAX_OPENING_RANGE,
+        min_gap=MIN_GAP,
+        cost_per_trade=COST_PER_TRADE,
         initial_capital=INITIAL_CAPITAL,
         position_size=POSITION_SIZE,
+        same_bar_priority=SAME_BAR_PRIORITY,
+        eod_exit_time=EOD_EXIT_TIME,
+        verbose=False,
     )
 
-    final_equity = equity_curve["equity"].iloc[-1]
-    total_return = final_equity / INITIAL_CAPITAL - 1
-    win_rate = (trades["net_return"] > 0).mean()
-    avg_trade = trades["net_return"].mean()
-    max_dd = calculate_max_drawdown(equity_curve)
+    summary = summarize_research_backtest(
+        trades=trades,
+        equity_curve=equity_curve,
+        initial_capital=INITIAL_CAPITAL,
+    )
 
-    gross_profit = trades.loc[trades["pnl"] > 0, "pnl"].sum()
-    gross_loss = abs(trades.loc[trades["pnl"] < 0, "pnl"].sum())
-
-    profit_factor = gross_profit / gross_loss if gross_loss > 0 else None
+    if summary is None:
+        return None
 
     return {
         "label": label,
         "tickers": ",".join(tickers),
         "ticker_count": len(tickers),
-        "trades": len(trades),
-        "final_equity": final_equity,
-        "total_return": total_return,
-        "win_rate": win_rate,
-        "avg_trade": avg_trade,
-        "max_drawdown": max_dd,
-        "profit_factor": profit_factor,
+        "trades": summary["trades"],
+        "final_equity": summary["final_equity"],
+        "total_return": summary["total_return"],
+        "win_rate": summary["win_rate"],
+        "avg_trade": summary["avg_trade"],
+        "max_drawdown": summary["max_drawdown"],
+        "profit_factor": summary["profit_factor"],
     }
 
 
-def main():
+def main() -> None:
     print("\n=== ORB TICKER OPTIMIZATION ===")
+    print("Using shared ORB execution engine.")
+    print(f"Breakout window: {BREAKOUT_START} to {BREAKOUT_END}")
+    print(f"R multiple: {R_MULTIPLE}")
+    print(f"Max opening range: {MAX_OPENING_RANGE:.2%}")
+    print(f"Min gap: {MIN_GAP:.2%}")
+    print(f"Cost per trade: {COST_PER_TRADE:.4%}")
+    print(f"Same-bar priority: {SAME_BAR_PRIORITY}")
+    print(f"EOD exit time: {EOD_EXIT_TIME}")
+
+    prices = load_normalised_intraday_prices()
 
     results = []
 
     # Individual ticker performance
     for ticker in ALL_TICKERS:
-        result = evaluate_tickers([ticker], ticker)
-        if result:
+        result = evaluate_tickers(
+            prices=prices,
+            tickers=[ticker],
+            label=ticker,
+        )
+
+        if result is not None:
             results.append(result)
 
     # Remove one ticker at a time
     for ticker in ALL_TICKERS:
         tickers = [t for t in ALL_TICKERS if t != ticker]
-        result = evaluate_tickers(tickers, f"WITHOUT_{ticker}")
-        if result:
+
+        result = evaluate_tickers(
+            prices=prices,
+            tickers=tickers,
+            label=f"WITHOUT_{ticker}",
+        )
+
+        if result is not None:
             results.append(result)
 
     # Full basket
-    result = evaluate_tickers(ALL_TICKERS, "ALL_TICKERS")
-    if result:
+    result = evaluate_tickers(
+        prices=prices,
+        tickers=ALL_TICKERS,
+        label="ALL_TICKERS",
+    )
+
+    if result is not None:
         results.append(result)
 
     results_df = pd.DataFrame(results)
+
+    if results_df.empty:
+        print("No ticker optimization results found.")
+        return
 
     results_df = results_df.sort_values(
         ["total_return", "profit_factor", "trades"],

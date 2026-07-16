@@ -1,12 +1,13 @@
 import itertools
+
 import pandas as pd
 
-from Intraday.core.paths import DATA_DIR
-from Intraday.core.orb_strategy import (
-    load_intraday_prices,
-    build_orb_trades,
-    simulate_orb_equity,
+from Intraday.core.orb_research import (
+    load_normalised_intraday_prices,
+    run_research_backtest,
+    summarize_research_backtest,
 )
+from Intraday.core.paths import DATA_DIR
 
 
 ALLOWED_TICKERS = [
@@ -21,6 +22,13 @@ ALLOWED_TICKERS = [
 
 INITIAL_CAPITAL = 10000
 POSITION_SIZE = 0.10
+COST_PER_TRADE = 0.0005
+
+SAME_BAR_PRIORITY = "STOP"
+
+# Research/backtest convention:
+# use final available bar of the day for EOD closes.
+EOD_EXIT_TIME = None
 
 OUTPUT_FILE = DATA_DIR / "orb_parameter_optimization.csv"
 
@@ -35,20 +43,13 @@ BREAKOUT_WINDOWS = [
 ]
 
 
-def max_drawdown(equity_curve):
-    if len(equity_curve) == 0:
-        return None
-
-    rolling_peak = equity_curve["equity"].cummax().clip(lower=INITIAL_CAPITAL)
-    drawdown = equity_curve["equity"] / rolling_peak - 1
-
-    return drawdown.min()
-
-
-def main():
+def main() -> None:
     print("\n=== ORB PARAMETER OPTIMIZATION ===")
+    print("Using shared ORB execution engine.")
+    print(f"Same-bar priority: {SAME_BAR_PRIORITY}")
+    print(f"EOD exit time: {EOD_EXIT_TIME}")
 
-    df = load_intraday_prices()
+    prices = load_normalised_intraday_prices()
 
     results = []
 
@@ -63,67 +64,66 @@ def main():
 
     print(f"Testing combinations: {len(combinations)}")
 
-    for i, (r_multiple, max_range, min_gap, window) in enumerate(combinations, start=1):
+    for i, (r_multiple, max_range, min_gap, window) in enumerate(
+        combinations,
+        start=1,
+    ):
         breakout_start, breakout_end = window
 
-        trades = build_orb_trades(
-            df=df,
+        trades, equity_curve = run_research_backtest(
+            prices=prices,
             allowed_tickers=ALLOWED_TICKERS,
             breakout_start=breakout_start,
             breakout_end=breakout_end,
             r_multiple=r_multiple,
             max_opening_range=max_range,
             min_gap=min_gap,
-            cost_per_trade=0.0005,
-        )
-
-        if len(trades) == 0:
-            continue
-
-        trades = trades.sort_values("entry_time").reset_index(drop=True)
-
-        trades, equity_curve = simulate_orb_equity(
-            trades,
+            cost_per_trade=COST_PER_TRADE,
             initial_capital=INITIAL_CAPITAL,
             position_size=POSITION_SIZE,
+            same_bar_priority=SAME_BAR_PRIORITY,
+            eod_exit_time=EOD_EXIT_TIME,
+            verbose=False,
         )
 
-        final_equity = equity_curve["equity"].iloc[-1]
-        total_return = final_equity / INITIAL_CAPITAL - 1
-        win_rate = (trades["net_return"] > 0).mean()
-        avg_trade = trades["net_return"].mean()
-        dd = max_drawdown(equity_curve)
-
-        profit_factor = (
-            trades.loc[trades["pnl"] > 0, "pnl"].sum()
-            / abs(trades.loc[trades["pnl"] < 0, "pnl"].sum())
-            if abs(trades.loc[trades["pnl"] < 0, "pnl"].sum()) > 0
-            else None
+        summary = summarize_research_backtest(
+            trades=trades,
+            equity_curve=equity_curve,
+            initial_capital=INITIAL_CAPITAL,
         )
 
-        results.append({
-            "r_multiple": r_multiple,
-            "max_opening_range": max_range,
-            "min_gap": min_gap,
-            "breakout_start": breakout_start,
-            "breakout_end": breakout_end,
-            "trades": len(trades),
-            "final_equity": final_equity,
-            "total_return": total_return,
-            "win_rate": win_rate,
-            "avg_trade": avg_trade,
-            "max_drawdown": dd,
-            "profit_factor": profit_factor,
-        })
+        if summary is None:
+            continue
+
+        results.append(
+            {
+                "r_multiple": r_multiple,
+                "max_opening_range": max_range,
+                "min_gap": min_gap,
+                "breakout_start": breakout_start,
+                "breakout_end": breakout_end,
+                "trades": summary["trades"],
+                "final_equity": summary["final_equity"],
+                "total_return": summary["total_return"],
+                "win_rate": summary["win_rate"],
+                "avg_trade": summary["avg_trade"],
+                "max_drawdown": summary["max_drawdown"],
+                "profit_factor": summary["profit_factor"],
+            }
+        )
 
         print(
             f"{i}/{len(combinations)} "
             f"R={r_multiple}, range={max_range:.2%}, gap={min_gap:.2%}, "
             f"{breakout_start}-{breakout_end} "
-            f"=> return={total_return:.2%}, trades={len(trades)}"
+            f"=> return={summary['total_return']:.2%}, trades={summary['trades']}"
         )
 
     results_df = pd.DataFrame(results)
+
+    if results_df.empty:
+        print("No optimization results found.")
+        return
 
     results_df = results_df.sort_values(
         ["total_return", "profit_factor", "trades"],
