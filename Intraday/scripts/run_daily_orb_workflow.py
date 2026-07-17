@@ -24,6 +24,7 @@ COMMANDS = [
     ("Export strategy config snapshot", "Intraday.scripts.export_strategy_config_snapshot"),
     ("Export workflow run audit", "Intraday.scripts.export_workflow_run_audit"),
     ("Export risk filter shadow report", "Intraday.scripts.research_orb_risk_filter_shadow_report"),
+    ("Export position sizing shadow report", "Intraday.scripts.research_orb_position_sizing_shadow_report"),
     ("Export Power BI workbook", "Intraday.scripts.export_powerbi_workbook"),
     ("Validate daily outputs", "Intraday.scripts.validate_daily_outputs"),
 ]

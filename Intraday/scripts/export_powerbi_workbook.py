@@ -19,6 +19,14 @@ TABLES = {
     "orb_parameter_optimization": DATA_DIR / "orb_parameter_optimization.csv",
     "orb_ticker_optimization": DATA_DIR / "orb_ticker_optimization.csv",
     "orb_portfolio_simulation": DATA_DIR / "orb_portfolio_simulation.csv",
+    "orb_risk_filter_shadow_summary": DATA_DIR / "orb_risk_filter_shadow_summary.csv",
+    "orb_risk_filter_shadow_report": DATA_DIR / "orb_risk_filter_shadow_report.csv",
+    "orb_risk_filter_shadow_candidates": DATA_DIR / "orb_risk_filter_shadow_candidates.csv",
+    "orb_position_sizing_shadow_summary": DATA_DIR / "orb_position_sizing_shadow_summary.csv",
+    "orb_position_sizing_shadow_report": DATA_DIR / "orb_position_sizing_shadow_report.csv",
+    "orb_position_sizing_shadow_daily_summary": DATA_DIR / "orb_position_sizing_shadow_daily_summary.csv",
+    "orb_position_sizing_shadow_trades": DATA_DIR / "orb_position_sizing_shadow_trades.csv",
+    "orb_position_sizing_shadow_equity_curve": DATA_DIR / "orb_position_sizing_shadow_equity_curve.csv",
 }
 
 
