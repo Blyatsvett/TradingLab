@@ -27,6 +27,15 @@ TABLES = {
     "orb_position_sizing_shadow_daily_summary": DATA_DIR / "orb_position_sizing_shadow_daily_summary.csv",
     "orb_position_sizing_shadow_trades": DATA_DIR / "orb_position_sizing_shadow_trades.csv",
     "orb_position_sizing_shadow_equity_curve": DATA_DIR / "orb_position_sizing_shadow_equity_curve.csv",
+    "intraday_market_regime": DATA_DIR / "intraday_market_regime.csv",
+    "intraday_strategy_lab_summary": DATA_DIR / "intraday_strategy_lab_summary.csv",
+    "intraday_strategy_lab_trades": DATA_DIR / "intraday_strategy_lab_trades.csv",
+    "intraday_strategy_lab_equity_curve": DATA_DIR / "intraday_strategy_lab_equity_curve.csv",
+    "intraday_strategy_lab_daily_summary": DATA_DIR / "intraday_strategy_lab_daily_summary.csv",
+    "intraday_strategy_lab_overlap": DATA_DIR / "intraday_strategy_lab_overlap.csv",
+    "intraday_strategy_lab_regime_summary": DATA_DIR / "intraday_strategy_lab_regime_summary.csv",
+    "intraday_strategy_lab_candidates": DATA_DIR / "intraday_strategy_lab_candidates.csv",
+    "intraday_strategy_lab_market_regime": DATA_DIR / "intraday_strategy_lab_market_regime.csv",
 }
 
 

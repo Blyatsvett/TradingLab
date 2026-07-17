@@ -23,6 +23,8 @@ COMMANDS = [
     ("Export paper account equity curve", "Intraday.scripts.export_paper_account_equity_curve"),
     ("Export strategy config snapshot", "Intraday.scripts.export_strategy_config_snapshot"),
     ("Export workflow run audit", "Intraday.scripts.export_workflow_run_audit"),
+    ("Export intraday market regime", "Intraday.scripts.export_intraday_market_regime"),
+    ("Run intraday strategy lab", "Intraday.scripts.research_intraday_strategy_lab"),
     ("Export risk filter shadow report", "Intraday.scripts.research_orb_risk_filter_shadow_report"),
     ("Export position sizing shadow report", "Intraday.scripts.research_orb_position_sizing_shadow_report"),
     ("Export Power BI workbook", "Intraday.scripts.export_powerbi_workbook"),
