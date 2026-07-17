@@ -36,6 +36,8 @@ TABLES = {
     "intraday_strategy_lab_regime_summary": DATA_DIR / "intraday_strategy_lab_regime_summary.csv",
     "intraday_strategy_lab_candidates": DATA_DIR / "intraday_strategy_lab_candidates.csv",
     "intraday_strategy_lab_market_regime": DATA_DIR / "intraday_strategy_lab_market_regime.csv",
+    "strategy_lab_orb_baseline_comparison_summary": DATA_DIR / "strategy_lab_orb_baseline_comparison_summary.csv",
+    "strategy_lab_orb_baseline_comparison_mismatches": DATA_DIR / "strategy_lab_orb_baseline_comparison_mismatches.csv",
 }
 
 

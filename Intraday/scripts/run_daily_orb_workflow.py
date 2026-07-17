@@ -25,6 +25,7 @@ COMMANDS = [
     ("Export workflow run audit", "Intraday.scripts.export_workflow_run_audit"),
     ("Export intraday market regime", "Intraday.scripts.export_intraday_market_regime"),
     ("Run intraday strategy lab", "Intraday.scripts.research_intraday_strategy_lab"),
+    ("Compare Strategy Lab ORB baseline", "Intraday.scripts.compare_strategy_lab_orb_baseline"),
     ("Export risk filter shadow report", "Intraday.scripts.research_orb_risk_filter_shadow_report"),
     ("Export position sizing shadow report", "Intraday.scripts.research_orb_position_sizing_shadow_report"),
     ("Export Power BI workbook", "Intraday.scripts.export_powerbi_workbook"),
