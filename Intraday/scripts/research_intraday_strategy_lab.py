@@ -86,7 +86,10 @@ def detect_timestamp_column(df: pd.DataFrame) -> str:
     )
 
 
-def prepare_prices(prices: pd.DataFrame) -> pd.DataFrame:
+def prepare_prices(
+    prices: pd.DataFrame,
+    allowed_tickers: list[str] | None = None,
+) -> pd.DataFrame:
     df = prices.copy()
 
     timestamp_col = detect_timestamp_column(df)
@@ -112,7 +115,9 @@ def prepare_prices(prices: pd.DataFrame) -> pd.DataFrame:
     if "volume" not in df.columns:
         df["volume"] = 0.0
 
-    df = df[df["ticker"].isin(ORB_ALLOWED_TICKERS)].copy()
+    if allowed_tickers is not None:
+        df = df[df["ticker"].isin(allowed_tickers)].copy()
+
     df = df.dropna(subset=["open", "high", "low", "close"])
     df = df.sort_values(["ticker", "timestamp"]).reset_index(drop=True)
 
@@ -309,10 +314,17 @@ def safe_execute_long_trade(
     return row
 
 
-def build_orb_breakout_candidates(raw_prices: pd.DataFrame) -> pd.DataFrame:
+def build_orb_breakout_candidates(
+    raw_prices: pd.DataFrame,
+    allowed_tickers: list[str] | None = None,
+) -> pd.DataFrame:
+    if allowed_tickers is None:
+        prepared = prepare_prices(raw_prices, allowed_tickers=None)
+        allowed_tickers = sorted(prepared["ticker"].dropna().unique())
+
     trades = build_research_trades(
         prices=raw_prices,
-        allowed_tickers=ORB_ALLOWED_TICKERS,
+        allowed_tickers=allowed_tickers,
         breakout_start=ORB_BREAKOUT_START,
         breakout_end=ORB_BREAKOUT_END,
         r_multiple=ORB_R_MULTIPLE,
@@ -1145,7 +1157,7 @@ def main() -> None:
     print(f"EOD exit time: {EOD_EXIT_TIME}")
 
     raw_prices = load_normalised_intraday_prices()
-    prices = prepare_prices(raw_prices)
+    prices = prepare_prices(raw_prices, allowed_tickers=ORB_ALLOWED_TICKERS)
     daily_refs = calculate_daily_references(prices)
 
     market_regime = calculate_daily_market_regime(raw_prices)
@@ -1153,7 +1165,10 @@ def main() -> None:
     strategy_candidate_frames = []
 
     print("\n--- Building ORB breakout baseline candidates ---")
-    orb_breakout = build_orb_breakout_candidates(raw_prices)
+    orb_breakout = build_orb_breakout_candidates(
+        raw_prices,
+        allowed_tickers=ORB_ALLOWED_TICKERS,
+    )
     print(f"{ORB_BREAKOUT_NAME}: {len(orb_breakout)} candidates")
     strategy_candidate_frames.append(orb_breakout)
 

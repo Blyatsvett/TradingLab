@@ -18,12 +18,20 @@ PAPER_ACCOUNT_EQUITY_CURVE = DATA_DIR / "paper_account_equity_curve.csv"
 STRATEGY_CONFIG_SNAPSHOT = DATA_DIR / "strategy_config_snapshot.csv"
 WORKFLOW_RUN_AUDIT = DATA_DIR / "workflow_run_audit.csv"
 
+STRATEGY_LAB_SHADOW_TRADES = DATA_DIR / "strategy_lab_shadow_trades.csv"
+STRATEGY_LAB_SHADOW_LATEST_TRADES = DATA_DIR / "strategy_lab_shadow_latest_trades.csv"
+STRATEGY_LAB_SHADOW_DAILY_SUMMARY = DATA_DIR / "strategy_lab_shadow_daily_summary.csv"
+STRATEGY_LAB_SHADOW_SUMMARY = DATA_DIR / "strategy_lab_shadow_summary.csv"
+STRATEGY_LAB_SHADOW_EQUITY_CURVE = DATA_DIR / "strategy_lab_shadow_equity_curve.csv"
+STRATEGY_LAB_SHADOW_STATUS = DATA_DIR / "strategy_lab_shadow_status.csv"
+
 INITIAL_CAPITAL = float(ORB_INITIAL_CAPITAL)
 
 
 def read_csv(path: Path) -> pd.DataFrame:
     if not path.exists():
         raise FileNotFoundError(f"Missing required file: {path}")
+
     return pd.read_csv(path)
 
 
@@ -37,6 +45,12 @@ def check_required_files(errors: list[str], warnings: list[str]) -> None:
         POWERBI_WORKBOOK,
         STRATEGY_CONFIG_SNAPSHOT,
         WORKFLOW_RUN_AUDIT,
+        STRATEGY_LAB_SHADOW_TRADES,
+        STRATEGY_LAB_SHADOW_LATEST_TRADES,
+        STRATEGY_LAB_SHADOW_DAILY_SUMMARY,
+        STRATEGY_LAB_SHADOW_SUMMARY,
+        STRATEGY_LAB_SHADOW_EQUITY_CURVE,
+        STRATEGY_LAB_SHADOW_STATUS,
     ]
 
     for path in required_files:
@@ -56,6 +70,12 @@ def check_required_files(errors: list[str], warnings: list[str]) -> None:
             ORB_SIGNAL_HISTORY,
             STRATEGY_CONFIG_SNAPSHOT,
             WORKFLOW_RUN_AUDIT,
+            STRATEGY_LAB_SHADOW_TRADES,
+            STRATEGY_LAB_SHADOW_LATEST_TRADES,
+            STRATEGY_LAB_SHADOW_DAILY_SUMMARY,
+            STRATEGY_LAB_SHADOW_SUMMARY,
+            STRATEGY_LAB_SHADOW_EQUITY_CURVE,
+            STRATEGY_LAB_SHADOW_STATUS,
         ]
 
         for path in source_files:
@@ -67,6 +87,8 @@ def check_required_files(errors: list[str], warnings: list[str]) -> None:
 
 
 def check_signal_outputs(errors: list[str], warnings: list[str]) -> None:
+    check_start_errors = len(errors)
+
     latest = read_csv(ORB_SIGNALS_LATEST)
     history = read_csv(ORB_SIGNAL_HISTORY)
 
@@ -94,7 +116,7 @@ def check_signal_outputs(errors: list[str], warnings: list[str]) -> None:
             if column not in df.columns:
                 errors.append(f"{table_name} missing required column: {column}")
 
-    if errors:
+    if len(errors) > check_start_errors:
         return
 
     for table_name, df in [
@@ -103,18 +125,21 @@ def check_signal_outputs(errors: list[str], warnings: list[str]) -> None:
     ]:
         for column in ["signal_key", "scan_date", "ticker", "status"]:
             missing = df[column].isna().sum()
+
             if missing > 0:
                 errors.append(
                     f"{table_name} has {missing} missing values in {column}."
                 )
 
     latest_duplicate_keys = latest["signal_key"].duplicated().sum()
+
     if latest_duplicate_keys > 0:
         errors.append(
             f"orb_signals_latest has {latest_duplicate_keys} duplicate signal_key rows."
         )
 
     history_duplicate_keys = history["signal_key"].duplicated().sum()
+
     if history_duplicate_keys > 0:
         errors.append(
             f"orb_signal_history has {history_duplicate_keys} duplicate signal_key rows."
@@ -134,6 +159,7 @@ def check_signal_outputs(errors: list[str], warnings: list[str]) -> None:
     allowed_statuses = {"INVALID", "NOT_TRIGGERED", "TRIGGERED"}
 
     unexpected_statuses = latest_statuses - allowed_statuses
+
     if unexpected_statuses:
         warnings.append(
             "orb_signals_latest has unexpected statuses: "
@@ -141,6 +167,7 @@ def check_signal_outputs(errors: list[str], warnings: list[str]) -> None:
         )
 
     unique_latest_dates = latest["scan_date"].dropna().unique()
+
     if len(unique_latest_dates) != 1:
         warnings.append(
             "orb_signals_latest should usually contain exactly one scan_date, "
@@ -149,6 +176,8 @@ def check_signal_outputs(errors: list[str], warnings: list[str]) -> None:
 
 
 def check_paper_trades(errors: list[str], warnings: list[str]) -> None:
+    check_start_errors = len(errors)
+
     trades = read_csv(PAPER_TRADES)
 
     if trades.empty:
@@ -156,39 +185,44 @@ def check_paper_trades(errors: list[str], warnings: list[str]) -> None:
         return
 
     required_columns = [
-    "trade_id",
-    "date",
-    "ticker",
-    "status",
-    "pnl_sek",
-    "strategy_version",
-    "initial_capital",
-    "position_size_pct",
-    "max_open_positions",
-    "capital_model",
+        "trade_id",
+        "date",
+        "ticker",
+        "status",
+        "pnl_sek",
+        "strategy_version",
+        "initial_capital",
+        "position_size_pct",
+        "max_open_positions",
+        "capital_model",
     ]
 
     for column in required_columns:
         if column not in trades.columns:
             errors.append(f"paper_trades missing required column: {column}")
 
-    if errors:
+    if len(errors) > check_start_errors:
         return
 
     duplicate_trade_ids = trades["trade_id"].duplicated().sum()
+
     if duplicate_trade_ids > 0:
         errors.append(f"paper_trades has {duplicate_trade_ids} duplicate trade_id rows.")
 
     allowed_statuses = {"OPEN", "CLOSED"}
-    observed_statuses = set(trades["status"].dropna().astype(str).str.upper().unique())
+    observed_statuses = set(
+        trades["status"].dropna().astype(str).str.upper().unique()
+    )
 
     unexpected_statuses = observed_statuses - allowed_statuses
+
     if unexpected_statuses:
         errors.append(
             f"paper_trades has unexpected statuses: {sorted(unexpected_statuses)}"
         )
 
     missing_strategy = trades["strategy_version"].isna().sum()
+
     if missing_strategy > 0:
         warnings.append(
             f"paper_trades has {missing_strategy} rows missing strategy_version."
@@ -243,11 +277,14 @@ def check_paper_trades(errors: list[str], warnings: list[str]) -> None:
         )
 
         missing_pnl = closed["pnl_sek"].isna().sum()
+
         if missing_pnl > 0:
             errors.append(f"Closed paper trades have {missing_pnl} missing pnl_sek.")
 
 
 def check_strategy_equity_curve(errors: list[str], warnings: list[str]) -> None:
+    check_start_errors = len(errors)
+
     curve = read_csv(PAPER_EQUITY_CURVE)
 
     if curve.empty:
@@ -266,7 +303,7 @@ def check_strategy_equity_curve(errors: list[str], warnings: list[str]) -> None:
         if column not in curve.columns:
             errors.append(f"paper_equity_curve missing required column: {column}")
 
-    if errors:
+    if len(errors) > check_start_errors:
         return
 
     curve["trade_number"] = pd.to_numeric(
@@ -306,8 +343,8 @@ def check_strategy_equity_curve(errors: list[str], warnings: list[str]) -> None:
             )
 
     baseline_counts = baseline.groupby("strategy_version").size()
-
     bad_baselines = baseline_counts[baseline_counts != 1]
+
     if not bad_baselines.empty:
         errors.append(
             "paper_equity_curve should have exactly one baseline row per strategy. "
@@ -316,6 +353,8 @@ def check_strategy_equity_curve(errors: list[str], warnings: list[str]) -> None:
 
 
 def check_account_equity_curve(errors: list[str], warnings: list[str]) -> None:
+    check_start_errors = len(errors)
+
     trades = read_csv(PAPER_TRADES)
     account_curve = read_csv(PAPER_ACCOUNT_EQUITY_CURVE)
 
@@ -337,7 +376,7 @@ def check_account_equity_curve(errors: list[str], warnings: list[str]) -> None:
                 f"paper_account_equity_curve missing required column: {column}"
             )
 
-    if errors:
+    if len(errors) > check_start_errors:
         return
 
     account_curve["account_trade_number"] = pd.to_numeric(
@@ -356,6 +395,7 @@ def check_account_equity_curve(errors: list[str], warnings: list[str]) -> None:
     ).fillna(0.0)
 
     duplicate_trade_numbers = account_curve["account_trade_number"].duplicated().sum()
+
     if duplicate_trade_numbers > 0:
         errors.append(
             "paper_account_equity_curve has duplicate account_trade_number rows: "
@@ -371,6 +411,7 @@ def check_account_equity_curve(errors: list[str], warnings: list[str]) -> None:
         )
     else:
         baseline_equity = float(baseline["account_equity"].iloc[0])
+
         if abs(baseline_equity - INITIAL_CAPITAL) > 0.01:
             errors.append(
                 "paper_account_equity_curve baseline equity is not initial capital: "
@@ -409,7 +450,11 @@ def check_account_equity_curve(errors: list[str], warnings: list[str]) -> None:
             "closed paper trade PnL. "
             f"Expected {expected_final_equity:.2f}, got {actual_final_equity:.2f}."
         )
+
+
 def check_strategy_config_snapshot(errors: list[str], warnings: list[str]) -> None:
+    check_start_errors = len(errors)
+
     snapshot = read_csv(STRATEGY_CONFIG_SNAPSHOT)
 
     if snapshot.empty:
@@ -433,7 +478,7 @@ def check_strategy_config_snapshot(errors: list[str], warnings: list[str]) -> No
         if column not in snapshot.columns:
             errors.append(f"strategy_config_snapshot missing required column: {column}")
 
-    if errors:
+    if len(errors) > check_start_errors:
         return
 
     required_setting_keys = {
@@ -467,6 +512,7 @@ def check_strategy_config_snapshot(errors: list[str], warnings: list[str]) -> No
         )
 
     duplicate_settings = snapshot["setting_key"].duplicated().sum()
+
     if duplicate_settings > 0:
         errors.append(
             f"strategy_config_snapshot has {duplicate_settings} duplicate setting_key rows."
@@ -487,7 +533,10 @@ def check_strategy_config_snapshot(errors: list[str], warnings: list[str]) -> No
             f"but found {len(strategy_versions)}: {strategy_versions}"
         )
 
+
 def check_workflow_run_audit(errors: list[str], warnings: list[str]) -> None:
+    check_start_errors = len(errors)
+
     audit = read_csv(WORKFLOW_RUN_AUDIT)
 
     if audit.empty:
@@ -521,7 +570,7 @@ def check_workflow_run_audit(errors: list[str], warnings: list[str]) -> None:
         if column not in audit.columns:
             errors.append(f"workflow_run_audit missing required column: {column}")
 
-    if errors:
+    if len(errors) > check_start_errors:
         return
 
     duplicate_run_ids = audit["run_id"].duplicated().sum()
@@ -530,7 +579,6 @@ def check_workflow_run_audit(errors: list[str], warnings: list[str]) -> None:
         errors.append(f"workflow_run_audit has {duplicate_run_ids} duplicate run_id rows.")
 
     latest = audit.sort_values("run_timestamp").tail(1).copy()
-
     status = str(latest["validation_status"].iloc[0]).upper().strip()
 
     if status != "PASSED":
@@ -561,6 +609,196 @@ def check_workflow_run_audit(errors: list[str], warnings: list[str]) -> None:
             errors.append(f"workflow_run_audit has invalid numeric values in {column}.")
 
 
+def check_strategy_lab_shadow_outputs(
+    errors: list[str],
+    warnings: list[str],
+) -> None:
+    check_start_errors = len(errors)
+
+    expected_shadow_ids = {
+        "ORB_PRODUCTION_REFERENCE_CURRENT_BASKET",
+        "PDH_ACTIVE_BEST5",
+        "PDH_DIAGNOSTIC_ALL_DOWNLOADED",
+        "GAP_RECOVERY_WATCH_BEST7",
+        "PULLBACK_DIAGNOSTIC_ALL_DOWNLOADED",
+        "VWAP_DIAGNOSTIC_BEST5",
+    }
+
+    required_shadow_files = {
+        "strategy_lab_shadow_trades": STRATEGY_LAB_SHADOW_TRADES,
+        "strategy_lab_shadow_latest_trades": STRATEGY_LAB_SHADOW_LATEST_TRADES,
+        "strategy_lab_shadow_daily_summary": STRATEGY_LAB_SHADOW_DAILY_SUMMARY,
+        "strategy_lab_shadow_summary": STRATEGY_LAB_SHADOW_SUMMARY,
+        "strategy_lab_shadow_equity_curve": STRATEGY_LAB_SHADOW_EQUITY_CURVE,
+        "strategy_lab_shadow_status": STRATEGY_LAB_SHADOW_STATUS,
+    }
+
+    loaded_tables: dict[str, pd.DataFrame] = {}
+
+    for name, path in required_shadow_files.items():
+        if not path.exists():
+            errors.append(f"Missing Strategy Lab shadow file: {path}")
+            continue
+
+        if path.stat().st_size == 0:
+            errors.append(f"Strategy Lab shadow file exists but is empty: {path}")
+            continue
+
+        try:
+            df = pd.read_csv(path)
+        except Exception as exc:
+            errors.append(f"Could not read Strategy Lab shadow file {path}: {exc}")
+            continue
+
+        loaded_tables[name] = df
+
+        if name != "strategy_lab_shadow_latest_trades" and df.empty:
+            errors.append(f"Strategy Lab shadow file is empty: {path}")
+
+    if len(errors) > check_start_errors:
+        return
+
+    status = loaded_tables["strategy_lab_shadow_status"]
+    summary = loaded_tables["strategy_lab_shadow_summary"]
+    trades = loaded_tables["strategy_lab_shadow_trades"]
+    equity = loaded_tables["strategy_lab_shadow_equity_curve"]
+    daily_summary = loaded_tables["strategy_lab_shadow_daily_summary"]
+    latest_trades = loaded_tables["strategy_lab_shadow_latest_trades"]
+
+    if len(status) != 6:
+        errors.append(
+            f"strategy_lab_shadow_status should have 6 rows, found {len(status)}"
+        )
+
+    if len(summary) != 6:
+        errors.append(
+            f"strategy_lab_shadow_summary should have 6 rows, found {len(summary)}"
+        )
+
+    required_identity_columns = [
+        "shadow_strategy_id",
+        "research_tier",
+        "summary_role",
+        "strategy_name",
+    ]
+
+    for table_name, df in [
+        ("strategy_lab_shadow_status", status),
+        ("strategy_lab_shadow_summary", summary),
+        ("strategy_lab_shadow_trades", trades),
+        ("strategy_lab_shadow_equity_curve", equity),
+        ("strategy_lab_shadow_daily_summary", daily_summary),
+    ]:
+        missing_columns = [
+            column for column in required_identity_columns
+            if column not in df.columns
+        ]
+
+        if missing_columns:
+            errors.append(f"{table_name} missing required columns: {missing_columns}")
+
+    if len(errors) > check_start_errors:
+        return
+
+    status_ids = set(status["shadow_strategy_id"].dropna().astype(str))
+    summary_ids = set(summary["shadow_strategy_id"].dropna().astype(str))
+    trade_ids = set(trades["shadow_strategy_id"].dropna().astype(str))
+    equity_ids = set(equity["shadow_strategy_id"].dropna().astype(str))
+    daily_ids = set(daily_summary["shadow_strategy_id"].dropna().astype(str))
+
+    missing_status_ids = expected_shadow_ids - status_ids
+    missing_summary_ids = expected_shadow_ids - summary_ids
+    missing_trade_ids = expected_shadow_ids - trade_ids
+    missing_equity_ids = expected_shadow_ids - equity_ids
+    missing_daily_ids = expected_shadow_ids - daily_ids
+
+    if missing_status_ids:
+        errors.append(
+            f"strategy_lab_shadow_status missing IDs: {sorted(missing_status_ids)}"
+        )
+
+    if missing_summary_ids:
+        errors.append(
+            f"strategy_lab_shadow_summary missing IDs: {sorted(missing_summary_ids)}"
+        )
+
+    if missing_trade_ids:
+        errors.append(
+            f"strategy_lab_shadow_trades missing IDs: {sorted(missing_trade_ids)}"
+        )
+
+    if missing_equity_ids:
+        errors.append(
+            f"strategy_lab_shadow_equity_curve missing IDs: {sorted(missing_equity_ids)}"
+        )
+
+    if missing_daily_ids:
+        errors.append(
+            f"strategy_lab_shadow_daily_summary missing IDs: {sorted(missing_daily_ids)}"
+        )
+
+    if "ready_for_monday" not in status.columns:
+        errors.append("strategy_lab_shadow_status missing ready_for_monday column")
+    else:
+        ready_values = (
+            status["ready_for_monday"]
+            .astype(str)
+            .str.strip()
+            .str.lower()
+        )
+
+        not_ready = status.loc[
+            ~ready_values.isin(["true", "1", "yes"]),
+            "shadow_strategy_id",
+        ].tolist()
+
+        if not_ready:
+            errors.append(
+                f"These shadow strategies are not ready for Monday: {not_ready}"
+            )
+
+    if "latest_data_date" not in status.columns:
+        errors.append("strategy_lab_shadow_status missing latest_data_date column")
+    elif status["latest_data_date"].isna().any():
+        errors.append("strategy_lab_shadow_status contains blank latest_data_date")
+
+    required_summary_numeric_columns = [
+        "selected_trades",
+        "latest_trade_count",
+        "total_account_return",
+        "profit_factor",
+        "max_drawdown",
+        "win_rate",
+    ]
+
+    for column in required_summary_numeric_columns:
+        if column not in summary.columns:
+            errors.append(f"strategy_lab_shadow_summary missing required column: {column}")
+            continue
+
+        converted = pd.to_numeric(summary[column], errors="coerce")
+
+        if converted.isna().any():
+            errors.append(
+                f"strategy_lab_shadow_summary has invalid numeric values in {column}"
+            )
+
+    if "date" not in trades.columns:
+        errors.append("strategy_lab_shadow_trades missing date column")
+
+    if "account_return" not in trades.columns:
+        errors.append("strategy_lab_shadow_trades missing account_return column")
+
+    if "equity" not in equity.columns:
+        errors.append("strategy_lab_shadow_equity_curve missing equity column")
+
+    if latest_trades.empty:
+        warnings.append(
+            "strategy_lab_shadow_latest_trades is empty. "
+            "This can be okay on a no-signal day."
+        )
+
+
 def main() -> None:
     print("\n=== VALIDATE DAILY OUTPUTS ===")
 
@@ -575,6 +813,7 @@ def main() -> None:
         ("Account equity curve", check_account_equity_curve),
         ("Strategy config snapshot", check_strategy_config_snapshot),
         ("Workflow run audit", check_workflow_run_audit),
+        ("Strategy Lab shadow outputs", check_strategy_lab_shadow_outputs),
     ]
 
     for label, check_function in checks:

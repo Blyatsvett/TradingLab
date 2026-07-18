@@ -38,6 +38,12 @@ TABLES = {
     "intraday_strategy_lab_market_regime": DATA_DIR / "intraday_strategy_lab_market_regime.csv",
     "strategy_lab_orb_baseline_comparison_summary": DATA_DIR / "strategy_lab_orb_baseline_comparison_summary.csv",
     "strategy_lab_orb_baseline_comparison_mismatches": DATA_DIR / "strategy_lab_orb_baseline_comparison_mismatches.csv",
+    "strategy_lab_shadow_trades": DATA_DIR / "strategy_lab_shadow_trades.csv",
+    "strategy_lab_shadow_latest_trades": DATA_DIR / "strategy_lab_shadow_latest_trades.csv",
+    "strategy_lab_shadow_daily_summary": DATA_DIR / "strategy_lab_shadow_daily_summary.csv",
+    "strategy_lab_shadow_summary": DATA_DIR / "strategy_lab_shadow_summary.csv",
+    "strategy_lab_shadow_equity_curve": DATA_DIR / "strategy_lab_shadow_equity_curve.csv",
+    "strategy_lab_shadow_status": DATA_DIR / "strategy_lab_shadow_status.csv",
 }
 
 

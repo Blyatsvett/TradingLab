@@ -26,6 +26,7 @@ COMMANDS = [
     ("Export intraday market regime", "Intraday.scripts.export_intraday_market_regime"),
     ("Run intraday strategy lab", "Intraday.scripts.research_intraday_strategy_lab"),
     ("Compare Strategy Lab ORB baseline", "Intraday.scripts.compare_strategy_lab_orb_baseline"),
+    ("Export Strategy Lab daily shadow report", "Intraday.scripts.research_strategy_lab_daily_shadow_report"),
     ("Export risk filter shadow report", "Intraday.scripts.research_orb_risk_filter_shadow_report"),
     ("Export position sizing shadow report", "Intraday.scripts.research_orb_position_sizing_shadow_report"),
     ("Export Power BI workbook", "Intraday.scripts.export_powerbi_workbook"),
@@ -33,37 +34,39 @@ COMMANDS = [
 ]
 
 
-def run_step(title, module_name, log_file):
-    separator = "\n" + "=" * 60 + "\n"
-    header = f"{separator}{title.upper()}\n{'=' * 60}\n"
-
-    print(header)
-    log_file.write(header)
+def run_step(title: str, module_name: str, log_file) -> None:
+    print(f"\n=== {title.upper()} ===")
+    log_file.write(f"\n=== {title.upper()} ===\n")
     log_file.flush()
 
-    result = subprocess.run(
+    result = subprocess.Popen(
         [sys.executable, "-m", module_name],
-        capture_output=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
         text=True,
+        bufsize=1,
     )
 
-    if result.stdout:
-        print(result.stdout)
-        log_file.write(result.stdout)
+    output_lines = []
 
-    if result.stderr:
-        print(result.stderr)
-        log_file.write("\n--- STDERR ---\n")
-        log_file.write(result.stderr)
+    if result.stdout is not None:
+        for line in result.stdout:
+            print(line, end="")
+            log_file.write(line)
+            log_file.flush()
+            output_lines.append(line)
 
+    return_code = result.wait()
+
+    if return_code != 0:
+        raise RuntimeError(
+            f"Step failed: {title} ({module_name}) "
+            f"with return code {return_code}"
+        )
+
+    print(f"\nOK: {title}")
+    log_file.write(f"\nOK: {title}\n")
     log_file.flush()
-
-    if result.returncode != 0:
-        error_message = f"\n❌ Step failed: {title}\nReturn code: {result.returncode}\n"
-        print(error_message)
-        log_file.write(error_message)
-        log_file.flush()
-        raise SystemExit(result.returncode)
 
 
 def main():
