@@ -44,6 +44,11 @@ TABLES = {
     "strategy_lab_shadow_summary": DATA_DIR / "strategy_lab_shadow_summary.csv",
     "strategy_lab_shadow_equity_curve": DATA_DIR / "strategy_lab_shadow_equity_curve.csv",
     "strategy_lab_shadow_status": DATA_DIR / "strategy_lab_shadow_status.csv",
+    "daily_research_review_summary": DATA_DIR / "daily_research_review_summary.csv",
+    "daily_research_review_items": DATA_DIR / "daily_research_review_items.csv",
+    "daily_research_review_orb_signals": DATA_DIR / "daily_research_review_orb_signals.csv",
+    "daily_research_review_paper_trades_today": DATA_DIR / "daily_research_review_paper_trades_today.csv",
+    "daily_research_review_shadow_trades_today": DATA_DIR / "daily_research_review_shadow_trades_today.csv",
 }
 
 

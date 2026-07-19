@@ -29,6 +29,7 @@ COMMANDS = [
     ("Export Strategy Lab daily shadow report", "Intraday.scripts.research_strategy_lab_daily_shadow_report"),
     ("Export risk filter shadow report", "Intraday.scripts.research_orb_risk_filter_shadow_report"),
     ("Export position sizing shadow report", "Intraday.scripts.research_orb_position_sizing_shadow_report"),
+    ("Export daily research review", "Intraday.scripts.export_daily_research_review"),
     ("Export Power BI workbook", "Intraday.scripts.export_powerbi_workbook"),
     ("Validate daily outputs", "Intraday.scripts.validate_daily_outputs"),
 ]
