@@ -15,6 +15,7 @@ from Intraday.core.orb_config import (
 )
 from Intraday.core.orb_research import (
     build_research_trades,
+    filter_to_completed_research_sessions,
     load_normalised_intraday_prices,
 )
 from Intraday.core.paths import DATA_DIR
@@ -822,6 +823,11 @@ def main() -> None:
     print(f"EOD exit time: {EOD_EXIT_TIME}")
 
     prices = load_normalised_intraday_prices()
+
+    prices = filter_to_completed_research_sessions(
+        prices,
+        verbose=True,
+    )
 
     candidates = build_research_trades(
         prices=prices,

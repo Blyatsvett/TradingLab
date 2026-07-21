@@ -25,6 +25,7 @@ from Intraday.core.orb_execution import execute_long_orb_trade
 from Intraday.core.orb_research import (
     build_research_trades,
     load_normalised_intraday_prices,
+    filter_to_completed_research_sessions,
 )
 from Intraday.core.paths import DATA_DIR
 
@@ -1157,6 +1158,10 @@ def main() -> None:
     print(f"EOD exit time: {EOD_EXIT_TIME}")
 
     raw_prices = load_normalised_intraday_prices()
+    raw_prices = filter_to_completed_research_sessions(
+    raw_prices,
+    verbose=True,
+)
     prices = prepare_prices(raw_prices, allowed_tickers=ORB_ALLOWED_TICKERS)
     daily_refs = calculate_daily_references(prices)
 

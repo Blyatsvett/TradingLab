@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pandas as pd
 
 from Intraday.core.orb_execution import execute_long_orb_trade
@@ -13,6 +15,11 @@ SHARED_TO_RESEARCH_EXIT_REASON = {
     "TARGET_HIT": "target",
     "CLOSED_EOD": "close",
 }
+
+
+# Research/backtest outputs should use completed sessions only.
+# Production/paper can still use live intraday data from the current day.
+RESEARCH_COMPLETED_SESSION_TIME = "16:30"
 
 
 def normalise_prices(df: pd.DataFrame) -> pd.DataFrame:
@@ -53,6 +60,76 @@ def normalise_prices(df: pd.DataFrame) -> pd.DataFrame:
 
 def load_normalised_intraday_prices() -> pd.DataFrame:
     return normalise_prices(load_intraday_prices())
+
+
+def filter_to_completed_research_sessions(
+    prices: pd.DataFrame,
+    completion_time: str = RESEARCH_COMPLETED_SESSION_TIME,
+    verbose: bool = False,
+) -> pd.DataFrame:
+    """
+    Exclude the latest session from research/backtest calculations when that
+    session is still incomplete.
+
+    This is intentionally research-only.
+
+    Production/paper trading may use today's live intraday bars.
+    Strategy Lab/backtests should not try to close trades from an unfinished
+    trading day, because a trade opened during the live session may have no
+    post-entry bars yet.
+    """
+
+    if prices.empty:
+        return prices.copy()
+
+    output = normalise_prices(prices)
+
+    timestamp_text = output["datetime"].astype(str)
+
+    session_dates = pd.to_datetime(
+        timestamp_text.str.slice(0, 10),
+        errors="coerce",
+    ).dt.strftime("%Y-%m-%d")
+
+    session_times = timestamp_text.str.extract(r"(\d{2}:\d{2})")[0]
+
+    valid_mask = session_dates.notna() & session_times.notna()
+
+    if not valid_mask.any():
+        if verbose:
+            print(
+                "Research session filter: could not parse session dates/times. "
+                "Using prices unchanged."
+            )
+        return output.reset_index(drop=True)
+
+    latest_date = session_dates[valid_mask].max()
+    latest_date_mask = session_dates.eq(latest_date)
+    latest_time = session_times[latest_date_mask & valid_mask].max()
+
+    if latest_time < completion_time:
+        filtered = output.loc[~latest_date_mask].copy()
+
+        if verbose:
+            print(
+                "Research session filter: excluded incomplete latest session "
+                f"{latest_date}. Latest bar was {latest_time}; "
+                f"completion threshold is {completion_time}."
+            )
+            print(
+                f"Research rows before filter: {len(output)} | "
+                f"after filter: {len(filtered)}"
+            )
+
+        return filtered.reset_index(drop=True)
+
+    if verbose:
+        print(
+            "Research session filter: latest session appears complete "
+            f"({latest_date}, latest bar {latest_time})."
+        )
+
+    return output.reset_index(drop=True)
 
 
 def reexecute_trade_with_shared_engine(
@@ -178,7 +255,16 @@ def build_research_trades(
     same_bar_priority: str = "STOP",
     eod_exit_time: str | None = None,
     verbose: bool = False,
+    completed_sessions_only: bool = True,
 ) -> pd.DataFrame:
+    prices = normalise_prices(prices)
+
+    if completed_sessions_only:
+        prices = filter_to_completed_research_sessions(
+            prices,
+            verbose=verbose,
+        )
+
     trades = build_orb_trades(
         df=prices,
         allowed_tickers=allowed_tickers,
@@ -242,8 +328,15 @@ def run_research_backtest(
     same_bar_priority: str = "STOP",
     eod_exit_time: str | None = None,
     verbose: bool = False,
+    completed_sessions_only: bool = True,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     prices = normalise_prices(prices)
+
+    if completed_sessions_only:
+        prices = filter_to_completed_research_sessions(
+            prices,
+            verbose=verbose,
+        )
 
     trades = build_research_trades(
         prices=prices,
@@ -257,6 +350,7 @@ def run_research_backtest(
         same_bar_priority=same_bar_priority,
         eod_exit_time=eod_exit_time,
         verbose=verbose,
+        completed_sessions_only=False,
     )
 
     if trades.empty:

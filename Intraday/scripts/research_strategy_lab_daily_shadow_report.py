@@ -5,7 +5,10 @@ import pandas as pd
 from Intraday.core.export_utils import export_csv_for_power_bi
 from Intraday.core.market_regime import calculate_daily_market_regime
 from Intraday.core.orb_config import ORB_INITIAL_CAPITAL, ORB_POSITION_SIZE
-from Intraday.core.orb_research import load_normalised_intraday_prices
+from Intraday.core.orb_research import (
+    filter_to_completed_research_sessions,
+    load_normalised_intraday_prices,
+)
 from Intraday.core.paths import DATA_DIR
 from Intraday.core.research_shadow_config import get_research_shadow_definitions
 from Intraday.scripts.research_strategy_lab_ticker_optimization import (
@@ -589,6 +592,10 @@ def main() -> None:
     definitions = get_research_shadow_definitions()
 
     raw_prices = load_normalised_intraday_prices()
+    raw_prices = filter_to_completed_research_sessions(
+        raw_prices,
+        verbose=True,
+    )
     all_tickers = discover_downloaded_tickers(raw_prices)
 
     print(f"\nDownloaded ticker count: {len(all_tickers)}")

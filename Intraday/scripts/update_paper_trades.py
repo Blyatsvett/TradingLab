@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 import sqlite3
 
@@ -39,19 +41,48 @@ NUMERIC_COLUMNS = [
 def ensure_columns(trades: pd.DataFrame) -> pd.DataFrame:
     trades = trades.copy()
 
-    for col in TEXT_COLUMNS:
+    required_text_columns = [
+        "trade_id",
+        "date",
+        "ticker",
+        "side",
+        "status",
+        "entry_time",
+        "created_at",
+        "strategy_version",
+        "exit_time",
+        "exit_reason",
+    ]
+
+    required_numeric_columns = [
+        "entry_price",
+        "stop_price",
+        "target_price",
+        "exit_price",
+        "pnl_pct",
+        "position_size_sek",
+        "pnl_sek",
+        "trade_duration_minutes",
+        "risk_per_share",
+        "r_multiple_achieved",
+        "signal_rank",
+    ]
+
+    for col in required_text_columns:
         if col not in trades.columns:
             trades[col] = ""
 
-    for col in NUMERIC_COLUMNS:
+    for col in required_numeric_columns:
         if col not in trades.columns:
             trades[col] = 0
 
-    for col in NUMERIC_COLUMNS:
+    for col in required_numeric_columns:
         trades[col] = pd.to_numeric(trades[col], errors="coerce").fillna(0)
 
-    trades["exit_time"] = trades["exit_time"].fillna("").astype("object")
-    trades["exit_reason"] = trades["exit_reason"].fillna("").astype("object")
+    for col in required_text_columns:
+        trades[col] = trades[col].fillna("").astype("object")
+
+    trades["status"] = trades["status"].astype(str).str.upper().str.strip()
 
     return trades
 
@@ -82,6 +113,7 @@ def load_prices_from_db() -> pd.DataFrame:
         if column not in prices.columns:
             raise ValueError(f"intraday_prices missing required column: {column}")
 
+    prices["ticker"] = prices["ticker"].astype(str)
     prices["datetime"] = pd.to_datetime(prices["datetime"], errors="coerce")
 
     for column in ["high", "low", "close"]:
@@ -102,6 +134,48 @@ def load_prices_from_db() -> pd.DataFrame:
     return prices
 
 
+def get_trade_day_bars(
+    prices: pd.DataFrame,
+    ticker: str,
+    entry_time: pd.Timestamp,
+) -> pd.DataFrame:
+    ticker_prices = prices[prices["ticker"].astype(str) == ticker].copy()
+
+    if ticker_prices.empty:
+        return pd.DataFrame()
+
+    trade_date = entry_time.date()
+
+    day_bars = ticker_prices[
+        ticker_prices["datetime"].dt.date == trade_date
+    ].copy()
+
+    day_bars = day_bars.sort_values("datetime").reset_index(drop=True)
+
+    return day_bars
+
+
+def should_close_no_hit_at_eod(day_bars: pd.DataFrame) -> bool:
+    """
+    Return True only once the latest available bar for the trade date is at
+    or after the configured EOD paper exit time.
+
+    Before that, open trades should remain OPEN unless stop or target is hit.
+    """
+
+    if day_bars.empty:
+        return False
+
+    latest_bar_time = day_bars["datetime"].max()
+
+    if pd.isna(latest_bar_time):
+        return False
+
+    latest_bar_clock = latest_bar_time.strftime("%H:%M")
+
+    return latest_bar_clock >= EOD_EXIT_TIME
+
+
 def update_open_trade(
     trades: pd.DataFrame,
     idx: int,
@@ -115,9 +189,13 @@ def update_open_trade(
         print(f"Skipping trade with invalid entry_time: index={idx}, ticker={ticker}")
         return False
 
-    ticker_prices = prices[prices["ticker"].astype(str) == ticker].copy()
+    day_bars = get_trade_day_bars(
+        prices=prices,
+        ticker=ticker,
+        entry_time=entry_time,
+    )
 
-    if ticker_prices.empty:
+    if day_bars.empty:
         print(f"No prices found for open trade: ticker={ticker}, entry_time={entry_time}")
         return False
 
@@ -125,14 +203,19 @@ def update_open_trade(
     stop_price = float(trade["stop_price"])
     target_price = float(trade["target_price"])
 
+    close_if_no_hit = should_close_no_hit_at_eod(day_bars)
+
+    latest_bar_time = day_bars["datetime"].max()
+    latest_bar_clock = latest_bar_time.strftime("%H:%M")
+
     result = execute_long_orb_trade(
         entry_time=entry_time,
         entry_price=entry_price,
         stop_price=stop_price,
         target_price=target_price,
-        bars=ticker_prices,
+        bars=day_bars,
         timestamp_col="datetime",
-        close_if_no_hit=True,
+        close_if_no_hit=close_if_no_hit,
         same_bar_priority=SAME_BAR_PRIORITY,
         eod_exit_time=EOD_EXIT_TIME,
     )
@@ -140,7 +223,11 @@ def update_open_trade(
     if result.status != "CLOSED":
         print(
             "Trade remains open: "
-            f"ticker={ticker}, entry_time={entry_time}, reason={result.exit_reason}"
+            f"ticker={ticker}, "
+            f"entry_time={entry_time}, "
+            f"latest_bar={latest_bar_time}, "
+            f"latest_bar_clock={latest_bar_clock}, "
+            f"reason={result.exit_reason}"
         )
         return False
 
@@ -175,6 +262,10 @@ def main() -> None:
     print("Using shared ORB execution engine.")
     print(f"EOD exit time: {EOD_EXIT_TIME}")
     print(f"Same-bar priority: {SAME_BAR_PRIORITY}")
+    print(
+        "Intraday no-hit rule: keep trades OPEN before EOD unless "
+        "STOP_HIT or TARGET_HIT occurs."
+    )
 
     if not os.path.exists(TRADES_FILE):
         print(f"Missing trades file: {TRADES_FILE}")
