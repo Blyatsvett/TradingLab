@@ -227,7 +227,7 @@ def test_source_hash_export_uses_platform_neutral_project_relative_keys(tmp_path
     assert set(payload["source_hashes"]) == {
         "config/step9u_historical_contingency_selector_v1.json",
         "data/outputs/research/step9s_historical_contingency_replay_v1/step9s_summary.csv",
-        "data/step9t_regime_transition_archetype_research_v1/freeze_92b274cb24cad391/STEP9T_HISTORICAL_REPLAY_V1_FREEZE_MANIFEST.json",
+        "data/archives/freezes/step9t_regime_transition_archetype_research_v1/freeze_92b274cb24cad391/STEP9T_HISTORICAL_REPLAY_V1_FREEZE_MANIFEST.json",
         "data/outputs/research/step9t_regime_transition_archetype_research_v1/step9t_session_transitions.csv",
         "data/outputs/research/step9t_regime_transition_archetype_research_v1/step9t_ticker_archetypes.csv",
         "data/outputs/research/step9t_regime_transition_archetype_research_v1/step9t_ticker_outcomes.csv",

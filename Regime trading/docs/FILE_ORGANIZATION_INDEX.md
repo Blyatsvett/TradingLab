@@ -58,6 +58,10 @@ The following material is separated from the active root or clearly marked as hi
 
 The `entrypoint-archives` folder contains six unreferenced, explicitly named V1 backup copies moved during the 2026-08-01 cleanup. No active wrapper depends on them by filename.
 
+Historical root-level development notes and old research reports are now
+under `docs/legacy/regime_notes/`. See `docs/LEGACY_FILE_CLASSIFICATION.md`
+for the exact moved set and the retained root-level evidence.
+
 ## Legacy but not yet moved
 
 These are likely historical or superseded, but remain in place until execution references are fully verified:
@@ -72,18 +76,16 @@ Their presence does not mean they are part of the daily canonical chain. They re
 
 ## Data organization status
 
-`data/` currently contains several distinct classes of artifacts:
+The active data tree is now separated into:
 
-- raw market data and source databases
-- prospective shadow ledgers
-- historical replay ledgers
-- generated CSV outputs
-- audit results
-- Power BI workbooks
-- freeze manifests and source hashes
-- hotfix backups
+- `data/source/` for raw market data and reusable references
+- `data/ledgers/` for prospective and research databases
+- `data/outputs/` for generated reports, shadow outputs, collectors, and observers
+- `data/archives/` for frozen and historical evidence
 
-These should eventually be separated into `data/source`, `data/ledgers`, `data/outputs`, and `data/archive`, but that move is deferred until every active path is converted from hard-coded filenames to centralized path configuration.
+The remaining work is documentation cleanup and classification of any new
+payload restored from another machine. Do not introduce files directly under
+`data/`.
 
 ## Reorganization rules
 

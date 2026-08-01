@@ -31,6 +31,16 @@ Inspect a wrapper's parameters and current data readiness before running it. Use
 
 ## Validation commands
 
+The dependency-free canonical contract check can run before third-party
+packages or local market data are restored:
+
+```powershell
+python .\tools\validate_canonical_pipeline.py
+```
+
+It verifies the stage order, research-only safety flags, centralized ledger
+and output boundaries, required entry points, and current project guides.
+
 The project-level validation runner performs compile checks and configuration JSON checks. By default it also runs the full project test suite:
 
 ```powershell

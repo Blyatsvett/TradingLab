@@ -157,13 +157,17 @@ Generated CSVs, audit tables, Power BI workbooks, and freeze manifests are evide
 - V1 `step9tu` morning wrappers.
 - Older Step 9I/9L variants and superseded research engines.
 - Step 7–9 development experiments and old patch manifests.
-- The original root workflow described by `README.txt`, which covers the earlier gap-recovery project.
+- The original root workflow described by `docs/legacy/regime_notes/README.txt`, which covers the earlier gap-recovery project.
 
 Historical material is retained for reproducibility. Do not delete or rewrite it during normal development.
 
 ## Consolidated note index
 
 Older Regime Trading notes remain available as provenance, but the following rules now govern their use:
+
+The historical development notes listed below now live under
+`docs/legacy/regime_notes/`. Their original filenames are preserved there;
+patch manifests may still mention the original names as historical provenance.
 
 - `README_REGIME_SYSTEM_ROADMAP.txt` and the Step 7–9 README files describe development history; the canonical current chain is the pipeline documented above.
 - `ROUTINE AND SCRIPS.txt`, `Scripts and Routines.txt`, and `UPDATED STRATEGY ADJUSTED.txt` are historical operating notes; use the approved entry-point table and `docs/REPRODUCIBILITY.md` for current commands.
@@ -174,6 +178,11 @@ Older Regime Trading notes remain available as provenance, but the following rul
 When an older note conflicts with current code, the precedence order is: current source and tests, current config/registry, current manifests and ledgers, then historical notes and installer bundles.
 
 ## Verification baseline
+
+The dependency-free canonical contract check is `tools/validate_canonical_pipeline.py`. It verifies the stage order, centralized data boundaries, required current entry points, and the research-only execution flags before third-party packages or local market data are needed. The Codex-bundled Python runtime does not include SciPy or pytest and is suitable only for static checks.
+
+The current project test collection contains 395 tests; the complete collection
+passed in bounded batches on 2026-08-01.
 
 The active project currently has approximately 50 Python test files and 389 test functions by source inspection. The primary Python source compiles successfully, and the main V2 PowerShell entry points pass parser validation. The project-local `.venv` must contain NumPy, Pandas, SciPy, OpenPyXL, pytest, and yfinance; run `tools/check_dependencies.py` before treating missing verifier output as a code failure. The Codex-bundled Python runtime does not include SciPy and is suitable only for static checks unless separately provisioned.
 

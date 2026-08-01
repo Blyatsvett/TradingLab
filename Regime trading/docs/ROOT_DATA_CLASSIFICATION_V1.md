@@ -1,6 +1,6 @@
 # Root Data Classification V1
 
-Status: classification completed. Source/reference data, Nasdaq collector assets, the Step 9M/N/O legacy families, and the Step 9T reconciliation input are now centralized. Remaining root-level items are limited to intentional placeholders or files awaiting a final documentation pass.
+Status: classification completed. Source/reference data, Nasdaq collector assets, the Step 9M/N/O legacy families, and the Step 9T reconciliation input are centralized. The current workspace retains only the intentional `data/.gitkeep` placeholder directly under `data/`; newly restored files require classification before use.
 
 ## Active source data and registries
 

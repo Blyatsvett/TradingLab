@@ -1,6 +1,6 @@
 # Data Separation Map
 
-Status: inventory, reference mapping, rehearsal, and migration are complete for the mixed legacy regime-research families. Active runtime output and snapshot paths are centrally configurable; remaining root-level data is intentionally retained where it is source data, an active database, or still awaiting a separate reference audit.
+Status: inventory, reference mapping, rehearsal, and migration are complete for the mixed legacy regime-research families. Active runtime output and snapshot paths are centrally configurable, and the current workspace has no unclassified payload files directly under `data/`. Any newly restored payload must be classified before use.
 
 The remaining root-level items are classified in `docs/ROOT_DATA_CLASSIFICATION_V1.md`. The current passes also centralized `data/powerbi_exports.xlsx` → `data/outputs/kpi/` and the active Step 9I/9L CSV families under `data/outputs/shadow/`.
 

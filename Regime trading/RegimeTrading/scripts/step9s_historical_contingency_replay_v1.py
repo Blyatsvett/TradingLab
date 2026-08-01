@@ -21,7 +21,7 @@ LATEST_ROUTER_SOURCE_LABEL = "09:40"
 COVERAGE_TRADE_LABEL = "MANDATORY_COVERAGE_CONTROL_TRADE"
 NATURAL_TRADE_LABEL = "NATURAL_TRIGGER_TRADE"
 
-TAXONOMY_FILE = DATA_DIR / "regime_daily_taxonomy.csv"
+TAXONOMY_FILE = legacy_output_path("regime_daily_taxonomy.csv")
 BASELINE_CANDIDATE_FILE = legacy_output_path("regime_playbook_baseline_candidates.csv")
 BASELINE_TRADE_FILE = legacy_output_path("regime_playbook_baseline_trades.csv")
 PRICE_DB = INTRADAY_DB
@@ -609,12 +609,20 @@ def _audit(
 
 
 def run_replay(data_dir: Path = DATA_DIR, output_dir: Path = DEFAULT_OUTPUT_DIR) -> dict[str, Any]:
-    source_paths = {
-        "taxonomy": data_dir / TAXONOMY_FILE.name,
-        "baseline_candidates": data_dir / BASELINE_CANDIDATE_FILE.name,
-        "baseline_trades": data_dir / BASELINE_TRADE_FILE.name,
-        "price_db": data_dir / PRICE_DB.name,
-    }
+    if data_dir.resolve() == DATA_DIR.resolve():
+        source_paths = {
+            "taxonomy": TAXONOMY_FILE,
+            "baseline_candidates": BASELINE_CANDIDATE_FILE,
+            "baseline_trades": BASELINE_TRADE_FILE,
+            "price_db": PRICE_DB,
+        }
+    else:
+        source_paths = {
+            "taxonomy": data_dir / TAXONOMY_FILE.name,
+            "baseline_candidates": data_dir / BASELINE_CANDIDATE_FILE.name,
+            "baseline_trades": data_dir / BASELINE_TRADE_FILE.name,
+            "price_db": data_dir / PRICE_DB.name,
+        }
     for row in ASSIGNMENT_REGISTRY:
         source_filename = row["natural_source_file"]
         source_paths[f"natural_{row['regime']}"] = (

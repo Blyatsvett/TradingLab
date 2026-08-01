@@ -29,8 +29,8 @@
     "step9r_research": "data/ledgers/research/step9r_candidate_ranking_research_v1.db"
   },
   "output_dirs": {
-    "step9i": "data",
-    "step9l": "data",
+    "step9i": "data/outputs/shadow/step9i_v2",
+    "step9l": "data/outputs/shadow/step9l_v3",
     "step9s": "data/outputs/research/step9s_historical_contingency_replay_v1",
     "step9r": "data/outputs/research/step9r",
     "step9t": "data/outputs/research/step9t_regime_transition_archetype_research_v1",
