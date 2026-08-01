@@ -31,6 +31,8 @@ Open this `TradingLab` folder as the project in the desktop app. Read `AGENTS.md
 
 For the current folder ownership and independent project commands, see [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md).
 
+Contribution and repository workflow guidance is in [`CONTRIBUTING.md`](CONTRIBUTING.md). Recommended branch protection is documented in [`.github/BRANCH_PROTECTION.md`](.github/BRANCH_PROTECTION.md); release/tagging conventions are in [`docs/RELEASE_CONVENTIONS.md`](docs/RELEASE_CONVENTIONS.md).
+
 ## Repository boundary
 
 Source code, configurations, project documentation, and reproducible research definitions belong in Git. Local databases, downloaded/raw data, generated outputs, archives, virtual environments, and proprietary dashboard exports remain local and are excluded by `.gitignore`.
