@@ -12,8 +12,8 @@ def test_live_orchestrator_prioritizes_l_then_runs_i_with_downstream_and_has_saf
     assert 'Start-PersistentStageWorker -Stage "step9i"' in text
     assert 'Start-PersistentStageWorker -Stage "step9l"' in text
     assert 'Release-PersistentStageWorker' in text
-    l_release = text.index('-LedgerDb "data\\step9l_v3_selected_strategy_shadow_ledger.db"')
-    i_release = text.index('-LedgerDb "data\\step9i_v2_shadow_ledger.db"')
+    l_release = text.index('-LedgerDb $Step9LLedgerRel')
+    i_release = text.index('-LedgerDb $Step9ILedgerRel')
     assert l_release < i_release
     assert text.index('Finish-PersistentStageWorker -Job $LJob') < i_release
     assert 'Finish-PersistentStageWorker' in text

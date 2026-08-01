@@ -109,9 +109,6 @@ $Step9RResearchRel = $LedgerPaths["step9r_research"]
 $Step9TLedgerRel = $LedgerPaths["step9t"]
 $Step9ULedgerRel = $LedgerPaths["step9u"]
 
-# Compatibility contract: -LedgerDb "data\step9l_v3_selected_strategy_shadow_ledger.db"
-# Compatibility contract: -LedgerDb "data\step9i_v2_shadow_ledger.db"
-
 New-Item -ItemType Directory -Path $Logs -Force | Out-Null
 New-Item -ItemType Directory -Path $RegistryDir -Force | Out-Null
 

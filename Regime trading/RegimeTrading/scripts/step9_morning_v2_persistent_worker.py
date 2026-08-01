@@ -11,7 +11,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
-from RegimeTrading.core.stage_registry import resolve_stage_path
+from RegimeTrading.core.stage_registry import PROJECT_ROOT, resolve_stage_path
 
 PROTOCOL = "STEP9_MORNING_V2_PERSISTENT_WORKER_V1"
 READY_STATUS = "STEP9_MORNING_V2_PERSISTENT_WORKER_READY"
@@ -153,7 +153,7 @@ def _validate_request(
             / session_date
             / "prices_through_0940.db"
         ).as_posix()
-        expected_ledger = LIVE_LEDGERS[stage].as_posix()
+        expected_ledger = LIVE_LEDGERS[stage].relative_to(PROJECT_ROOT).as_posix()
         if source_relative.lower() != expected_source.lower():
             raise PersistentWorkerError(
                 f"Live worker source path is not canonical: {source_relative}"

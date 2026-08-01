@@ -6,6 +6,8 @@ Project root: `TradingLab/Regime trading`
 
 This document identifies the current Regime Trading system, its approved entry points, data flow, evidence boundaries, and historical material. It is the starting point for future maintenance and refactoring.
 
+For setup, canonical commands, validation, and data restoration, use `docs/REPRODUCIBILITY.md`.
+
 ## Current scope
 
 Regime Trading is currently a research/backtesting and prospective-shadow project. It does not place broker orders or manage live capital.
@@ -161,7 +163,7 @@ Historical material is retained for reproducibility. Do not delete or rewrite it
 
 ## Verification baseline
 
-The active project currently has approximately 50 Python test files and 389 test functions by source inspection. The primary Python source compiles successfully, and the main V2 PowerShell entry points pass parser validation.
+The active project currently has approximately 50 Python test files and 389 test functions by source inspection. The primary Python source compiles successfully, and the main V2 PowerShell entry points pass parser validation. The project-local `.venv` must contain NumPy, Pandas, SciPy, OpenPyXL, pytest, and yfinance; run `tools/check_dependencies.py` before treating missing verifier output as a code failure. The Codex-bundled Python runtime does not include SciPy and is suitable only for static checks unless separately provisioned.
 
 The project’s local `.venv` is the intended test environment. If it cannot be launched, resolve the environment issue before treating missing pytest output as a code failure.
 
