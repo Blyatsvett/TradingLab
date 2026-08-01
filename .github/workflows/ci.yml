@@ -78,7 +78,9 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Run project validation without local-data workflows
         shell: pwsh
-        run: .\tools\run_project_validation.ps1 -SkipTests -PythonPath python
+        run: |
+          $python = (Get-Command python).Source
+          .\tools\run_project_validation.ps1 -StaticOnly -PythonPath $python
       - name: Run canonical safety tests
         run: >-
           python -B -m pytest -q -p no:cacheprovider
@@ -133,8 +135,13 @@ jobs:
           black_friday_event_study/run_pipeline.py
           labor_day_event_study/audit_prices.py
           labor_day_event_study/universe.py
-      - name: Run Labor Day tests
-        run: python -B -m pytest -q -p no:cacheprovider tests
+      - name: Run reproducible Labor Day tests
+        run: >-
+          python -B -m pytest -q -p no:cacheprovider
+          tests/test_event_dates.py
+          tests/test_universe.py
+          tests/test_contamination.py
+          tests/test_no_lookahead.py
         working-directory: Pattern Trading/labor_day_event_study
 
   intraday:
