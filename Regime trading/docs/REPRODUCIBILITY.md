@@ -67,6 +67,8 @@ The validation runner is read-only with respect to the real project databases. F
 
 The frozen Step 9 Morning V2 install payload is historical evidence. Its package check is opt-in because its embedded runtime manifest can legitimately predate the current centralized data paths.
 
+Runtime-manifest hashes normalize text line endings before comparison, so the same audited source remains reproducible across Windows CRLF and repository/CI LF checkouts. SQLite databases, CSV files, and other non-text payloads remain byte-hashed.
+
 ## Local data acquisition and restoration
 
 Market databases, ledgers, generated outputs, archives, and proprietary exports are intentionally excluded from Git. A fresh checkout therefore contains the code and contracts but not the local research payload.

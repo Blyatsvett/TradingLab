@@ -451,8 +451,8 @@ def test_runtime_manifest_hashes_and_exclusive_glob(tmp_path: Path) -> None:
         json.dumps(
             {
                 "files": {
-                    "engine.py": mod._sha256(dependency),
-                    "freeze/one/summary.json": mod._sha256(summary),
+                    "engine.py": mod._manifest_sha256(dependency),
+                    "freeze/one/summary.json": mod._manifest_sha256(summary),
                 },
                 "exclusive_globs": {
                     "freeze/*/summary.json": [
