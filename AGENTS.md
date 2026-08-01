@@ -19,6 +19,7 @@ The projects are currently in research and backtesting. Live-trading infrastruct
 - Data migration and classification records are maintained in `Regime trading/docs/DATA_MIGRATION_MANIFEST_V1.md`, `Regime trading/docs/DATA_SEPARATION_MAP.md`, and `Regime trading/docs/ROOT_DATA_CLASSIFICATION_V1.md`.
 - This root `AGENTS.md` is the single project-wide working-agreement file. Update it when the project structure or operating rules change.
 - The concise project ownership and command map is maintained in `docs/PROJECT_MAP.md`.
+- Secondary-project classifications and audit evidence are maintained in `docs/SECONDARY_PROJECT_AUDIT.md`.
 
 ## Regime Trading data layout
 

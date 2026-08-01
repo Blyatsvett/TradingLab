@@ -1,5 +1,7 @@
 # Canonical Swing pipeline
 
+Status: active, research-only. The canonical pipeline is a backtest; it does not place production orders.
+
 Run from the `Swing` project root:
 
 ```bash

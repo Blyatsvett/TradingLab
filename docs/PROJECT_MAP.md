@@ -11,6 +11,14 @@ TradingLab is a multi-project research workspace. Each project owns its setup, d
 | `Trading Beta/` | Legacy first project; reference only | No new active setup | Not part of the active baseline | Historical scripts and local payloads retained for reference |
 | `Training/` | Notes, visual references, and planning material | N/A | N/A | Documentation/support material, not an executable project |
 
+The detailed secondary-project audit is recorded in `docs/SECONDARY_PROJECT_AUDIT.md`.
+
+## Secondary project audit
+
+- `Swing/` — active, research-only. Its canonical v1 backtest and tests are maintained; legacy scripts are not part of the canonical runner.
+- `Pattern Trading/` — research-only. Black Friday and Labor Day are active research children; `super_bowl/` is paused/legacy until it has an implementation and validation boundary.
+- `Intraday/` — active, research and paper-trading-only. Its ORB workflow can update paper trades and research reports, but is not a live broker execution system.
+
 ## Repository-wide rules
 
 - Root `AGENTS.md` is the single project-wide source of truth for working agreements and structure.

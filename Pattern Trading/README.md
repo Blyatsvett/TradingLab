@@ -2,6 +2,8 @@
 
 Pattern Trading contains independent event-study research projects. It is research-only and does not place orders.
 
+Black Friday and Labor Day are the active research children. `super_bowl/` is paused/legacy pending a documented implementation and validation boundary.
+
 ## Setup
 
 From this folder in PowerShell:

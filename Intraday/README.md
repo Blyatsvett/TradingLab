@@ -2,6 +2,8 @@
 
 Intraday contains the ORB, paper-trading, and Strategy Lab workflows. It is separate from Regime Trading and currently supports research and paper workflows only.
 
+Status: active, research and paper-trading-only. The canonical daily workflow does not submit broker or live orders.
+
 ## Setup
 
 From this folder in PowerShell:
