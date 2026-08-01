@@ -1,0 +1,25 @@
+{
+  "columns": [
+    "datetime",
+    "open",
+    "high",
+    "low",
+    "close",
+    "ticker",
+    "source",
+    "collected_at_utc"
+  ],
+  "csv_sha256": "7941189fc893c086ce2a0aa9b25eaaa9214f7ab5ff1f3d57cb1277b6290b32ee",
+  "cutoff": "09:45",
+  "evidence_status": "UPLOADED_AUTHENTIC_POINT_IN_TIME_SOURCE_COPY",
+  "exact_0945_ticker_count": 21,
+  "fixture_id": "STEP9_MORNING_V2_AUTHENTIC_20260730_0945_SOURCE_V1",
+  "orders_enabled": false,
+  "purpose": "ISOLATED_SEMANTIC_EQUIVALENCE_ONLY",
+  "router_active": false,
+  "row_count": 282,
+  "session_date": "2026-07-30",
+  "source_archive_sha256": "e8c7b619295dfe4fef3991b42532f4f2b65cfe6a3771ee870153f5d4a97d9a38",
+  "source_database_sha256": "e48e5ba85e3e6673bcc0735c73c3dbda541aa115b973db11a380876eb9c44165",
+  "ticker_count": 29
+}

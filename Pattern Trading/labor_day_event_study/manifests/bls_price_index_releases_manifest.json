@@ -1,0 +1,31 @@
+{
+  "cpi_row_count": 335,
+  "dataset": "Historical BLS CPI and PPI release dates",
+  "end_year": 2025,
+  "generated_at_utc": "2026-07-23T12:27:17.683621+00:00",
+  "maximum_release_date": "2025-12-18",
+  "minimum_release_date": "1998-01-08",
+  "output_path": "data\\raw\\macro_releases\\bls_price_index_releases_1998_2025.csv",
+  "output_sha256": "816176475a620d5721e3c9e328e7d628207d11d630618cc97968204a4b5f355e",
+  "ppi_row_count": 334,
+  "release_time_et": "08:30",
+  "sources": {
+    "cpi": {
+      "archive_url": "https://www.bls.gov/bls/news-release/cpi.htm",
+      "row_count": 335,
+      "source_file": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\bls_cpi_archive_index.html",
+      "source_kind": "local_official_html",
+      "source_sha256": "f1380f1997e2b0b93add8739e1aea433a8e3255104ead868a4c1ec96a0420e87"
+    },
+    "ppi": {
+      "archive_url": "https://www.bls.gov/bls/news-release/ppi.htm",
+      "row_count": 334,
+      "source_file": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\bls_ppi_archive_index.html",
+      "source_kind": "local_official_html",
+      "source_sha256": "0732ab632f6639d224cbe138a28202324ee063da58edc98e48321cbdafa26459"
+    }
+  },
+  "start_year": 1998,
+  "total_row_count": 669,
+  "verification_status": "official_archive"
+}

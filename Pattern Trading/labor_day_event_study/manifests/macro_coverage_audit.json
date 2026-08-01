@@ -1,0 +1,75 @@
+{
+  "audit_name": "Labor Day macro coverage audit",
+  "audit_range": {
+    "forward_year": 2026,
+    "historical_end_year": 2025,
+    "historical_start_year": 1998
+  },
+  "audit_version": "1.0.0",
+  "clean_window_counts": {
+    "complete": 0,
+    "demand_build_up": 0,
+    "early": 2,
+    "final_week": 0,
+    "first_postweek": 0,
+    "immediate": 0,
+    "unwind": 0
+  },
+  "created_utc": "2026-07-23T20:23:13.112673+00:00",
+  "inputs": {
+    "macro_registry": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\macro_events.csv",
+      "rows": 3113,
+      "sha256": "260e1c71ca2b252c97fc37bd8d3db2f31bac860cde0396660df2935825d46290"
+    },
+    "mapped_events": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\labor_day_macro_event_map.csv",
+      "rows_in_audit_sample": 571,
+      "sha256": "ea6d6406f3a8d136a32213846a19364425fa62d25f5a6633d0773aaf4da837a6"
+    }
+  },
+  "issue_counts": {
+    "critical": 0,
+    "info": 0,
+    "warning": 6
+  },
+  "outputs": {
+    "labor_day_macro_coverage_by_window.csv": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\labor_day_macro_coverage_by_window.csv",
+      "sha256": "f41085dd8bd73dc394c1f83d63142c1dafe62574f77a34ae52597c8f7a99c3ca"
+    },
+    "labor_day_macro_coverage_by_year.csv": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\labor_day_macro_coverage_by_year.csv",
+      "sha256": "b56fb98580f1793ba682af281b49ba5db78a1d5ee7a0623d7c7dc19d6ac165c9"
+    },
+    "macro_coverage_by_series_year.csv": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\macro_coverage_by_series_year.csv",
+      "sha256": "5ddbcccf0febb0275b6be7786405c318bc076b05f4311ff69a797603481efbe4"
+    },
+    "macro_coverage_event_type_summary.csv": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\macro_coverage_event_type_summary.csv",
+      "sha256": "6ffe930a981c7967b97c81b9cf0566437e0ea4d1e601125a36164e71f055ce64"
+    },
+    "macro_coverage_gaps.csv": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\macro_coverage_gaps.csv",
+      "sha256": "589ab6c3f0ed569ef2e17338ad6034bf130c500975d0dd571dd183e1c1af9baf"
+    }
+  },
+  "row_counts": {
+    "event_type_summary": 18,
+    "issues": 6,
+    "series_year": 522,
+    "window_summary": 203,
+    "year_summary": 29
+  },
+  "status": "PASS_WITH_WARNINGS",
+  "tier_1_clean_window_counts": {
+    "complete": 0,
+    "demand_build_up": 0,
+    "early": 2,
+    "final_week": 0,
+    "first_postweek": 0,
+    "immediate": 0,
+    "unwind": 0
+  }
+}

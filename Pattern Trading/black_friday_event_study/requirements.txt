@@ -1,0 +1,6 @@
+pandas>=2.2
+numpy>=1.26
+yfinance>=0.2.54
+scipy>=1.13
+statsmodels>=0.14
+pandas-market-calendars>=4.4

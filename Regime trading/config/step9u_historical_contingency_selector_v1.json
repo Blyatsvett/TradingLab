@@ -1,0 +1,56 @@
+{
+  "experiment_id": "STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1",
+  "research_status": "RESEARCH_ONLY_RETROSPECTIVE_IN_SAMPLE_RULE_DESIGN_NOT_ROUTER_ACTIVE",
+  "code_version": "STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1_2026_07_28",
+  "historical_freeze_id": "92b274cb24cad391",
+  "historical_artifact_set_sha256": "92b274cb24cad391324b4023e20c9f9830544f6c63e87b73846ff757ff986aa1",
+  "historical_freeze_manifest_sha256": "e8a5074f2cbe0ebfa73f5d579c042d8a9e5305e1a61059ee171bdd90f5f2e23e",
+  "max_selected_positions": 2,
+  "max_positions_per_sector": 1,
+  "mandatory_control_active": false,
+  "selection_active_historical_replay_only": true,
+  "entry_contract": "INHERIT_STEP9T_STANDARDIZED_0950_OPEN_TO_EOD_CLOSE",
+  "candidate_universe": "MORNING_COMPLETE_DIRECTIONAL_STEP9T_ARCHETYPES",
+  "ranking_tie_break": [
+    "rule_priority_desc",
+    "signal_strength_desc",
+    "ticker_asc"
+  ],
+  "rules": [
+    {
+      "rule_id": "HD_MIXED_BCL_AVOID_V1",
+      "action": "BLOCKED_NEGATIVE_CONTROL",
+      "priority": 1000,
+      "source_regime": "HIGH_DISPERSION",
+      "transition_state": "MIXED_TRANSITION",
+      "primary_archetype": "BULLISH_CONTINUATION_LONG",
+      "signal_formula": "NONE",
+      "evidence_basis": "NEGATIVE_EXPLORATORY_EXACT_CELL",
+      "historical_design_note": "Blocked because the frozen Step 9T exact cell had a session-clustered confidence interval below zero."
+    },
+    {
+      "rule_id": "LRL_AGGREGATE_PROMISING_V1",
+      "action": "SELECTABLE_CHALLENGER",
+      "priority": 200,
+      "source_regime": "*",
+      "transition_state": "*",
+      "primary_archetype": "LAGGARD_RECOVERY_LONG",
+      "signal_formula": "max(-early_return,0)+max(last5_return,0)",
+      "evidence_basis": "PROMISING_EXPLORATORY_AGGREGATE_ARCHETYPE",
+      "historical_design_note": "Aggregate archetype evidence was positive; exact regime-transition cells remain sparse."
+    },
+    {
+      "rule_id": "VE_BCL_BACKOFF_CHALLENGER_V1",
+      "action": "SELECTABLE_CHALLENGER",
+      "priority": 100,
+      "source_regime": "VOLATILITY_EXPANSION",
+      "transition_state": "*",
+      "primary_archetype": "BULLISH_CONTINUATION_LONG",
+      "signal_formula": "max(early_return,0)+max(last5_return,0)",
+      "evidence_basis": "PROMISING_EXPLORATORY_REGIME_ARCHETYPE_BACKOFF",
+      "historical_design_note": "Backoff evidence was barely positive and remains exploratory."
+    }
+  ],
+  "router_active": false,
+  "orders_enabled": false
+}

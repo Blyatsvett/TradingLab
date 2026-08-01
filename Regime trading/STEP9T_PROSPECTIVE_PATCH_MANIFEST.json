@@ -1,0 +1,67 @@
+{
+  "creates_real_ledger_during_install": false,
+  "dedicated_tests_expected": 20,
+  "expected_universe_size": 29,
+  "experiment_id": "STEP9T_PROSPECTIVE_REGIME_TRANSITION_ARCHETYPE_V1",
+  "files": [
+    {
+      "bytes": 793,
+      "path": "INSTALL_STEP9T_PROSPECTIVE_REGIME_TRANSITION_ARCHETYPE_V1.md",
+      "sha256": "8b92a77f3bc0a669fdcfc9b02b09f5b07b4fd8b1b1ee4ff65ded066431e412bb"
+    },
+    {
+      "bytes": 58605,
+      "path": "RegimeTrading/scripts/step9t_prospective_regime_transition_archetype_v1.py",
+      "sha256": "1bd05a5d8114fe6358404061824d7ffbbfb96effe582692fcd721bf4699abb29"
+    },
+    {
+      "bytes": 1742,
+      "path": "STEP9T_PROSPECTIVE_REGIME_TRANSITION_ARCHETYPE_V1_README.md",
+      "sha256": "83f0145badfdb4f07198b11eaf1aa8609e85c318fa17d4a17ae940904a673c3b"
+    },
+    {
+      "bytes": 1343,
+      "path": "config/step9t_prospective_regime_transition_archetype_v1.json",
+      "sha256": "f8b498045b95e702120893c9bdd44fdc01f96ea533d1e5b12993cd8a95cb2403"
+    },
+    {
+      "bytes": 269,
+      "path": "run_step9t_prospective_audit_v1.ps1",
+      "sha256": "2e9f49b79a1ce1fd693f1ca4efc641dac496fd491b15b1dd59762092ee63848a"
+    },
+    {
+      "bytes": 581,
+      "path": "run_step9t_prospective_eod_v1.ps1",
+      "sha256": "9ef0d495688b8737f591c60ba15890956815a48b7f4969bc8d6c831d8e375b09"
+    },
+    {
+      "bytes": 594,
+      "path": "run_step9t_prospective_snapshot_v1.ps1",
+      "sha256": "9ac654853284961ea85a3ffb9ca85b00b97b777fbf3eff1cf27f8add7488aae2"
+    },
+    {
+      "bytes": 12989,
+      "path": "tests/test_step9t_prospective_regime_transition_archetype_v1.py",
+      "sha256": "fa89c66ce03c751b2ab37c9a0e4e52e9c862d3a80c914e2e6c0957bdee5ba6a6"
+    },
+    {
+      "bytes": 8588,
+      "path": "tools/verify_step9t_prospective_regime_transition_archetype_v1.py",
+      "sha256": "110e5fbd8bb70d9a27abd492b565a1ce57983f400e148fc2d3667ee92d9ede8e"
+    }
+  ],
+  "full_suite_expected": 277,
+  "historical_artifact_set_sha256": "92b274cb24cad391324b4023e20c9f9830544f6c63e87b73846ff757ff986aa1",
+  "historical_freeze_id": "92b274cb24cad391",
+  "historical_freeze_manifest_sha256": "e8a5074f2cbe0ebfa73f5d579c042d8a9e5305e1a61059ee171bdd90f5f2e23e",
+  "morning_deadline": "09:49:30",
+  "morning_decision_time": "09:48:00",
+  "morning_latest_source_label": "09:45",
+  "orders_enabled": false,
+  "patch_id": "STEP9T_PROSPECTIVE_REGIME_TRANSITION_ARCHETYPE_V1_PATCH_20260728",
+  "research_status": "RESEARCH_ONLY_PROSPECTIVE_OBSERVER_NOT_SELECTOR_NOT_ROUTER_ACTIVE",
+  "router_active": false,
+  "selection_active": false,
+  "source_duplicate_policy": "LATEST_SQLITE_ROWID_PER_TICKER_MINUTE_V1",
+  "standardized_entry_label": "09:50"
+}

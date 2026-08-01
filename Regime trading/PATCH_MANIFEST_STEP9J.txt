@@ -1,0 +1,9 @@
+STEP9J_CHALLENGER_REGIME_STRATEGY_REDESIGN_V1
+
+Adds:
+- run_step9j_challenger_regime_strategy_redesign.ps1
+- README_REGIME_SYSTEM_STEP9J.txt
+- RegimeTrading/scripts/step9j_challenger_regime_strategy_redesign.py
+- tests/test_step9j_challenger_regime_strategy_redesign.py
+
+Does not replace or modify frozen Step 9I, Step 9I-R, production ORB, databases, or ledgers.

@@ -1,0 +1,67 @@
+{
+  "core_strategy_files_modified": false,
+  "files": [
+    {
+      "bytes": 14279,
+      "path": "tools\\check_step9tu_morning_readiness_v1.py",
+      "sha256": "2e5cf3f9e71ab6e4058d38517e86f9de6358910cf46dc6f8828e3ab64095b11e"
+    },
+    {
+      "bytes": 5372,
+      "path": "tests\\test_step9tu_morning_safety_v1.py",
+      "sha256": "7f545dae46617439ac5dfec2b4144e84304469ca733785c346f3839cc85aec9d"
+    },
+    {
+      "bytes": 4688,
+      "path": "run_step9tu_tonight_preflight_v1.ps1",
+      "sha256": "15b63e1d021bd37c310d0b928b2c8351719ab25be8fec3a95f437f7050be80a4"
+    },
+    {
+      "bytes": 2464,
+      "path": "run_step9tu_morning_readiness_v1.ps1",
+      "sha256": "0edac1ad68bc3172891ed5921fe82a0a56171992878bbae35522de1278d6ea9f"
+    },
+    {
+      "bytes": 6210,
+      "path": "run_step9tu_live_morning_v1.ps1",
+      "sha256": "61cae9b06267c69ab701bd27ecdf0f20899e6c5946654ba2bcd4f1da2565caaa"
+    },
+    {
+      "bytes": 1294,
+      "path": "STEP9TU_MORNING_SAFETY_V1_README.md",
+      "sha256": "d89540775a4ee12732535027cb7ab45d6e8e4294735e3519a6c1555188644c6c"
+    },
+    {
+      "bytes": 13667,
+      "path": "tools\\check_step9_full_morning_chain_v1.py",
+      "sha256": "898d16954957b423eb1cccef302b27020dfd809f41a6871b24afae24b8472e36"
+    },
+    {
+      "bytes": 2307,
+      "path": "tests\\test_step9_full_morning_safety_v1.py",
+      "sha256": "fc81ec2efa10bee2459af416b9088fe6888269447468e22497b28afbd39c0c20"
+    },
+    {
+      "bytes": 4871,
+      "path": "run_step9_full_tonight_preflight_v1.ps1",
+      "sha256": "6b2f8cf6917dc822506dff85c7a756856b7c6abbe2b4e985773ee30fdddb657d"
+    },
+    {
+      "bytes": 7935,
+      "path": "run_step9_full_live_morning_v1.ps1",
+      "sha256": "92f9c6205739c5d5559f59db69203b3ce454864a648b9d946cd0bb4712dc5cc6"
+    },
+    {
+      "bytes": 1075,
+      "path": "STEP9_FULL_MORNING_SAFETY_V1_README.md",
+      "sha256": "adc165af07fd93db2763de6f837130d22e0d3fcc7a4306ccf8b511823969c8d4"
+    }
+  ],
+  "orders_enabled": false,
+  "package_id": "STEP9_FULL_MORNING_SAFETY_V1_PATCH_20260729",
+  "real_ledgers_included": false,
+  "router_active": false,
+  "status": "OPERATIONAL_GUARDRAIL_ONLY_NO_STRATEGY_CHANGE",
+  "step9s_mandatory_benchmark_control": true,
+  "step9u_mandatory_control": false
+}

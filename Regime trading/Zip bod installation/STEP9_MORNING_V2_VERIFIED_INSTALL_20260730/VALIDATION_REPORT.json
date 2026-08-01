@@ -1,0 +1,34 @@
+{
+  "package_id": "STEP9_MORNING_V2_REBUILT_VERIFIED_20260730",
+  "package_manifest_sha256": "1dd11e4b4557478ab3abccdfe1f074a48dfe16d4fa347251bd1142fb8bf2cb54",
+  "outer_installer_sha256": "cf32042ca3db2b8364fce3439ad99ef018b6454e8d4ab38793b691ede634a5ed",
+  "payload_files": 14,
+  "runtime_dependencies": 51,
+  "task1_preflight": {
+    "status": "STEP9_MORNING_V2_PREFLIGHT_QUALIFIED",
+    "validation_iterations": 10,
+    "full_suite_passed": true,
+    "router_active": false,
+    "orders_sent": false
+  },
+  "task2": {
+    "mock_fallback": "MOCK_FALLBACK_COMPLETE",
+    "mock_evidence_status": "MOCK_REHEARSAL",
+    "mock_real_databases_unchanged": true,
+    "rollback_fault_injection": "PASSED",
+    "rollback_clone_restored": true,
+    "normal_installation": "PASSED",
+    "focused_package_tests": "25 passed",
+    "focused_live_tests": "69 passed in 101.09 seconds",
+    "complete_suite": "381 passed in 213.11 seconds",
+    "package_validator": "STEP9_MORNING_V2_PACKAGE_VALIDATION_PASSED"
+  },
+  "safety": {
+    "production_orb_touched": false,
+    "real_project_modified_during_rebuild_and_qa": false,
+    "scheduled_tasks_registered_during_qa": false,
+    "router_active": false,
+    "orders_sent": false
+  },
+  "zip_sha256": "see adjacent .zip.sha256 sidecar"
+}

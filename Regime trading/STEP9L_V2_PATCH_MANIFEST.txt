@@ -1,0 +1,30 @@
+STEP 9L V2 SELECTED-STRATEGY SHADOW ENGINE
+==========================================
+
+Additive files only. No Step 9I or Step 9L V1 file is replaced.
+
+Adds:
+- RegimeTrading/scripts/step9l_v2_selected_strategy_shadow_engine.py
+- RegimeTrading/scripts/step9l_v2_compare_step9i_v2.py
+- tests/test_step9l_v2_selected_strategy_shadow_engine.py
+- tests/test_step9l_v2_compare_step9i_v2.py
+- run_step9l_v2_morning_research_engine.ps1
+- run_step9l_v2_eod_research_engine.ps1
+- export_step9l_v2_research_ledgers.ps1
+- compare_step9i_v2_vs_step9l_v2.ps1
+- STEP9L_V2_PATCH_MANIFEST.txt
+
+V2 preserves all five V1 contracts exactly and adds:
+1. HIGH_VOL_REVERSAL directional volatility breakout with 2R target
+   Role: prospective primary challenger
+2. HIGH_VOL_REVERSAL group-aligned delayed-reversal fade
+   Role: negative guardrail / counterfactual only
+
+Separate immutable ledger:
+- data/step9l_v2_selected_strategy_shadow_ledger.db
+
+V1 remains archived and unchanged:
+- data/step9l_selected_strategy_shadow_ledger.db
+
+Frozen baseline remains unchanged:
+- data/step9i_v2_shadow_ledger.db

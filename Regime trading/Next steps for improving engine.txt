@@ -1,0 +1,191 @@
+Notes 28/7 
+
+After this passes, Step 9R can resume prospectively alongside Step 9S on the next new session. Step 9S guarantees one forced shadow trade; Step 9R independently stores all V3 candidates and shadow-selects 0–2 without replacing V3.
+
+
+************************
+The mandatory Step 9S control and Step 9R selection must remain separate:
+
+Step 9S asks: What happens if we always trade one deterministic contingency?
+Step 9R asks: Can ranking identify the best candidates and avoid weak ones?
+Step 9L V3 remains the frozen reference strategy and is not replaced.
+
+
+
+Next steps after 27/7 - 26 
+
+1. Preserve every candidate’s counterfactual outcome 2. Replay the exact V3 contracts historically 3. Test whether the current rank predicts outcome 4. Build a simple expected-R score 5. Compare it with statistical challengers 6. Shadow-select 0–2 candidates prospectively 7. Do not replace V3 until enough unseen evidence exists
+
+Create a separate research-only layer:
+STEP9R_CANDIDATE_RANKING_RESEARCH_V1
+
+- Selector A — Current baseline
+- Selector B — Interpretable scorecard
+- Selector C — Statistical probability model
+- Selector D — Nonlinear challenger
+- Selector E — Oracle benchmark
+(E is for research only, select the best two candidates using their known end-of-day outcomes.)
+
+Key principle  - 
+Eligibility determines what may be traded. Ranking determines what deserves capital. A weak score should result in no trade—not an automatic second position.
+
+First ensure the strategy library covers the day, then ensure the selector captures the profitable opportunity within that strategy.
+
+
+search to find metrics we should add - "Metrics we should add
+
+The future research dashboard should distinguish:"
+
+**********************
+
+1. Freeze and tag Step 9H
+2. Add a recurring data-collection routine
+3. Implement Step 9I prospective morning decision ledger
+4. Implement Step 9I end-of-day evaluator
+5. Pre-register promotion and rejection gates
+6. Begin shadow operation
+7. Review weekly operationally and monthly statistically
+8. Build Step 9J only after sufficient forward observations
+
+******
+
+Step 9E
+Build sector, company and ticker-characteristic taxonomy
+
+Step 9F
+Recalculate the challenger matrix by market regime × sector × strategy
+
+Step 9G
+Run leave-one-ticker-out and leave-one-sector-out robustness
+
+Step 9H
+Expand the historical period and liquid-stock universe
+
+Step 9I
+Freeze a small candidate router
+
+Step 10
+Chronological shared-account and forward simulation
+
+
+
+
+Main strategy — locked in
+
+I will treat this as the central objective throughout the project:
+
+Every trading day is unique. At the start of each day, the system evaluates the current market regime and macro environment, selects the appropriate validated trading response, and day-trades accordingly—or deliberately stays out when no edge is present.
+My recommended order is:
+
+1. True max-two-position portfolio simulation
+2. Profit concentration and leave-one-out analysis
+3. Execution/cost stress testing
+4. Parameter robustness grid
+5. Cleaner Nasdaq/Yahoo completeness and match metrics
+6. New shadow filters only after those results are understood
+
+
+
+1. Build a true portfolio simulation
+Maximum two simultaneous positions
+Fixed position size
+Limited capital
+Potentially several candidates on the same day
+
+
+2. Add robustness testing around V1
+Rather than searching for the single “best” parameter, we should test whether the result survives small changes.
+
+
+3. Measure result concentration
+Best one, three and five days as a percentage of total profit
+Performance excluding the best day
+Performance excluding the best three days
+Performance excluding each ticker
+Performance excluding each month
+Performance excluding each market regime
+Largest single-trade contribution
+Herfindahl-style profit concentration
+
+
+4. Add leave-one-out validation
+We should rerun the results repeatedly while excluding:
+
+One ticker at a time
+One month at a time
+One week at a time
+One regime at a time
+
+
+5. Correct the decision-match headline
+
+
+6. Add complete-session quality gates
+The comparison should not treat an incomplete intraday session as final.
+
+Then the Power BI report can clearly distinguish:
+
+Live provisional comparison
+Final entry comparison
+Final outcome comparison
+
+This will prevent confusing situations such as zero final-trigger rows but one outcome row.
+
+
+7. Normalize prices to valid tick sizes
+
+We should normalize both sources (Yahoo and Nasdaq using:
+
+Instrument tick-size rules where available, or
+A controlled precision/tolerance model
+
+
+8. Improve cost and execution modelling
+The current 0.05% cost assumption is useful, but we can make the shadow calculation more realistic.
+
+Test:
+
+0.025%, 0.05%, 0.075%, 0.10% round-trip costs
+Entry slippage of one valid tick
+Stop slippage of one to three ticks
+Delayed entry by one five-minute bar
+No fill when price only touches the trigger briefly
+Gap-through-stop handling
+
+A good strategy should survive moderately worse ex
+
+
+
+Strategy improvements that can be researched now
+A. Opening-range risk filter
+
+Very wide opening ranges create distant stops and poor capital efficiency.
+
+B. Entry-time filter
+
+A recovery triggered at 09:50 may behave differently from one first triggered at 12:55.
+
+C. Gap-size buckets
+
+D. Nasdaq volume confirmation
+
+E. Market/sector confirmation
+
+The current early regime is already useful. We can later test simple conditions such as:
+
+Stock recovery plus positive index breadth
+Bank setup plus positive bank-sector breadth
+Industrial setup plus positive industrial breadth
+
+
+
+What genuinely requires more data
+
+Some decisions should wait.
+
+Question	Approximate evidence needed
+Does Nasdaq consistently reproduce Yahoo decisions?	10–20 complete sessions
+Is a Nasdaq volume filter promising?	Around 30–60 sessions
+Is one simple filter improving V1?	Preferably 75–100 completed trades
+Should ticker-specific rules be introduced?	Preferably 50+ trades per subgroup
+Should a shadow variant replace V1?	Multiple market regimes and several months of forward evidence

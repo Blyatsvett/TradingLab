@@ -1,0 +1,31 @@
+STEP 7 PATCH MANIFEST
+=====================
+
+New files
+---------
+RegimeTrading\scripts\step7_regime_feature_foundation.py
+run_step7_regime_feature_foundation.ps1
+tests\test_step7_regime_feature_foundation.py
+README_REGIME_SYSTEM_STEP7.txt
+PATCH_MANIFEST_STEP7.txt
+
+Modified files
+--------------
+RegimeTrading\scripts\run_daily_research_workflow.py
+RegimeTrading\scripts\export_powerbi_workbook.py
+RegimeTrading\scripts\validate_outputs.py
+
+Generated at runtime
+--------------------
+data\regime_feature_foundation_summary.csv
+data\regime_daily_features.csv
+data\regime_feature_definitions.csv
+data\regime_feature_completeness.csv
+data\regime_point_in_time_audit.csv
+
+Safety boundary
+---------------
+No production ORB file is included.
+No Gap Recovery V1 trading rule is changed.
+No live or paper order functionality is added.
+This patch is simulation-only.

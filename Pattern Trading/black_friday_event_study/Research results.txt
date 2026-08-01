@@ -1,0 +1,54 @@
+FIRST RESEARCH RESULT - 
+
+This is much healthier-looking than the logistics pre-event result because:
+
+The means and medians agree.
+Most years are positive.
+The effect appears in two economically related groups.
+Both groups subsequently have negative Late_post returns.
+
+For retail:
+
+Immediate event: +1.42%
+Late post: −0.84%
+
+For logistics:
+
+Immediate event: +0.81%
+Late post: −0.62%
+
+That is directionally consistent with:
+
+Stocks exposed to Black Friday rise around Black Friday week and subsequently give back part of the gain.
+
+This is currently the most promising pattern in the project.
+
+But it is still exploratory
+
+The raw p-values are:
+
+Retail immediate event: approximately 0.092
+Logistics immediate event: approximately 0.087
+
+Neither is conventionally significant, and both become approximately 0.46 after FDR correction.
+
+Retail being positive in 12 of 16 years is notable. A simple one-sided sign test gives approximately p = 0.038, but we cannot treat that as confirmed evidence because we discovered it after examining several groups and windows.
+
+So this becomes a new hypothesis to validate, not a finished result.
+
+
+
+***FURTHERMORE ****
+
+- Revised main hypothesis
+
+US retail and e-commerce stocks generate positive abnormal returns during the five trading days preceding Black Friday through the following Monday.
+
+This is now the project’s strongest candidate.
+
+
+
+- The retail immediate-event result is strong enough to continue investigating, but not yet strong enough to call an investment strategy. The next two gates are company-level breadth and placebo-window testing.
+
+
+- Certain highly Black-Friday-sensitive retailers—particularly Macy’s and possibly Etsy—have historically generated positive abnormal returns around Black Friday week.

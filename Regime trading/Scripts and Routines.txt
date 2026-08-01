@@ -1,0 +1,28 @@
+Run after EOD 
+
+.\collect_step9h_holdout_data.ps1
+
+eller denna? hmm får fråga
+.\collect_step9i_shadow_data.ps1 -Days 5
+.\run_step9i_eod_shadow_evaluator.ps1
+
+
+Every trading day: collect data
+Every week: run Step 9H transport
+Every month: perform formal review
+
+
+09.45 TIME run - 
+
+cd "C:\Users\User\Desktop\Kaizen\TradingLab\Regime trading"
+
+.\collect_step9i_shadow_data.ps1 -Days 5
+.\run_step9i_morning_shadow_router.ps1
+
+^
+A successful run should report:
+"Prospective status : PROSPECTIVE_CONFIRMATORY_ELIGIBLE
+Ledger action      : SEALED_NEW_BATCH"
+
+(in case den laggar och kommer utanför 09.45)
+.\run_step9i_morning_shadow_router.ps1 -AllowLateReconstruction

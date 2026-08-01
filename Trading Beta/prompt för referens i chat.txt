@@ -1,0 +1,3 @@
+För att hitta allt EFTER daytrade är byggt ->
+
+- I couldn't agree with you more, the purpose now with this small sample is to learn, not gain profit. Lets say I would like to include all stocks, how much money would be needed? And how would that affect the models we have built? Would anything need to change ?

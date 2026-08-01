@@ -1,0 +1,26 @@
+V1 VALIDATION SUITE STEP 5 PATCH MANIFEST
+=========================================
+
+New files
+---------
+RegimeTrading/scripts/v1_validation_provider_quality.py
+tests/test_v1_validation_provider_quality.py
+run_v1_validation_step5.ps1
+README_V1_VALIDATION_SUITE_STEP5.txt
+PATCH_MANIFEST_STEP5.txt
+
+Modified files
+--------------
+RegimeTrading/scripts/export_powerbi_workbook.py
+RegimeTrading/scripts/validate_outputs.py
+RegimeTrading/scripts/run_daily_research_workflow.py
+run_v1_validation_suite.ps1
+run_nasdaq_collection.ps1
+run_strategy_decision_comparison.ps1
+README_V1_VALIDATION_SUITE_ROADMAP.txt
+
+Safety
+------
+No production Intraday files are included.
+No V1 strategy rules are changed.
+Nasdaq remains an independent shadow-data source.

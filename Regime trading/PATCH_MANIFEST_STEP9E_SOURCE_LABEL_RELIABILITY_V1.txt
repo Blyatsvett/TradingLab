@@ -1,0 +1,40 @@
+PATCH ID
+PRE_STEP9S_STEP9E_SOURCE_LABEL_RELIABILITY_V1_20260728
+
+STATUS
+RESEARCH_SHADOW_RELIABILITY_FIX_NOT_ROUTER_ACTIVE
+
+SCOPE
+- Fixes mixed string/NaN aggregation of max_same_day_source_label in Step 9E.
+- Missing ticker-day source labels normalize to an empty string and remain point-in-time incomplete.
+- Group source labels use the latest valid non-missing label.
+- A group with no valid source label fails point_in_time_pass safely.
+- Adds two synthetic regression tests reproducing mixed-valid/missing and all-missing group states.
+- Adds an isolated verifier that uses temporary ledgers/workbooks and checks protected database hashes.
+
+FILES INSTALLED
+RegimeTrading/scripts/step9e_instrument_sector_taxonomy.py
+tests/test_step9e_instrument_sector_taxonomy.py
+tools/verify_step9e_source_label_reliability.py
+
+AUDIT-ONLY FILES
+PATCH_MANIFEST_STEP9E_SOURCE_LABEL_RELIABILITY_V1.txt
+VALIDATION_REPORT_STEP9E_SOURCE_LABEL_RELIABILITY_V1.txt
+INSTALL_STEP9E_SOURCE_LABEL_RELIABILITY_V1.md
+STEP9E_SOURCE_LABEL_RELIABILITY_PATCH.diff
+
+EXPLICITLY NOT INCLUDED OR MODIFIED
+- Step 9I source code
+- Step 9L source code
+- Step 9R source code
+- Step 9Q source code or schema
+- Step 9S code
+- Any SQLite database or ledger
+- Any collector
+- Any production/paper ORB file
+- Any router or order-routing implementation
+- Step 9I preflight code
+
+SOURCE ZIP AUDITED
+regime_trading_fresh_20260728_113645.zip
+SHA-256: 60d048b06c679ee94bfdf126d987a082deab1f531b36f74a9e092163449f61d6

@@ -1,0 +1,15 @@
+V1 Research Validation Suite Step 4 patch
+
+Added:
+- RegimeTrading/scripts/v1_validation_parameter_robustness.py
+- tests/test_v1_validation_parameter_robustness.py
+- run_v1_validation_step4.ps1
+- README_V1_VALIDATION_SUITE_STEP4.txt
+- PATCH_MANIFEST_STEP4.txt
+
+Updated:
+- RegimeTrading/scripts/run_daily_research_workflow.py
+- RegimeTrading/scripts/export_powerbi_workbook.py
+- RegimeTrading/scripts/validate_outputs.py
+- run_v1_validation_suite.ps1
+- README_V1_VALIDATION_SUITE_ROADMAP.txt

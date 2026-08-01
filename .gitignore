@@ -1,16 +1,49 @@
-.venv/
-__pycache__/
-*.pyc
+# Python environments, caches, and test artifacts
+**/.venv/
+**/venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ipynb_checkpoints/
+**/*.egg-info/
 
-Intraday/data/*.db
-Intraday/data/*.xlsx
-Intraday/data/logs/
-Intraday/data/*.csv
+# Local databases, raw data, generated data, and runtime logs
+**/data/**/*.db
+**/data/**/*.db-*
+**/data/**/*.csv
+**/data/**/*.xlsx
+**/data/**/*.parquet
+**/data/**/*.feather
+**/data/raw/
+**/data/processed/
+**/data/logs/
+**/outputs/
+**/logs/
 
+# Regime Trading's local research payloads
+Regime trading/data/source/
+Regime trading/data/ledgers/
+Regime trading/data/outputs/
+Regime trading/data/archives/
+Regime trading mock sessions/
+Regime trading backups/
+
+# Other local project payloads and archives
+**/backups/
+**/mock sessions/
+**/*.zip
+**/*.7z
+**/*.bak
+**/step9r_readable_context_*.txt
+
+# Local exports and proprietary dashboard files
 *.pbix
-*.bak
-*_backup.py
-# Legacy / root-level research workspace not part of active Intraday system
-/core/
-/scripts/
-/data/
+**/powerbi/*.xlsx
+
+# OS/editor metadata
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/

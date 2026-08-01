@@ -1,0 +1,72 @@
+VALIDATION DATE
+2026-07-28
+
+TEST ENVIRONMENT
+- Isolated extraction of the uploaded fresh project ZIP
+- Container Python 3.13.5
+- User-side verification remains required under Python 3.14.6
+
+FAILURE REPRODUCED BEFORE PATCH
+Fresh temporary Step 9I V2 ledger, session 2026-07-28:
+TypeError: '>=' not supported between instances of 'str' and 'float'
+Location: build_group_daily_state() in step9e_instrument_sector_taxonomy.py
+Cause: max_same_day_source_label contained both '09:40' strings and NaN values.
+Observed incomplete source rows:
+- 2026-06-04 FABG.ST
+- 2026-06-10 FABG.ST
+
+AUTOMATED TESTS AFTER PATCH
+- Step 7 through Step 9H group: 86 passed
+- Step 9I through Step 9L group: 70 passed
+- Step 9M/9N/9O group: 30 passed
+- Step 9Q group: 13 passed
+- Step 9R group: 14 passed
+- V1 validation group: 28 passed
+TOTAL: 241 passed
+
+ISOLATED REAL-DATA MORNING VALIDATION
+Step 9I V2, 2026-07-28, temporary ledger:
+- SEALED_NEW_BATCH
+- TREND_DOWN, 75.7%
+- 184 decisions / 0 eligible
+- Identical rerun returned existing batch
+
+Step 9L V3, 2026-07-28, temporary ledger:
+- SEALED_NEW_BATCH
+- TREND_DOWN, 75.7%
+- 184 decisions / 0 eligible
+- Identical rerun returned existing batch
+
+ISOLATED REAL-DATA EOD VALIDATION
+Step 9I V2, 2026-07-27, temporary ledger:
+- 184 outcome rows
+- Morning decision-row hash unchanged after EOD
+
+Step 9L V3, 2026-07-27, temporary ledger:
+- 184 outcome rows
+- 2 completed primary-hypothesis trades
+- 2 completed guardrail counterfactual trades
+- Morning decision-row hash unchanged after EOD
+- Outcomes matched the uploaded real ledger after excluding seal/evaluation metadata and payload hashes
+
+STEP 9Q READ-ONLY VALIDATION
+- Workbook validation passed
+- Step 9I rows/eligible: 184/0
+- Step 9L rows/eligible: 184/0
+- Current equity: 9995.34 SEK
+- Total P&L: -4.66 SEK
+- Source access: read-only
+
+PROTECTED FILE VERIFICATION
+The following SHA-256 values were unchanged after tests and smoke validation:
+- data/step9i_v2_shadow_ledger.db
+  0e73fb05d3eded400c92adf87dd23f7d49ef69b8f387d8847d831bb2c50bceb1
+- data/step9l_v3_selected_strategy_shadow_ledger.db
+  d92e77220739f0070cbf96af403503099708cbb64ae37f7c4db705f7f9467243
+- data/step9i_shadow_intraday_prices.db
+  51bc1b8cdd1e210e39fea76a55142598bfbc36fa6efe41d0e1354b2badc88bc9
+
+NO ORDERS WERE SENT.
+NO REAL LEDGER WAS WRITTEN.
+STEP 9I PREFLIGHT WAS NOT USED OR MODIFIED.
+STEP 9S WAS NOT USED OR MODIFIED.

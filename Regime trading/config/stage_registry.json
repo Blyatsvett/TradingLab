@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "orders_enabled": false,
+  "router_active": false,
+  "stage_order": [
+    "step9i",
+    "step9l",
+    "step9s",
+    "step9r",
+    "step9t",
+    "step9u",
+    "step9v"
+  ],
+  "stage_groups": {
+    "persistent_worker": ["step9i", "step9l"],
+    "deadline_critical": ["step9l", "step9s", "step9t", "step9u"],
+    "noncritical": ["step9i", "step9r", "step9l_sensitivity"],
+    "deferred_diagnostics": ["step9l_core_regime_sensitivity"]
+  },
+  "ledger_paths": {
+    "prices": "data/source/market/step9i_shadow_intraday_prices.db",
+    "step9i": "data/ledgers/prospective/step9i_v2_shadow_ledger.db",
+    "step9l": "data/ledgers/prospective/step9l_v3_selected_strategy_shadow_ledger.db",
+    "step9s": "data/ledgers/prospective/step9s_prospective_contingency_shadow_v1.db",
+    "step9r": "data/ledgers/prospective/step9r_prospective_selector_shadow_v1.db",
+    "step9t": "data/ledgers/prospective/step9t_regime_transition_archetype_prospective_v1.db",
+    "step9u": "data/ledgers/prospective/step9u_contingency_selector_prospective_shadow_v1.db",
+    "step9v": "data/ledgers/prospective/step9v_intraday_regime_transition_observer_v1.db",
+    "step9r_research": "data/ledgers/research/step9r_candidate_ranking_research_v1.db"
+  },
+  "output_dirs": {
+    "step9i": "data",
+    "step9l": "data",
+    "step9s": "data/outputs/research/step9s_historical_contingency_replay_v1",
+    "step9r": "data/outputs/research/step9r",
+    "step9t": "data/outputs/research/step9t_regime_transition_archetype_research_v1",
+    "step9u": "data/outputs/research/step9u_historical_contingency_selector_v1",
+    "step9v": "data/outputs/observer/step9v_intraday_regime_transition_observer_v1"
+  },
+  "stages": {
+    "step9i": {"kind": "prospective", "ledger": "step9i", "persistent_worker": true},
+    "step9l": {"kind": "prospective", "ledger": "step9l", "persistent_worker": true, "deadline_critical": true},
+    "step9s": {"kind": "prospective", "ledger": "step9s", "deadline_critical": true},
+    "step9r": {"kind": "prospective", "ledger": "step9r"},
+    "step9t": {"kind": "prospective", "ledger": "step9t", "deadline_critical": true},
+    "step9u": {"kind": "prospective", "ledger": "step9u", "deadline_critical": true},
+    "step9v": {"kind": "observer", "ledger": "step9v"},
+    "step9l_sensitivity": {"kind": "diagnostic", "ledger": "step9l"},
+    "step9l_core_regime_sensitivity": {"kind": "diagnostic", "ledger": "step9l"}
+  }
+}

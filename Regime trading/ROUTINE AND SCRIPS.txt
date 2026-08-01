@@ -1,0 +1,13 @@
+SLUTET PÅ VARJE VECKODAG !! 
+
+
+cd "C:\Users\User\Desktop\Kaizen\TradingLab\Regime trading"
+
+.\run_nasdaq_collection.ps1 -MaxFiles 2000 -LookbackHours 48
+
+
+*****
+
+.\run_strategy_decision_comparison.ps1
+
+.\.venv\Scripts\python.exe -m RegimeTrading.scripts.export_powerbi_workbook

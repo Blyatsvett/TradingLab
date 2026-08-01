@@ -1,0 +1,67 @@
+ROUTINE 27/7 - 26 
+
+
+09.42 !!!!!!!!!!!
+
+
+1 - 
+.\run_step9i_v2_morning_shadow_router.ps1
+
+2 - 
+.\run_step9l_morning_research_engine.ps1
+
+ELLR Samtidigt
+
+.\run_step9i_v2_morning_shadow_router.ps1
+.\run_step9l_current_morning.ps1
+
+.\run_step9t_prospective_snapshot_v1.ps1
+
+
+EOD - 
+
+.\run_step9i_v2_eod_shadow_evaluator.ps1
+.\run_step9l_current_eod.ps1
+***
+.\export_step9i_v2_shadow_ledgers.ps1
+.\export_step9l_current.ps1
+***
+
+.\compare_step9i_v2_vs_step9l_current.ps1
+
+
+Step 9I V2 Frozen Engine 	CURRENT ALPHA	ENGINE A
+9L New Research Engine		UNDER CONSTR.	ENGINE B
+
+both will intend to run alongside each other tomorrow		STEP9L_SELECTED_STRATEGY_SHADOW_ENGINE_V1
+
+
+Final aligned definition
+
+Our goal is now:
+
+Use the eleven-stock source universe to classify the morning market regime, then actively simulate the applicable regime-dependent strategies across all twenty-three tradable stocks, while preserving separate Core 5 and Holdout 18 evidence labels.
+
+
+9I = step for all tradeable tickers, live, will be used Monday as for now 
+
+9J = challenger and historical
+
+
+
+Så vi har använt 5 OG tickers för att hitta mönster, detta utökade med några fler för att sätta market regime. 
+Därefter utökade ännu fler tickers för att prova hypotesen, nu har vi totalt 23 st Tickers. Vill tradea med alla
+
+11 Regime setters
+
+5 OG tickers
+
+18 universe
+
+Total trade = 5 + 18
+
+
+DOWNLOAD DATA EOD
+DOWNLOAD DATA SOD 
+RUN SIMULATIONS
+ANALYZE 

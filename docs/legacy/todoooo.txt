@@ -1,0 +1,79 @@
+***** REGIME TRADING *****
+
+*30/7*
+
+BYGG SÅ ENGINE INTE HAR SÄMST TIMEFRAME						[/]
+EOD report									[]
+BI Sidor									[/] 1/7
+Fixa så rapportering funkar under dagen						[X] - någon bugg om 28/29 tickrs
+ 
+Undersök industrial/sector affected strats. 					[]
+excel på strat/regime/tickers, effect osv. 					[X]
+förbättra "regimes" träffsäkerhet						[]   -  intraday transition observer
+	detta kan t.ex. göras om vi EOD kollar hur bra accuracy% var 
+Post-day analys om regime stämmer med actual market (BI report)		
+
+Bygg research data base (like 1000 tickers)					[]
+Uppdatera contingency theory så trade sker ALLA dagar oavsett regime		[X] - Step 9S
+EOD 28/7, kolla tickers resultat (rank model stuff)				[X]
+Ta bort hela laddarchecken i kod för mornine routine				[]
+
+Undersök/optimera 2 tickers per day, ex. få fram vilken som kommer		[/] - Step 9R V1.1 
+performa bäst under dagen, inte bara välja random sen stänga rest		[]
+
+gör djupare research/förbättring på alla regimes				[/]
+	RANGE_LOW_VOL							[X]
+	VOLATILITY_EXPANSION						[X]	
+	HIGH_DISPERSION							[X]
+	HIGH_VOL_REVERSAL						[X]
+	TREND_UP							[X]		
+	TREND_DOWN							[X]
+	RECOVERY							[]
+	DEFENSIVE_MIXED							[]
+
+
+
+Migrera daytrade till ny chat							[]
+
+Lista ut hur programmet ska köra i kroatien					[]
+
+
+Paper trades page - 
+PNL chart + card								[/]
+
+Sätt upp struktur för soft data om Pattern trading companies 			[]
+
+
+
+**Rest från ORB 1 **
+bygg shadow sidan 								[]
+skapa live_trade.csv								[]
+Gör checklist mon trade								[X]
+effektivisera python -m Intraday.scripts.run_daily_orb_workflow 		[]
+Bygg sidorna för shadow + market regime som är senast q i chatgpt		[]
+Lös Avanza bevakningssida 							[X]
+Bygg current price vs target price etc. page 					[X]
+Opportunity ORB GAP COST ANALYSIS 						[]
+06_REGIME_AWARE_GAP_RECOVERY							[X]
+
+******
+
+** PROJECT MANY STRATS **
+compare the Strategy Lab ORB baseline against your existing ORB backtest/shadow baseline	[X]
+(chatgpt vill göra senare, har denna som reminder)
+
+Kolla om vi borde ha andra tickers på andra strategier		[X] -
+
+1. Create a broader research ticker universe
+2. Update downloader to download those tickers
+3. Keep ORB production config unchanged
+4. Rerun daily downloader
+5. Rerun market regime export
+6. Rerun Strategy Lab ticker optimization
+7. Then build walk-forward validation
+
+add walk-forward validation for the ticker optimization		[X] fråga
+
+1. run shadow report and send result
+2. Ask about daily/weekly checklist after report, then as again to see difference [X]
+3. proceed 

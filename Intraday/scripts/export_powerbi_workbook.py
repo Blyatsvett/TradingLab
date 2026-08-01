@@ -49,6 +49,10 @@ TABLES = {
     "daily_research_review_orb_signals": DATA_DIR / "daily_research_review_orb_signals.csv",
     "daily_research_review_paper_trades_today": DATA_DIR / "daily_research_review_paper_trades_today.csv",
     "daily_research_review_shadow_trades_today": DATA_DIR / "daily_research_review_shadow_trades_today.csv",
+    "regime_gap_recovery_summary": DATA_DIR / "regime_gap_recovery_summary.csv",
+    "regime_gap_recovery_trades": DATA_DIR / "regime_gap_recovery_trades.csv",
+    "regime_gap_recovery_daily": DATA_DIR / "regime_gap_recovery_daily.csv",
+    "regime_gap_recovery_latest": DATA_DIR / "regime_gap_recovery_latest.csv",
 }
 
 

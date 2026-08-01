@@ -1,0 +1,25 @@
+{
+  "bea_archive_pages_sha256": "e19318c1f056bb5781d4d7e22e0cfcdfbf375b20a87bddaa1162313321cc0ce3",
+  "bea_archive_url": "https://www.bea.gov/news/archive",
+  "bea_release_pages_sha256": "34d287c01e0bf0bcca5e3c914a57a818d4fd7278acbab28c643be9066439dc81",
+  "cache_directory": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\international_trade_source_cache",
+  "census_historical_releases_url": "https://www.census.gov/foreign-trade/Press-Release/ft900_index.html",
+  "census_schedule_url": "https://www.census.gov/foreign-trade/schedule.html",
+  "dataset": "Historical U.S. International Trade in Goods and Services (FT-900) publication calendar",
+  "generated_at_utc": "2026-07-23T19:02:26.733777+00:00",
+  "maximum_reference_period": "2025-09",
+  "maximum_release_date": "2025-12-11",
+  "minimum_reference_period": "1997-11",
+  "minimum_release_date": "1998-01-21",
+  "output_path": "data\\raw\\macro_releases\\international_trade_releases_1998_2025.csv",
+  "output_sha256": "f26e2948a7a8864532a0e389377ee16f058d55caaf60930e59eb33b8112b7e18",
+  "release_time_et": "08:30",
+  "requested_end_year": 2025,
+  "requested_start_year": 1998,
+  "row_count": 335,
+  "selection_basis": "Actual publication date on official BEA archive pages",
+  "selection_rule": "Include monthly FT-900 releases whose actual publication date falls from the requested start year through end year. Use the official BEA news archive and release pages for indexed records, plus the exact official Census FT-900 PDFs for six documented BEA archive-index omissions. Exclude standalone annual-revision notices. Preserve late or shutdown-delayed releases on their actual publication dates. Use exact source times when available and the official Census 08:30 ET standard only as an explicitly labelled fallback.",
+  "verification_status_counts": {
+    "official_release_page_exact_time": 335
+  }
+}

@@ -1,0 +1,5 @@
+Recommended research charter
+
+The initial charter should state:
+
+The study tests whether economically exposed US securities exhibit repeatable abnormal returns around Labor Day that are distinct from generic pre-holiday, September, macroeconomic and end-of-summer effects. Candidate hypotheses are defined from economic mechanisms before return analysis. Discovery results may select candidates and one window per hypothesis family. Validation results may not alter those selections. The 2026 event will be treated as a tamper-evident forward observation, with macroeconomic contamination rules specified before the first eligible trade.

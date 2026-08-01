@@ -1,0 +1,58 @@
+{
+  "experiment_id": "STEP9U_CONTINGENCY_SELECTOR_PROSPECTIVE_SHADOW_V1",
+  "research_status": "RESEARCH_ONLY_PROSPECTIVE_SHADOW_CHALLENGER_NOT_PRODUCTION",
+  "code_version": "STEP9U_CONTINGENCY_SELECTOR_PROSPECTIVE_SHADOW_V1_2026_07_28",
+  "historical_experiment_id": "STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1",
+  "historical_freeze_required": true,
+  "historical_freeze_id": "8042ad803be28ccf",
+  "historical_freeze_artifact_sha256": "8042ad803be28ccf76fa5ef14aebe80586b7e80cf4c065fc53193d07221a3615",
+  "historical_freeze_manifest_sha256": "6f69a1d1ef05927a33af9fba12b16427b3a6de472102cd3e851293d5fa578efa",
+  "historical_config_sha256": "c619eb8a937ba00a1b6818670f2d7bf56822694a8dc27d2f855daf8d58d0eea4",
+  "source_step9t_experiment_id": "STEP9T_PROSPECTIVE_REGIME_TRANSITION_ARCHETYPE_V1",
+  "source_step9t_code_version": "STEP9T_PROSPECTIVE_REGIME_TRANSITION_ARCHETYPE_V1_2026_07_28",
+  "decision_time": "09:48:05",
+  "assignment_deadline": "09:49:55",
+  "standardized_entry_label": "09:50",
+  "eod_time": "17:35:00",
+  "max_selected_positions": 2,
+  "max_positions_per_sector": 1,
+  "mandatory_control_active": false,
+  "selection_active": true,
+  "candidate_universe": "MORNING_COMPLETE_DIRECTIONAL_STEP9T_PROSPECTIVE_ARCHETYPES",
+  "ranking_tie_break": [
+    "rule_priority_desc",
+    "signal_strength_desc",
+    "ticker_asc"
+  ],
+  "rules": [
+    {
+      "rule_id": "HD_MIXED_BCL_AVOID_V1",
+      "action": "BLOCKED_NEGATIVE_CONTROL",
+      "priority": 1000,
+      "source_regime": "HIGH_DISPERSION",
+      "transition_state": "MIXED_TRANSITION",
+      "primary_archetype": "BULLISH_CONTINUATION_LONG",
+      "signal_formula": "NONE"
+    },
+    {
+      "rule_id": "LRL_AGGREGATE_PROMISING_V1",
+      "action": "SELECTABLE_CHALLENGER",
+      "priority": 200,
+      "source_regime": "*",
+      "transition_state": "*",
+      "primary_archetype": "LAGGARD_RECOVERY_LONG",
+      "signal_formula": "max(-early_return,0)+max(last5_return,0)"
+    },
+    {
+      "rule_id": "VE_BCL_BACKOFF_CHALLENGER_V1",
+      "action": "SELECTABLE_CHALLENGER",
+      "priority": 100,
+      "source_regime": "VOLATILITY_EXPANSION",
+      "transition_state": "*",
+      "primary_archetype": "BULLISH_CONTINUATION_LONG",
+      "signal_formula": "max(early_return,0)+max(last5_return,0)"
+    }
+  ],
+  "router_active": false,
+  "orders_enabled": false
+}

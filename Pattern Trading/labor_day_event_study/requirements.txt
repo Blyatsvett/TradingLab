@@ -1,0 +1,15 @@
+﻿pandas
+numpy
+scipy
+statsmodels
+pyyaml
+yfinance
+pandas-market-calendars
+matplotlib
+openpyxl
+pyarrow
+requests
+pytest
+tqdm
+beautifulsoup4
+

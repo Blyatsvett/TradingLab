@@ -1,0 +1,48 @@
+STEP 9I V2 CORE 5 EOD EXECUTION FIX
+====================================
+
+Purpose
+-------
+Fix an all-23 adapter gap discovered in Step 9I-R V2 Batch 1 reports:
+Core 5 ticker-contract rows reached the immutable morning decision grid and
+morning eligibility, but Step 9H's nested EOD execution context reset the
+Step 9B ticker whitelist to the original Holdout 18.
+
+Result before fix
+-----------------
+- 23 x 8 = 184 morning decisions were correctly sealed per day.
+- Core 5 rows could be contract-eligible.
+- Core 5 eligible rows never reached candidate/trade generation.
+- All completed trades therefore came from Holdout 18.
+
+Files replaced
+--------------
+RegimeTrading/scripts/step9i_v2_core5_plus_holdout18_shadow_router.py
+RegimeTrading/scripts/step9ir_v2_historical_walk_forward_replay.py
+RegimeTrading/scripts/step9j_v2_combined23_challenger_redesign.py
+tests/test_step9i_v2_core5_plus_holdout18.py
+
+Fixes
+-----
+1. Patch Step 9H's HOLDOUT_INSTRUMENTS registry to the Combined 23 taxonomy
+   inside the V2 execution context, in addition to patching the static builder.
+2. Keep the original Holdout 18 taxonomy frozen and safely reusable when the
+   context manager is nested.
+3. Run both Step 9J challenger and locked-reference engines inside the all-23
+   execution context.
+4. Add a replay audit that fails if a morning-eligible Core 5 row does not
+   reach the EOD candidate engine.
+5. Correct the replay decision-grid audit wording to all 23 tradable tickers.
+6. Bump Step 9I V2, Step 9I-R V2 and Step 9J V2 code-version identifiers.
+
+Required replay reset
+---------------------
+The existing Step 9I-R V2 ledger contains immutable incomplete Core 5 outcomes.
+Rerun with -ResetReplay after installing this patch.
+
+The prospective Step 9I V2 ledger must remain empty before the first live
+morning. If it is not empty, do not delete it blindly; review its contents.
+
+Verification
+------------
+Focused adapter and challenger tests: 14 tests, OK.

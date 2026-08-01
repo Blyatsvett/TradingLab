@@ -1,0 +1,28 @@
+** LAYERS **
+
+Layer 1: Strategy
+ORB breakout
+ORB pullback
+VWAP reclaim
+Gap recovery
+Previous-day high breakout
+
+Layer 2: Ticker basket
+Current ORB basket
+All downloaded tickers
+Strategy-specific top 3
+Strategy-specific top 5
+Strategy-specific top 7
+
+Layer 3: Market regime
+Diagnostic regime
+Pre-trade regime
+
+
+** WHAT WE CAN ANSWER **
+Best strategy overall?
+Best strategy per ticker basket?
+Best strategy during strong-up regimes?
+Best strategy during weak-market regimes?
+Best strategy when ORB usually loses?
+Best strategy using only information known before entry?

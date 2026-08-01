@@ -1,0 +1,25 @@
+STEP 9H HOLDOUT EXECUTION WHITELIST FIX
+
+Problem
+-------
+Step 9H correctly generated holdout point-in-time characteristics, but the
+shared build_market_state helper still resolved the frozen Step 9B discovery
+universe whitelist in the Step 9B module namespace. All 18 locked holdout
+symbols were therefore removed before contract eligibility, yielding 0
+eligible rows despite complete holdout data.
+
+Fix
+---
+- Step 9H temporarily injects the locked 18-symbol holdout universe into the
+  Step 9B market-state helper only while the holdout experiment executes.
+- The original Step 9B ticker whitelist is restored in a finally block.
+- The frozen discovery universe, production system, strategies, contract
+  definitions, thresholds, and holdout lock are unchanged.
+- Step 9H multiple-testing metadata now correctly names the three locked
+  primary holdout contracts rather than the seven-contract Step 9G family.
+- Added regression coverage proving a holdout ticker reaches eligibility and
+  that the original whitelist is restored after execution.
+
+Validation
+----------
+109 tests passed.

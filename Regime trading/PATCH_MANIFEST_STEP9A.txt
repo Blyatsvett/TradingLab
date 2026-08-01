@@ -1,0 +1,16 @@
+STEP 9A PATCH MANIFEST
+======================
+
+Added:
+- RegimeTrading/scripts/step9_playbook_specifications.py
+- tests/test_step9_playbook_specifications.py
+- run_step9_playbook_specifications.ps1
+- README_REGIME_SYSTEM_STEP9A.txt
+- PATCH_MANIFEST_STEP9A.txt
+
+Modified:
+- RegimeTrading/scripts/run_daily_research_workflow.py
+- RegimeTrading/scripts/export_powerbi_workbook.py
+- RegimeTrading/scripts/validate_outputs.py
+
+No production Intraday files are included or modified.

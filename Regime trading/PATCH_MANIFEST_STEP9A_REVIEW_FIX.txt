@@ -1,0 +1,18 @@
+STEP 9A REVIEW FIX PATCH
+========================
+
+Modified:
+- RegimeTrading/scripts/step9_playbook_specifications.py
+- tests/test_step9_playbook_specifications.py
+
+Added:
+- README_STEP9A_CONTRACT_AUDIT_FIX.txt
+- PATCH_MANIFEST_STEP9A_REVIEW_FIX.txt
+
+Validation:
+- 51 tests pass.
+- Reproduced a first-session DATA_LIMITED_DEFENSIVE row with
+  point_in_time_safe=False and data_quality_override=True.
+- Result: contract passes with reason
+  DATA_LIMITED_DETERMINISTIC_FALLBACK_SAFE.
+- Contract portfolio structure and risk multiplier export correctly.

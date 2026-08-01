@@ -1,0 +1,26 @@
+STEP 9D PATCH MANIFEST
+======================
+
+New files
+---------
+- RegimeTrading/scripts/step9d_regime_strategy_challenger_matrix.py
+- tests/test_step9d_regime_strategy_challenger_matrix.py
+- run_step9d_regime_strategy_challenger_matrix.ps1
+- README_REGIME_SYSTEM_STEP9D.txt
+- PATCH_MANIFEST_STEP9D.txt
+
+Modified files
+--------------
+- RegimeTrading/scripts/run_daily_research_workflow.py
+- RegimeTrading/scripts/export_powerbi_workbook.py
+- RegimeTrading/scripts/validate_outputs.py
+
+Research behavior
+-----------------
+- Keeps Step 9B frozen as the comparison control.
+- Simulates nine pre-registered challenger hypotheses across every regime.
+- Uses only router information available through the 09:40-labelled bar.
+- Starts execution observation at 09:45 or later.
+- Reports equal-notional and fixed-risk-capped P&L.
+- Exports exact trade-to-leg reconciliation under both sizing models.
+- Does not optimize, promote, or change production strategies.

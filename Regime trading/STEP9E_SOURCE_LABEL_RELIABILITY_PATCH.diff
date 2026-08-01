@@ -1,0 +1,114 @@
+--- /tmp/step9e_originals/RegimeTrading/scripts/step9e_instrument_sector_taxonomy.py	2026-07-28 10:29:40.420907906 +0000
++++ /mnt/data/step9e_patch_work/RegimeTrading/scripts/step9e_instrument_sector_taxonomy.py	2026-07-28 10:13:27.928932238 +0000
+@@ -536,6 +536,20 @@
+     return pd.to_datetime(values).dt.strftime("%H:%M")
+ 
+ 
++def _normalize_source_label(value) -> str:
++    """Return a stable HH:MM-like label or an empty string for missing data."""
++    if value is None or pd.isna(value):
++        return ""
++    return str(value).strip()
++
++
++def _max_valid_source_label(values: pd.Series) -> str:
++    """Return the latest non-missing source label without comparing strings to NaN."""
++    labels = values.map(_normalize_source_label)
++    labels = labels[labels.ne("")]
++    return str(labels.max()) if not labels.empty else ""
++
++
+ def _weighted_mean(values: pd.Series, weights: pd.Series) -> float:
+     valid = values.notna() & weights.notna() & weights.gt(0)
+     if not valid.any():
+@@ -795,7 +809,7 @@
+             else:
+                 range_state = "RANGE_NORMAL"
+ 
+-        same_day_label = str(row.get("max_same_day_source_label") or "")
++        same_day_label = _normalize_source_label(row.get("max_same_day_source_label"))
+         prior_max = prior["prior_history_max_date"]
+         prior_safe = prior_max == "" or pd.Timestamp(prior_max).date() < pd.Timestamp(row["date"]).date()
+         label_safe = bool(same_day_label) and same_day_label <= LATEST_ALLOWED_BAR_LABEL
+@@ -937,6 +951,7 @@
+                     direction = "DOWN"
+                 else:
+                     direction = "MIXED"
++                max_source_label = _max_valid_source_label(group["max_same_day_source_label"])
+                 rows.append(
+                     {
+                         "taxonomy_id": TAXONOMY_ID,
+@@ -960,8 +975,8 @@
+                         "group_relative_return_vs_market": mean_return - market_return if pd.notna(mean_return) and pd.notna(market_return) else np.nan,
+                         "group_direction_state": direction,
+                         "group_peer_status": "PEER_GROUP_READY" if company_count >= 2 else "SINGLE_COMPANY_PROXY",
+-                        "max_same_day_source_label": str(group["max_same_day_source_label"].max() or ""),
+-                        "point_in_time_pass": bool(str(group["max_same_day_source_label"].max() or "") <= LATEST_ALLOWED_BAR_LABEL),
++                        "max_same_day_source_label": max_source_label,
++                        "point_in_time_pass": bool(max_source_label) and max_source_label <= LATEST_ALLOWED_BAR_LABEL,
+                     }
+                 )
+     return pd.DataFrame(rows, columns=GROUP_STATE_COLUMNS)
+--- /tmp/step9e_originals/tests/test_step9e_instrument_sector_taxonomy.py	2026-07-28 10:29:40.420907906 +0000
++++ /mnt/data/step9e_patch_work/tests/test_step9e_instrument_sector_taxonomy.py	2026-07-28 10:13:56.700931518 +0000
+@@ -131,6 +131,60 @@
+         self.assertTrue(seb["relative_reference_used"].isin(["ECONOMIC_CLUSTER", "COMPANY_WEIGHTED_MARKET_FALLBACK"]).all())
+         self.assertTrue(seb["sector_relative_return"].isna().all())
+ 
++    def test_missing_early_label_does_not_crash_mixed_group(self):
++        prices = self._prices()
++        target_date = prices["date"].min()
++        missing_early = (
++            prices["ticker"].eq("ATCO-B.ST")
++            & prices["date"].eq(target_date)
++            & prices["datetime"].dt.strftime("%H:%M").le("09:40")
++        )
++        prices = prices.loc[~missing_early].copy()
++
++        characteristics, groups, _, _ = build_point_in_time_characteristics(
++            prices, build_static_taxonomy(), history_window=5, minimum_history=2
++        )
++
++        missing_row = characteristics[
++            characteristics["date"].eq(target_date)
++            & characteristics["ticker"].eq("ATCO-B.ST")
++        ].iloc[0]
++        self.assertEqual(missing_row["max_same_day_source_label"], "")
++        self.assertFalse(bool(missing_row["point_in_time_pass"]))
++        self.assertEqual(missing_row["characteristic_status"], "INCOMPLETE_REVIEW_REQUIRED")
++
++        industrials = groups[
++            groups["date"].eq(target_date)
++            & groups["aggregation_level"].eq("BROAD_SECTOR")
++            & groups["group_name"].eq("INDUSTRIALS")
++        ].iloc[0]
++        self.assertEqual(industrials["max_same_day_source_label"], "09:40")
++        self.assertTrue(bool(industrials["point_in_time_pass"]))
++
++    def test_all_missing_group_labels_fail_point_in_time_safely(self):
++        prices = self._prices()
++        target_date = prices["date"].min()
++        industrial_tickers = {"ATCO-A.ST", "ATCO-B.ST", "ALFA.ST"}
++        missing_early = (
++            prices["ticker"].isin(industrial_tickers)
++            & prices["date"].eq(target_date)
++            & prices["datetime"].dt.strftime("%H:%M").le("09:40")
++        )
++        prices = prices.loc[~missing_early].copy()
++
++        _, groups, _, _ = build_point_in_time_characteristics(
++            prices, build_static_taxonomy(), history_window=5, minimum_history=2
++        )
++        industrials = groups[
++            groups["date"].eq(target_date)
++            & groups["aggregation_level"].eq("BROAD_SECTOR")
++            & groups["group_name"].eq("INDUSTRIALS")
++        ].iloc[0]
++
++        self.assertEqual(industrials["max_same_day_source_label"], "")
++        self.assertFalse(bool(industrials["point_in_time_pass"]))
++        self.assertEqual(int(industrials["observed_ticker_count"]), 0)
++
+     def test_outputs_have_stable_schemas_and_no_router_activation(self):
+         outputs = build_outputs(self._prices())
+         summary, static, _, characteristics, groups, completeness, constraints, audit = outputs

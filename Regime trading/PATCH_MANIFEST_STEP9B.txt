@@ -1,0 +1,25 @@
+STEP 9B PATCH MANIFEST
+======================
+
+New files
+---------
+RegimeTrading/scripts/step9b_baseline_trade_generation.py
+run_step9b_baseline_trade_generation.ps1
+tests/test_step9b_baseline_trade_generation.py
+README_REGIME_SYSTEM_STEP9B.txt
+PATCH_MANIFEST_STEP9B.txt
+
+Modified files
+--------------
+RegimeTrading/scripts/step9_playbook_specifications.py
+RegimeTrading/scripts/run_daily_research_workflow.py
+RegimeTrading/scripts/export_powerbi_workbook.py
+RegimeTrading/scripts/validate_outputs.py
+
+Unchanged guarantees
+--------------------
+- Production Intraday project is not touched.
+- Frozen REGIME_AWARE_GAP_RECOVERY_V1 is not router eligible.
+- Strict point-in-time recovery V2 remains the recovery research candidate.
+- Same-day outcomes are not classifier inputs.
+- Step 9B remains simulation-only and unconstrained by a shared account.

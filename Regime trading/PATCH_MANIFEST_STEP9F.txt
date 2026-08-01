@@ -1,0 +1,26 @@
+STEP 9F PATCH MANIFEST
+======================
+
+New files
+---------
+RegimeTrading/scripts/step9f_sector_ticker_strategy_experiments.py
+tests/test_step9f_sector_ticker_strategy_experiments.py
+run_step9f_sector_ticker_strategy_experiments.ps1
+README_REGIME_SYSTEM_STEP9F.txt
+PATCH_MANIFEST_STEP9F.txt
+
+Modified files
+--------------
+RegimeTrading/scripts/run_daily_research_workflow.py
+RegimeTrading/scripts/export_powerbi_workbook.py
+RegimeTrading/scripts/validate_outputs.py
+
+Scope
+-----
+- Frozen Step 9D trade enrichment only
+- Hierarchical sector/company/ticker/state diagnostics
+- Pair relationship analysis
+- Leave-one-company and leave-one-sector robustness
+- Group redundancy and parameter-discrimination audits
+- No router activation
+- No production strategy changes

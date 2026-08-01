@@ -1,0 +1,39 @@
+What comes after the macro registry
+
+Then we leave infrastructure work and start the actual market research:
+
+Phase 1 — Tradable universe and prices
+finalize securities for refiners, auto dealers and domestic leisure;
+finalize benchmarks and sector ETFs;
+acquire adjusted OHLCV data;
+handle delistings and ticker changes;
+validate price completeness across 1998–2025.
+
+Phase 2 — Event-study engine
+raw returns;
+benchmark-adjusted returns;
+market-model abnormal returns;
+cumulative abnormal returns for every frozen window;
+discovery versus validation samples;
+clean versus contaminated years.
+
+Phase 3 — Strategy construction
+basket formation;
+entry and exit rules;
+equal-weight and volatility-weight alternatives;
+transaction costs and slippage;
+long-only and long/short variants.
+
+Phase 4 — Robustness
+leave-one-year-out tests;
+alternative benchmarks;
+placebo holidays and random dates;
+multiple-testing controls;
+sensitivity to windows and outliers;
+pre- versus post-structural-break comparisons.
+
+Phase 5 — 2026 execution plan
+determine which hypotheses survived validation;
+identify applicable 2026 windows;
+incorporate known 2026 contamination;
+produce actual watchlists, entries, exits and risk limits.

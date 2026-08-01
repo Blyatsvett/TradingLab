@@ -1,0 +1,19 @@
+{
+  "patch": "STEP9R_CANDIDATE_RANKING_RESEARCH_V1",
+  "research_only": true,
+  "router_active": false,
+  "orders_enabled": false,
+  "files_added": [
+    "RegimeTrading/scripts/step9r_v1_candidate_ranking_research.py",
+    "tests/test_step9r_v1_candidate_ranking_research.py",
+    "config/step9r_candidate_ranking_research_v1.json",
+    "run_step9r_v1_historical_research.ps1",
+    "run_step9r_v1_prospective_shadow.ps1",
+    "run_step9r_v1_eod_shadow.ps1",
+    "STEP9R_V1_INSTALL.md",
+    "STEP9R_V1_BUILD_MANIFEST.json",
+    "STEP9R_V1_VALIDATION_RESULTS.txt"
+  ],
+  "files_replaced": [],
+  "frozen_engines_modified": false
+}

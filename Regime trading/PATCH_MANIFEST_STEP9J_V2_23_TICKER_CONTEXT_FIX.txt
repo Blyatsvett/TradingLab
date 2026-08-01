@@ -1,0 +1,26 @@
+STEP 9J V2 23-TICKER DIAGNOSTIC CONTEXT FIX
+
+Purpose
+-------
+Fixes the runtime failure:
+AttributeError: module '...step9i_v2_core5_plus_holdout18_shadow_router'
+has no attribute '_patched_holdout_tickers'
+
+Files replaced
+--------------
+RegimeTrading/scripts/step9i_v2_core5_plus_holdout18_shadow_router.py
+tests/test_step9i_v2_core5_plus_holdout18.py
+
+Behavioral change
+-----------------
+Adds a V2 compatibility context manager that temporarily patches the shared
+Step 9B trade-diagnostic engine to the complete 23-ticker tradable universe,
+then restores all original globals on exit.
+
+No strategy definitions, regimes, execution rules, sizing, costs, ledgers, or
+historical results are changed.
+
+Verification
+------------
+python -m unittest tests.test_step9j_challenger_regime_strategy_redesign tests.test_step9i_v2_core5_plus_holdout18 -v
+Ran 13 tests ... OK

@@ -1,0 +1,19 @@
+**For Monday, I would do this:**
+
+1. Keep production ORB paper simulation exactly as-is.
+2. Add research/shadow simulation for all Strategy Lab strategies.
+3. Label each strategy as ACTIVE_SHADOW, WATCHLIST, or DIAGNOSTIC_ONLY.
+4. Do not manually trade the research strategies.
+5. Review weekly, not daily, to avoid overreacting.
+
+
+
+** Separation of strategies **
+paper_trades.csv
+= production ORB paper simulation only
+
+strategy_lab_shadow_trades.csv
+= research-only simulated trades
+
+strategy_lab_shadow_summary.csv
+= daily/weekly research status

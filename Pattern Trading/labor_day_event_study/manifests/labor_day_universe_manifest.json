@@ -1,0 +1,66 @@
+{
+  "artifact": "Labor Day dynamic tradable universe",
+  "created_utc": "2026-07-23T21:38:21.743531+00:00",
+  "study_range": {
+    "discovery_end_year": 2014,
+    "forward_year": 2026,
+    "start_year": 1998,
+    "validation_end_year": 2025,
+    "validation_start_year": 2015
+  },
+  "universe": {
+    "hypothesis_counts": {
+      "auto_dealers": 5,
+      "domestic_leisure_travel": 10,
+      "generic_control": 5,
+      "refining_gasoline": 5
+    },
+    "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\config\\labor_day_universe.csv",
+    "role_counts": {
+      "hypothesis_stock": 20,
+      "market_benchmark": 1,
+      "negative_control": 1,
+      "sector_benchmark": 2,
+      "size_control": 1
+    },
+    "rows": 25,
+    "sha256": "278d0715c70fd237621f52c221bdddbfd4323941ec7ae8f460e9c0aa20b61e74"
+  },
+  "version": "1.0.0",
+  "year_panel": {
+    "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\labor_day_universe_by_year.csv",
+    "rows": 613,
+    "rows_by_year": {
+      "1998": 12,
+      "1999": 15,
+      "2000": 17,
+      "2001": 17,
+      "2002": 17,
+      "2003": 17,
+      "2004": 17,
+      "2005": 17,
+      "2006": 18,
+      "2007": 18,
+      "2008": 19,
+      "2009": 19,
+      "2010": 19,
+      "2011": 20,
+      "2012": 22,
+      "2013": 24,
+      "2014": 25,
+      "2015": 25,
+      "2016": 25,
+      "2017": 25,
+      "2018": 25,
+      "2019": 25,
+      "2020": 25,
+      "2021": 25,
+      "2022": 25,
+      "2023": 25,
+      "2024": 25,
+      "2025": 25,
+      "2026": 25
+    },
+    "sha256": "5a0bbfff299f745c54498f91d7d79437b3b75b596204e7c9c54b08a87f311d4b"
+  }
+}

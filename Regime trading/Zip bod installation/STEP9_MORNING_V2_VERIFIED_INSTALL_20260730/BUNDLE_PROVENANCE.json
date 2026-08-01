@@ -1,0 +1,17 @@
+{
+  "package_id": "STEP9_MORNING_V2_REBUILT_VERIFIED_20260730",
+  "build_scope": "ISOLATED_REBUILD_NO_USER_PROJECT_WRITES",
+  "inputs": {
+    "STEP9_MORNING_V2_INSTALL_BUNDLE_HOTFIX2.zip": "6579c19262ebdd9c244a630420edc6c22053438dab470536690d33d8fdd8e310",
+    "STEP9_MORNING_V2_CONFIG_20260730_193915.zip": "84252c8b1098568f10653cae8f60dbbdd02e90d95fde97d378eaf9c9cd1a417e",
+    "STEP9_MORNING_V2_SOURCE_20260730_164054.zip": "e8c7b619295dfe4fef3991b42532f4f2b65cfe6a3771ee870153f5d4a97d9a38"
+  },
+  "safety": {
+    "production_orb_modified": false,
+    "real_project_modified_during_rebuild": false,
+    "mock_project_modified_during_rebuild": false,
+    "payload_contains_databases_or_ledgers": false,
+    "router_active": false,
+    "orders_enabled": false
+  }
+}

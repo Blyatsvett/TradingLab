@@ -1,0 +1,25 @@
+{
+  "package_id": "STEP9_MORNING_V2_REBUILT_VERIFIED_20260730",
+  "files": {
+    "config/step9_morning_v2_runtime_manifest.json": "50f0aa3344940d8c4697cb27546f3384eed06dd4556f7c6d8c44150ccc46cc3e",
+    "RegimeTrading/scripts/step9_morning_v2_stage_runner.py": "8f2b182e82d154dfd0b511108417557293c42dd316d7a38cb0ce4671e9bfcbe7",
+    "register_step9_morning_v2_tasks.ps1": "bb0628acf3c0dfbcc37c23843d26bc0e6871446066414f2db39f225b865a69fe",
+    "run_step9_full_live_morning_v2.ps1": "732cfbb58698b62d63d9634c43c9823c9b937069d8cc80c1e70a2c43c95aa801",
+    "run_step9_full_tonight_preflight_v2.ps1": "c957c8c4ddd5fb5bdb66c07daaec2ceef79c2b314d12e17b1516f5c73bd77bac",
+    "run_step9_morning_mock_fallback_v2.ps1": "19d0fe61a6f6ad6501d1175dd82f9087ef87baf0da132f07247fa6baf05eafd3",
+    "run_step9_morning_v2_validation.ps1": "9ab8a9ea47e93a7e1a27edbe76812a3e8fbd5d481a7aad4fd5345c146fc4e8a2",
+    "STEP9_FULL_LIVE_MORNING_ORCHESTRATOR_V2_README.md": "b8d2e385b95b92ed5b5c0375dbffad73833b4bf38749517e1f5431c33a1b1c40",
+    "tests/fixtures/step9_morning_v2_20260730_prices.csv": "7941189fc893c086ce2a0aa9b25eaaa9214f7ab5ff1f3d57cb1277b6290b32ee",
+    "tests/fixtures/step9_morning_v2_20260730_prices.manifest.json": "60777b19515f37912b5ae4a12f163a6e3c77b543461aeb13798eefa5aca5794d",
+    "tests/test_step9_morning_v2_install_contract.py": "a26a4b2c7842437c08fe1b247d9bf480f1e91709771ac33a94403116dcb1718d",
+    "tests/test_step9_morning_v2_support.py": "9f1157e7987f23e46fc103c07d78e08e9c49c349e879eb3fbf9d766466834fdc",
+    "tools/step9_morning_v2_support.py": "c9907fb64483e188d50b908bdd90ae78285838282b6f04c6a2128a79983f9725",
+    "tools/validate_step9_morning_v2_package.py": "765cec8386a34d3fb6be4e7679f6fa797aa3ec568740e7e1a42d839b094405f3"
+  },
+  "safety": {
+    "contains_database_or_ledger": false,
+    "production_orb_touched": false,
+    "router_active": false,
+    "orders_enabled": false
+  }
+}

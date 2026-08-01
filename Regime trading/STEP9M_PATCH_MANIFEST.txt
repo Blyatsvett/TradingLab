@@ -1,0 +1,15 @@
+STEP 9M HIGH-VOLATILITY REVERSAL RESEARCH — ADDITIVE ROOT PATCH
+
+Adds:
+- RegimeTrading/scripts/step9m_high_vol_reversal_strategy_research.py
+- tests/test_step9m_high_vol_reversal_strategy_research.py
+- run_step9m_high_vol_reversal_research.ps1
+- STEP9M_PATCH_MANIFEST.txt
+
+Dependencies already present in the project:
+- Step 9K research module
+- Step 9G state-filtered experiment framework
+- Step 9I V2 Combined 23 context
+
+This patch does not replace or activate Step 9I or Step 9L.
+No Step 9M result is automatically promoted.

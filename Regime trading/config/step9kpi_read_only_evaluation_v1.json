@@ -1,0 +1,74 @@
+{
+  "specification_id": "STEP9KPI_READ_ONLY_EVALUATION_V1",
+  "schema_id": "STEP9_KPI_OUTPUT_SCHEMA_V1",
+  "implementation_status": "LOCKED_APPROVED_READ_ONLY_IMPLEMENTED_V1",
+  "comparison_notional_sek": 1000.0,
+  "comparison_round_trip_cost_rate": 0.0005,
+  "pnl_tie_tolerance_sek": 0.01,
+  "main_portfolio_cap": 2,
+  "portfolio_n_values": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "source_paths": {
+    "price_db": "data/source/market/step9i_shadow_intraday_prices.db",
+    "step9i": "data/ledgers/prospective/step9i_v2_shadow_ledger.db",
+    "step9l": "data/ledgers/prospective/step9l_v3_selected_strategy_shadow_ledger.db",
+    "step9s": "data/ledgers/prospective/step9s_prospective_contingency_shadow_v1.db",
+    "step9r": "data/ledgers/prospective/step9r_prospective_selector_shadow_v1.db",
+    "step9t": "data/ledgers/prospective/step9t_regime_transition_archetype_prospective_v1.db",
+    "step9u": "data/ledgers/prospective/step9u_contingency_selector_prospective_shadow_v1.db",
+    "step9v": "data/ledgers/prospective/step9v_intraday_regime_transition_observer_v1.db"
+  },
+  "optional_registry_paths": {
+    "step9q_schema": "config/step9q_powerbi_schema_v1.json",
+    "step9s_config": "config/step9s_prospective_contingency_shadow_v1.json",
+    "step9u_config": "config/step9u_prospective_contingency_selector_v1.json",
+    "step9l_contract_registry": "data/outputs/shadow/step9l_v3/step9l_v3_shadow_contract_registry.csv"
+  },
+  "output_dir": "data/outputs/kpi",
+  "realized_regime": {
+    "classifier_id": "REALIZED_EOD_REGIME_V1",
+    "opening_label": "09:00",
+    "morning_label": "09:40",
+    "eod_minimum_label": "17:20",
+    "minimum_coverage": 0.8,
+    "minimum_prior_sessions": 5,
+    "percentile_lookback_sessions": 20
+  },
+  "strategy_archetype_regime_registry": {
+    "STEP9T::LAGGARD_RECOVERY_LONG::0950_TO_EOD": [
+      "RECOVERY",
+      "RANGE_LOW_VOL",
+      "HIGH_VOL_REVERSAL"
+    ],
+    "STEP9T::LEADER_REVERSAL_SHORT::0950_TO_EOD": [
+      "HIGH_VOL_REVERSAL",
+      "RANGE_LOW_VOL",
+      "TREND_UP"
+    ],
+    "STEP9T::BULLISH_CONTINUATION_LONG::0950_TO_EOD": [
+      "TREND_UP",
+      "VOLATILITY_EXPANSION",
+      "HIGH_DISPERSION"
+    ],
+    "STEP9T::BEARISH_CONTINUATION_SHORT::0950_TO_EOD": [
+      "TREND_DOWN",
+      "VOLATILITY_EXPANSION",
+      "HIGH_DISPERSION",
+      "DEFENSIVE_MIXED"
+    ]
+  },
+  "router_active": false,
+  "orders_enabled": false,
+  "benchmark_resolution": {
+    "approved_spec_conflict": "Section 5 defines ORACLE_TOP2_OBSERVED_FIXED without a sector cap; section 13 names ABB.ST + GETI-B.ST, which requires the Step 9U one-per-sector cap.",
+    "main_series": "ORACLE_TOP2_OBSERVED_FIXED",
+    "main_series_sector_cap": null,
+    "fixture_companion_series": "ORACLE_TOP2_OBSERVED_SECTOR_CAPPED_FIXED",
+    "fixture_companion_sector_cap": 1
+  }
+}

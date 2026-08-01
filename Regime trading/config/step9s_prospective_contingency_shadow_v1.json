@@ -1,0 +1,85 @@
+{
+  "experiment_id": "STEP9S_PROSPECTIVE_CONTINGENCY_SHADOW_V1",
+  "research_status": "RESEARCH_ONLY_PROSPECTIVE_COMPLETE_TRADE_COVERAGE_NOT_ROUTER_ACTIVE",
+  "code_version": "STEP9S_PROSPECTIVE_CONTINGENCY_SHADOW_V1_2026_07_28",
+  "historical_replay_id": "STEP9S_HISTORICAL_CONTINGENCY_REPLAY_V1",
+  "historical_freeze_required": true,
+  "source_step9l_experiment_id": "STEP9L_SELECTED_STRATEGY_SHADOW_ENGINE_V3",
+  "source_step9l_code_version": "STEP9L_SELECTED_STRATEGIES_V3_LOCKED_2026_07_26",
+  "decision_time": "09:45",
+  "assignment_deadline": "09:49:30",
+  "latest_router_source_label": "09:40",
+  "coverage_entry_window_start": "09:50",
+  "coverage_entry_window_end": "10:00",
+  "eod_minimum_label": "16:25",
+  "eod_time": "16:35:00",
+  "base_notional_sek": 1000.0,
+  "round_trip_cost_rate": 0.0005,
+  "router_active": false,
+  "orders_enabled": false,
+  "assignments": [
+    {
+      "regime": "RECOVERY",
+      "natural_strategy_id": "STRICT_POINT_IN_TIME_GAP_RECOVERY_V2_RESEARCH",
+      "natural_maturity": "PROVISIONAL_NEGATIVE_TOO_FEW_TRADES",
+      "natural_source_kind": "STEP9A_LOCAL_SIMULATION",
+      "mandatory_control_id": "RECOVERY_MANDATORY_0950_CONTROL_V1"
+    },
+    {
+      "regime": "TREND_UP",
+      "natural_strategy_id": "L3_TU_ALIGNED_DELAYED_REVERSAL_1R_V1",
+      "natural_maturity": "FROZEN_PROSPECTIVE_CHALLENGER",
+      "natural_source_kind": "STEP9L_V3_LEDGER",
+      "mandatory_control_id": "TREND_UP_MANDATORY_0950_CONTROL_V1"
+    },
+    {
+      "regime": "TREND_DOWN",
+      "natural_strategy_id": "TREND_DOWN_MOMENTUM_CONTINUATION_V1_RESEARCH",
+      "natural_maturity": "NEGATIVE_DIAGNOSTIC_CONTROL_NO_BETTER_STRATEGY",
+      "natural_source_kind": "STEP9A_LOCAL_SIMULATION",
+      "mandatory_control_id": "TREND_DOWN_MANDATORY_0950_CONTROL_V1"
+    },
+    {
+      "regime": "RANGE_LOW_VOL",
+      "natural_strategy_id": "L_RLV_GROUP_ALIGNED_LAGGARD_DELAYED_REVERSAL_V1",
+      "natural_maturity": "FROZEN_SELECTED_PROSPECTIVE_STRATEGY",
+      "natural_source_kind": "STEP9L_V3_LEDGER",
+      "mandatory_control_id": "RANGE_LOW_VOL_MANDATORY_0950_CONTROL_V1"
+    },
+    {
+      "regime": "HIGH_VOL_REVERSAL",
+      "natural_strategy_id": "L2_HVR_DIRECTIONAL_BREAKOUT_2R_V1",
+      "natural_maturity": "FROZEN_PROSPECTIVE_CHALLENGER",
+      "natural_source_kind": "STEP9L_V3_LEDGER",
+      "mandatory_control_id": "HIGH_VOL_REVERSAL_MANDATORY_0950_CONTROL_V1"
+    },
+    {
+      "regime": "HIGH_DISPERSION",
+      "natural_strategy_id": "L_HD_CONTRARIAN_LAGGARD_MIDPOINT_CATCHUP_V1",
+      "natural_maturity": "FROZEN_PROSPECTIVE_CHALLENGER",
+      "natural_source_kind": "STEP9L_V3_LEDGER",
+      "mandatory_control_id": "HIGH_DISPERSION_MANDATORY_PAIR_0950_CONTROL_V1"
+    },
+    {
+      "regime": "VOLATILITY_EXPANSION",
+      "natural_strategy_id": "L_VE_ALIGNED_CLOSE_CONFIRMED_ORB_V1",
+      "natural_maturity": "FROZEN_SELECTED_PROSPECTIVE_STRATEGY",
+      "natural_source_kind": "STEP9L_V3_LEDGER",
+      "mandatory_control_id": "VOLATILITY_EXPANSION_MANDATORY_0950_CONTROL_V1"
+    },
+    {
+      "regime": "DEFENSIVE_MIXED",
+      "natural_strategy_id": "PAIR_SPREAD_CONVERGENCE_V1",
+      "natural_maturity": "PROMISING_PROVISIONAL_TOO_FEW_SESSIONS",
+      "natural_source_kind": "STEP9D_LOCAL_SIMULATION",
+      "mandatory_control_id": "DEFENSIVE_MIXED_MANDATORY_PAIR_0950_CONTROL_V1"
+    },
+    {
+      "regime": "DATA_LIMITED_DEFENSIVE",
+      "natural_strategy_id": "DATA_LIMITED_STATIC_HEDGE_PROXY_V1_RESEARCH",
+      "natural_maturity": "DETERMINISTIC_DIAGNOSTIC_CONTROL_NOT_ECONOMICALLY_VALIDATED",
+      "natural_source_kind": "STEP9A_LOCAL_SIMULATION",
+      "mandatory_control_id": "DATA_LIMITED_DEFENSIVE_MANDATORY_HEDGE_0950_CONTROL_V1"
+    }
+  ]
+}

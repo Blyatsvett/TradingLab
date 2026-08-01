@@ -1,0 +1,56 @@
+event_anchor:
+  holiday_session: closed
+  pre_event_session: S_minus_1
+  post_event_session: S_plus_1
+
+discovery_windows:
+
+  early_anticipation:
+    start: -15
+    end: -6
+    mechanism: early_holiday_positioning
+
+  demand_build_up:
+    start: -10
+    end: -2
+    mechanism: operational_demand_build_up
+
+  final_preholiday_week:
+    start: -5
+    end: -1
+    mechanism: immediate_holiday_anticipation
+
+  immediate_preholiday:
+    start: -2
+    end: -1
+    mechanism: short_term_preholiday_effect
+
+  first_postholiday_week:
+    start: 1
+    end: 5
+    mechanism: realization_or_reversal
+
+  postholiday_unwind:
+    start: 1
+    end: 10
+    mechanism: end_of_summer_unwind
+
+  complete_cycle:
+    start: -5
+    end: 5
+    mechanism: complete_short_event_cycle
+
+intraday_windows:
+
+  closed_market_weekend:
+    entry: S_minus_1_close
+    exit: S_plus_1_open
+
+  first_postholiday_session:
+    entry: S_plus_1_open
+    exit: S_plus_1_close
+
+rules:
+  maximum_one_selected_daily_window_per_hypothesis_family: true
+  intraday_windows_evaluated_separately: true
+  no_window_changes_after_validation_freeze: true

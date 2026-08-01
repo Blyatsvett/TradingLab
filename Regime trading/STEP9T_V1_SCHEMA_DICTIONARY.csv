@@ -1,0 +1,44 @@
+table,field,type,purpose
+transition_batches,batch_id,TEXT,Immutable batch identifier
+transition_batches,session_date,TEXT,One unique row per market session
+transition_batches,created_at_stockholm,TEXT,Actual creation timestamp
+transition_batches,run_mode,TEXT,PROSPECTIVE or LATE_RECONSTRUCTION
+transition_batches,prospective_status,TEXT,Confirmatory eligibility label
+transition_batches,source_regime,TEXT,Immutable opening regime from Step 9L/taxonomy
+transition_batches,source_regime_confidence,REAL,Opening-regime confidence
+transition_batches,latest_allowed_bar_label,TEXT,Must equal 09:45 for 09:50 snapshot
+transition_batches,valid_ticker_count,INTEGER,Tickers with complete transition inputs
+transition_batches,transition_state,TEXT,Diagnostic 09:50 transition label
+transition_batches,feature_payload_hash,TEXT,Canonical session-feature hash
+transition_features,advancer_share,REAL,Share with positive 09:30–09:45 return
+transition_features,decliner_share,REAL,Share with negative 09:30–09:45 return
+transition_features,median_early_return,REAL,Cross-sectional median 09:30–09:45 return
+transition_features,median_last5_return,REAL,Cross-sectional median 09:40–09:45 return
+transition_features,recovery_share_of_early_losers,REAL,Early losers improving into 09:45
+transition_features,continuation_share_of_early_winners,REAL,Early winners still advancing
+transition_features,midpoint_reclaim_share,REAL,Share reclaiming opening-range midpoint
+transition_features,leader_failure_share,REAL,Early winners fading into 09:45
+transition_features,cross_sectional_dispersion,REAL,Dispersion of early returns
+ticker_archetypes,ticker_row_id,TEXT,Immutable ticker/session row identifier
+ticker_archetypes,session_date,TEXT,Market session
+ticker_archetypes,ticker,TEXT,Ticker
+ticker_archetypes,early_return,REAL,09:30 open to 09:45 close
+ticker_archetypes,last5_return,REAL,09:40 close to 09:45 close
+ticker_archetypes,opening_range_position,REAL,09:45 close position within opening range
+ticker_archetypes,midpoint_reclaimed,INTEGER,Point-in-time midpoint-reclaim flag
+ticker_archetypes,bullish_continuation_flag,INTEGER,Morning-only candidate flag
+ticker_archetypes,bearish_continuation_flag,INTEGER,Morning-only candidate flag
+ticker_archetypes,laggard_recovery_flag,INTEGER,Morning-only candidate flag
+ticker_archetypes,leader_reversal_flag,INTEGER,Morning-only candidate flag
+ticker_archetypes,primary_archetype,TEXT,Mutually exclusive diagnostic archetype
+ticker_outcomes,outcome_id,TEXT,Immutable EOD outcome identifier
+ticker_outcomes,ticker_row_id,TEXT,Links to morning archetype row
+ticker_outcomes,entry_time,TEXT,Standardized 09:50 shadow entry
+ticker_outcomes,entry_price,REAL,09:50 bar open
+ticker_outcomes,session_close_return,REAL,Directional 09:50-to-close return
+ticker_outcomes,mfe_return,REAL,Maximum favorable excursion after entry
+ticker_outcomes,mae_return,REAL,Maximum adverse excursion after entry
+ticker_outcomes,gross_pnl_sek,REAL,Standardized notional gross P&L
+ticker_outcomes,cost_sek,REAL,Frozen diagnostic cost
+ticker_outcomes,net_pnl_sek,REAL,Net diagnostic P&L
+ticker_outcomes,outcome_payload_hash,TEXT,Canonical EOD row hash

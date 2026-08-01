@@ -1,0 +1,37 @@
+project:
+  name: labor_day_event_study
+  version: "0.1.0"
+  status: research_design
+  created_for: US Labor Day event study
+
+paths:
+  raw_data: data/raw
+  interim_data: data/interim
+  processed_data: data/processed
+  outputs: outputs
+  manifests: manifests
+  logs: logs
+
+event:
+  name: US Labor Day
+  definition: first Monday in September
+  exchange: NYSE
+  timezone: America/New_York
+
+research_rules:
+  mechanism_first: true
+  discovery_validation_separation: true
+  forward_test_required: true
+  allow_black_friday_results: false
+  allow_black_friday_windows: false
+  allow_black_friday_weights: false
+  allow_black_friday_locked_files: false
+
+samples:
+  discovery_start: 1998
+  discovery_end: 2014
+  validation_start: 2015
+  validation_end: 2025
+  forward_start: 2026
+
+random_seed: 20260907

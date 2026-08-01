@@ -1,0 +1,43 @@
+{
+  "core_strategy_files_modified": false,
+  "files": [
+    {
+      "bytes": 14279,
+      "path": "tools/check_step9tu_morning_readiness_v1.py",
+      "sha256": "2e5cf3f9e71ab6e4058d38517e86f9de6358910cf46dc6f8828e3ab64095b11e"
+    },
+    {
+      "bytes": 5372,
+      "path": "tests/test_step9tu_morning_safety_v1.py",
+      "sha256": "7f545dae46617439ac5dfec2b4144e84304469ca733785c346f3839cc85aec9d"
+    },
+    {
+      "bytes": 4688,
+      "path": "run_step9tu_tonight_preflight_v1.ps1",
+      "sha256": "15b63e1d021bd37c310d0b928b2c8351719ab25be8fec3a95f437f7050be80a4"
+    },
+    {
+      "bytes": 2464,
+      "path": "run_step9tu_morning_readiness_v1.ps1",
+      "sha256": "0edac1ad68bc3172891ed5921fe82a0a56171992878bbae35522de1278d6ea9f"
+    },
+    {
+      "bytes": 6210,
+      "path": "run_step9tu_live_morning_v1.ps1",
+      "sha256": "61cae9b06267c69ab701bd27ecdf0f20899e6c5946654ba2bcd4f1da2565caaa"
+    },
+    {
+      "bytes": 1294,
+      "path": "STEP9TU_MORNING_SAFETY_V1_README.md",
+      "sha256": "d89540775a4ee12732535027cb7ab45d6e8e4294735e3519a6c1555188644c6c"
+    }
+  ],
+  "orders_enabled": false,
+  "package_id": "STEP9TU_MORNING_SAFETY_V1_PATCH_20260729",
+  "real_ledgers_included": false,
+  "router_active": false,
+  "status": "OPERATIONAL_SAFETY_LAYER_ONLY_NO_STRATEGY_CHANGE",
+  "step9t_experiment_id": "STEP9T_PROSPECTIVE_REGIME_TRANSITION_ARCHETYPE_V1",
+  "step9u_experiment_id": "STEP9U_CONTINGENCY_SELECTOR_PROSPECTIVE_SHADOW_V1",
+  "step9u_historical_freeze_id": "8042ad803be28ccf"
+}

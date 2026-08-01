@@ -1,0 +1,4 @@
+STEP9L_CURRENT=V3
+MODULE=RegimeTrading.scripts.step9l_v3_selected_strategy_shadow_engine
+LEDGER=data\step9l_v3_selected_strategy_shadow_ledger.db
+FROZEN_ON=2026-07-26

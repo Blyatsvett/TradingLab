@@ -1,0 +1,33 @@
+Tier 1 — Production / Paper
+ORB Breakout current basket
+Still robust, especially in normal/up/mixed regimes.
+
+Tier 2 — Active Research Shadow
+Previous-day High Breakout
+Especially worth watching in strong-up / broad-strength regimes.
+
+Tier 3 — Diagnostic Watchlist
+Gap-down Recovery
+ORB Pullback in specific composite regimes
+VWAP Reclaim only as educational diagnostics
+
+
+*********************************************
+
+
+Tier 1 — Production / Paper Simulation
+- ORB Breakout current 5-stock basket
+- Frozen, unchanged
+- Simulated daily
+
+Tier 2 — Active Shadow Research
+- Previous-day High Breakout optimized basket
+- Gap-down Recovery selected basket/watchlist
+- Tracked forward, not traded live
+
+Tier 3 — Diagnostic Watchlist
+- ORB Pullback
+- VWAP Reclaim
+- All-downloaded versions
+- Weak/marginal ticker baskets
+- Kept for regime learning, not decision-making

@@ -1,0 +1,50 @@
+{
+  "databases_included": false,
+  "files": [
+    {
+      "relative_path": "RegimeTrading/scripts/step9s_prospective_contingency_shadow_v1.py",
+      "sha256": "afb9d086a093c3eba799b08f21a241c22071d93942c7e08f2a3ef2f61c1cd24f",
+      "size_bytes": 77130
+    },
+    {
+      "relative_path": "STEP9S_PROSPECTIVE_CONTINGENCY_SHADOW_V1_INSTALL.md",
+      "sha256": "426c48afdd14848d0e68fb7789a06247986cf079461a6d09fdbd3fe4b5911954",
+      "size_bytes": 1734
+    },
+    {
+      "relative_path": "STEP9S_PROSPECTIVE_CONTINGENCY_SHADOW_V1_README.md",
+      "sha256": "109aa2db389f41bfb7b0df6a18d2cd19d96f74a206aed8d7c0eaac5825564dcc",
+      "size_bytes": 2623
+    },
+    {
+      "relative_path": "config/step9s_prospective_contingency_shadow_v1.json",
+      "sha256": "e89a97e5cf67ba759115719e73759e255933c265d798a59b4c56b9d8ec0325e5",
+      "size_bytes": 3711
+    },
+    {
+      "relative_path": "run_step9s_prospective_eod.ps1",
+      "sha256": "3ec677d262f7b9e1c7edd5b4b3c43600a8a233c08f6ef507b4fd10c6390f6291",
+      "size_bytes": 377
+    },
+    {
+      "relative_path": "run_step9s_prospective_morning.ps1",
+      "sha256": "4484d4a7aa210c139a6b17549c8d21f42d39032f5ca339086c7698a0d2f19a73",
+      "size_bytes": 371
+    },
+    {
+      "relative_path": "tests/test_step9s_prospective_contingency_shadow_v1.py",
+      "sha256": "1865f8ecb6a2d16b5a1c800474ea2ff8cb3de4f3740f32764fd0febfd431112e",
+      "size_bytes": 9782
+    },
+    {
+      "relative_path": "tools/verify_step9s_prospective_contingency_shadow_v1.py",
+      "sha256": "e747785d892db7c35c69729a48c1d5131efb24bb97a99b42d1174b16bc8fc6de",
+      "size_bytes": 5544
+    }
+  ],
+  "ledgers_included": false,
+  "orders_enabled": false,
+  "patch_id": "STEP9S_PROSPECTIVE_CONTINGENCY_SHADOW_V1_PATCH_20260728",
+  "protected_files_included": false,
+  "status": "RESEARCH_ONLY_NOT_ROUTER_ACTIVE"
+}

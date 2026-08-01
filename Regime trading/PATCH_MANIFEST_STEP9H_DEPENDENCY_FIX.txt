@@ -1,0 +1,10 @@
+STEP 9H DEPENDENCY FIX
+
+Files changed:
+- requirements.txt
+  - Adds scipy>=1.17 explicitly.
+  - Installs yfinance with the [repair] extra because the collector uses repair=True.
+- RegimeTrading/scripts/collect_step9h_holdout_data.py
+  - Adds a fail-fast SciPy preflight with a targeted repair command.
+
+No universe, contract, signal, execution, database, or router logic is changed.

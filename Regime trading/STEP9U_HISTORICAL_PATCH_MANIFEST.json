@@ -1,0 +1,84 @@
+{
+  "creates_real_prospective_ledger": false,
+  "dedicated_tests_expected": 18,
+  "experiment_id": "STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1",
+  "files": [
+    {
+      "bytes": 348,
+      "path": "INSTALL_STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1.md",
+      "sha256": "33777ef10b63e0c67476d53bd8f11ee1e9c1080b40e3563a206702c2e2bc63f2"
+    },
+    {
+      "bytes": 39950,
+      "path": "RegimeTrading/scripts/step9u_historical_contingency_selector_v1.py",
+      "sha256": "744304626eb53c7d85db612874039e8916869a4c0312803ab0febf76dce4bf93"
+    },
+    {
+      "bytes": 1456,
+      "path": "STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1_README.md",
+      "sha256": "90ddfd31a4071fe573e8e44672dbfe5e2752d1a225fb9d429992ce369446a210"
+    },
+    {
+      "bytes": 4484,
+      "path": "STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1_SPEC.md",
+      "sha256": "2e69540bc22c124725523c3002dd185795568e7c1a0d611845a38a97abfde201"
+    },
+    {
+      "bytes": 1775,
+      "path": "STEP9U_V1_SCHEMA_DICTIONARY.csv",
+      "sha256": "3992421f2ccc107b986d259966e55faf7b2a1428abbf43a8745a7b1cc20b1529"
+    },
+    {
+      "bytes": 2446,
+      "path": "config/step9u_historical_contingency_selector_v1.json",
+      "sha256": "c619eb8a937ba00a1b6818670f2d7bf56822694a8dc27d2f855daf8d58d0eea4"
+    },
+    {
+      "bytes": 235,
+      "path": "run_step9u_historical_contingency_selector_v1.ps1",
+      "sha256": "8c93979223be5ca2fa9ed8597772f4b07b2268c7a4faee9efefdc4975f0eb037"
+    },
+    {
+      "bytes": 10681,
+      "path": "tests/test_step9u_historical_contingency_selector_v1.py",
+      "sha256": "ee3fdb4d5f44e67d652ff6e3351dcadc2a72d8a28ec5ebf364a0073b9baf8a5e"
+    },
+    {
+      "bytes": 5983,
+      "path": "tools/verify_step9u_historical_contingency_selector_v1.py",
+      "sha256": "7b0836e7b4fb6c9f7a0d1c1d3d524683bb73cab4faa3c64668daf5b8874142f3"
+    }
+  ],
+  "full_suite_expected": 295,
+  "historical_artifact_set_sha256": "92b274cb24cad391324b4023e20c9f9830544f6c63e87b73846ff757ff986aa1",
+  "historical_expected": {
+    "blocked_negative_controls": 79,
+    "directional_candidates": 970,
+    "july28_selections": 0,
+    "regimes": 9,
+    "selectable_candidates": 158,
+    "selected_candidates": 73,
+    "selected_complete_outcomes": 71,
+    "selected_incomplete_outcomes": 2,
+    "selected_net_standardized_pnl_sek": 388.29973148050374,
+    "selected_sessions": 43,
+    "selection_opportunity_cost_sek": 354.76753198836883,
+    "sessions": 62,
+    "transition_states": 6
+  },
+  "historical_freeze_id": "92b274cb24cad391",
+  "historical_freeze_manifest_sha256": "e8a5074f2cbe0ebfa73f5d579c042d8a9e5305e1a61059ee171bdd90f5f2e23e",
+  "hotfixes": [
+    "STEP9U_VERIFIER_PROJECT_ROOT_BOOTSTRAP_V1",
+    "STEP9U_FEASIBLE_ORACLE_REGRET_DIAGNOSTIC_V1",
+    "STEP9U_PLATFORM_NEUTRAL_SOURCE_PROVENANCE_V1"
+  ],
+  "mandatory_control_active": false,
+  "orders_enabled": false,
+  "patch_id": "STEP9U_HISTORICAL_CONTINGENCY_SELECTOR_V1_PATCH_20260728",
+  "regret_oracle_contract": "UP_TO_2_POSITIVE_MAX_1_PER_SECTOR_V1",
+  "research_status": "RESEARCH_ONLY_RETROSPECTIVE_IN_SAMPLE_RULE_DESIGN_NOT_ROUTER_ACTIVE",
+  "router_active": false,
+  "source_provenance_contract": "PROJECT_RELATIVE_POSIX_KEYS_V1",
+  "verifier_invocation": "python tools/verify_step9u_historical_contingency_selector_v1.py"
+}

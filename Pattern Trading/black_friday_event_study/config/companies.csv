@@ -1,0 +1,26 @@
+ticker,company_name,exposure_group
+AMZN,Amazon,Ecommerce_Retail
+WMT,Walmart,Ecommerce_Retail
+TGT,Target,Ecommerce_Retail
+COST,Costco,Ecommerce_Retail
+BBY,Best Buy,Ecommerce_Retail
+EBAY,eBay,Ecommerce_Retail
+ETSY,Etsy,Ecommerce_Retail
+CHWY,Chewy,Ecommerce_Retail
+M,Macy's,Ecommerce_Retail
+KSS,Kohl's,Ecommerce_Retail
+V,Visa,Payments
+MA,Mastercard,Payments
+AXP,American Express,Payments
+PYPL,PayPal,Payments
+GPN,Global Payments,Payments
+FIS,Fidelity National Information Services,Payments
+FI,Fiserv,Payments
+UPS,United Parcel Service,Logistics
+FDX,FedEx,Logistics
+XPO,XPO,Logistics
+JBHT,J.B. Hunt Transport Services,Logistics
+EXPD,Expeditors International,Logistics
+CHRW,C.H. Robinson,Logistics
+ODFL,Old Dominion Freight Line,Logistics
+"XRT","SPDR S&P Retail ETF","Retail_ETF"

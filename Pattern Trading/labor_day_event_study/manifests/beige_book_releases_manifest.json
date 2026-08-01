@@ -1,0 +1,19 @@
+{
+  "cache_directory": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\beige_book_source_cache",
+  "dataset": "Historical Federal Reserve Beige Book publication calendar",
+  "generated_at_utc": "2026-07-23T17:57:26.787035+00:00",
+  "maximum_release_date": "2025-11-26",
+  "minimum_release_date": "1998-01-21",
+  "output_path": "data\\raw\\macro_releases\\beige_book_releases_1998_2025.csv",
+  "output_sha256": "3a7ea13cc5fa766e93f1b5cebf69f94a7dffe4ed671af766a3295f5d3e0feeb9",
+  "release_time_et": "14:00",
+  "requested_end_year": 2025,
+  "requested_start_year": 1998,
+  "row_count": 224,
+  "rows_per_year": 8,
+  "selection_rule": "One official HTML report link for each dated release on every annual Federal Reserve Beige Book archive page. Exact archive dates are used. The standard 2:00 p.m. ET publication time is recorded as an explicit historical fallback.",
+  "source_pages_sha256": "9449fb6ac2f7cf53a3c551092410ad4f6a4ca4da7584a8e8ab54f73ce7a71d3f",
+  "time_source": "official_federal_reserve_standard_release_time",
+  "verification_status": "official_archive_date_standard_time",
+  "year_page_template": "https://www.federalreserve.gov/monetarypolicy/beigebook{year}.htm"
+}

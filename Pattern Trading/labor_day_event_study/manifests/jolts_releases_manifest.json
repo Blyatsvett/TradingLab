@@ -1,0 +1,28 @@
+{
+  "archive_url": "https://www.bls.gov/bls/news-release/jolts.htm",
+  "cache_directory": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\jolts_source_cache",
+  "dataset": "Historical national JOLTS news releases",
+  "date_only_count": 0,
+  "exact_time_count": 260,
+  "generated_at_utc": "2026-07-23T16:02:25.717284+00:00",
+  "maximum_reference_period": "2025-10",
+  "maximum_release_date": "2025-12-09",
+  "minimum_reference_period": "2004-02",
+  "minimum_release_date": "2004-04-15",
+  "official_archive_reference_start": "2004-02",
+  "output_path": "data\\raw\\macro_releases\\jolts_releases_2004_2025.csv",
+  "output_sha256": "b5b7bb17d550bb35b93665ea5f17491c38a053967509e27624595a6eae2ea6b4",
+  "pre_archive_years_unavailable": [
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003
+  ],
+  "requested_end_year": 2025,
+  "requested_start_year": 1998,
+  "row_count": 260,
+  "selection_rule": "Official national Job Openings and Labor Turnover archived HTML/TXT releases, selected by actual publication date. PDF duplicates, state releases, supplemental material, and rule-derived pre-2004 dates are excluded.",
+  "source_pages_sha256": "fc71d2c1eee1f2c531b45535bb7ccbc5762673222709f0ee40747ccf56bdca42"
+}

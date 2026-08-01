@@ -1,0 +1,551 @@
+{
+  "manifest_version": 1,
+  "status": "phase_13_remaining_data_assets_completed_documentation_cleanup_pending",
+  "created_at": "2026-08-01",
+  "canonical_root": "data",
+  "phases": {
+    "phase_1_low_risk_archive_candidates": [
+      {
+        "old_path": "data/step9u_historical_contingency_selector_v1_outputs.zip",
+        "proposed_new_path": "data/archives/legacy/step9u_historical_contingency_selector_v1_outputs.zip",
+        "classification": "archive",
+        "confidence": "high",
+        "status": "moved_phase_1",
+        "reference_status": "no_active_code_reference_found",
+        "move_unit": "single_file",
+        "rollback": "move back to old_path"
+      },
+      {
+        "old_path": "data/step9kpi/hotfix_backups",
+        "proposed_new_path": "data/archives/legacy/step9kpi_hotfix_backups",
+        "classification": "historical_backup",
+        "confidence": "medium",
+        "status": "moved_phase_1",
+        "reference_status": "documentation_only_reference_found",
+        "move_unit": "complete_directory",
+        "rollback": "move complete directory back to old_path"
+      },
+      {
+        "old_path": "data/nasdaq_raw/archive",
+        "proposed_new_path": "data/archives/raw/nasdaq_raw_archive",
+        "classification": "immutable_raw_archive",
+        "confidence": "medium",
+        "status": "moved_phase_1",
+        "reference_status": "collector_documentation_pattern_requires_update",
+        "move_unit": "complete_directory_with_internal_structure",
+        "rollback": "move complete directory back to old_path"
+      }
+    ],
+    "phase_7_step9jk_legacy_research": [
+      {
+        "old_path": "data/step9j_v2_*.csv",
+        "proposed_new_path": "data/archives/research/step9j_v2/",
+        "classification": "historical_challenger_research_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_7",
+        "reference_status": "producer_and_Step_9S_historical_consumer_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/step9k_*.csv",
+        "proposed_new_path": "data/archives/research/step9k/",
+        "classification": "historical_high_dispersion_research_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_7",
+        "reference_status": "producer_and_downstream_importers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      }
+    ],
+    "phase_1_deferred_until_reference_update": [
+      {
+        "old_path": "data/step9s_historical_contingency_replay_v1/freeze_v1",
+        "proposed_new_path": "data/archives/freezes/step9s_historical_contingency_replay_v1/freeze_v1",
+        "classification": "immutable_freeze",
+        "confidence": "high",
+        "status": "moved_phase_4",
+        "reference_status": "active_runtime_manifest_and_preflight_references_updated; frozen_evidence_unchanged",
+        "move_unit": "complete_freeze_directory",
+        "rollback": "restore complete freeze directory and manifest paths"
+      },
+      {
+        "old_path": "data/step9t_regime_transition_archetype_research_v1/freeze_92b274cb24cad391",
+        "proposed_new_path": "data/archives/freezes/step9t_regime_transition_archetype_research_v1/freeze_92b274cb24cad391",
+        "classification": "immutable_freeze",
+        "confidence": "high",
+        "status": "moved_phase_4",
+        "reference_status": "active_runtime_manifest_and_source_hash_references_preserved; frozen_evidence_unchanged",
+        "move_unit": "complete_freeze_directory",
+        "rollback": "restore complete freeze directory and hash references"
+      },
+      {
+        "old_path": "data/step9u_historical_contingency_selector_v1/freeze_8042ad803be28ccf",
+        "proposed_new_path": "data/archives/freezes/step9u_historical_contingency_selector_v1/freeze_8042ad803be28ccf",
+        "classification": "immutable_freeze",
+        "confidence": "high",
+        "status": "moved_phase_4",
+        "reference_status": "active_runtime_manifest_package_validator_and_test_references_updated; frozen_evidence_unchanged",
+        "move_unit": "complete_freeze_directory",
+        "rollback": "restore complete freeze directory and validator paths"
+      }
+    ],
+    "phase_2_generated_outputs": [
+      {
+        "old_path": "data/step9r",
+        "proposed_new_path": "data/outputs/research/step9r",
+        "classification": "generated_research_output",
+        "confidence": "high",
+        "status": "moved_phase_2",
+        "reference_status": "active_module_and_tests_reference_current_path",
+        "move_unit": "complete_directory",
+        "rollback": "move complete directory back to old_path"
+      },
+      {
+        "old_path": "data/step9kpi",
+        "proposed_new_path": "data/outputs/kpi",
+        "classification": "generated_kpi_output",
+        "confidence": "high",
+        "status": "moved_phase_2",
+        "reference_status": "KPI_config_build_manifest_and_readme_references_found",
+        "move_unit": "current_outputs_separated_from_hotfix_backup",
+        "rollback": "restore original directory and update references back"
+      },
+      {
+        "old_path": "data/prospective_session_registry",
+        "proposed_new_path": "data/outputs/sessions/prospective_session_registry",
+        "classification": "runtime_session_metadata",
+        "confidence": "high",
+        "status": "moved_phase_2",
+        "reference_status": "active_V2_wrapper_and_docs_reference_current_path",
+        "move_unit": "complete_directory_with_wrapper_update",
+        "rollback": "restore directory and path configuration"
+      }
+    ],
+    "phase_3_active_sources_and_ledgers": [
+      {
+        "old_path": "data/step9i_shadow_intraday_prices.db",
+        "proposed_new_path": "data/source/market/step9i_shadow_intraday_prices.db",
+        "classification": "active_market_data_source",
+        "confidence": "high",
+        "status": "moved_phase_3",
+        "reference_status": "active_references_centralized; historical_hash_records_retain_original_provenance_paths",
+        "move_unit": "database_and_sidecars_as_one_unit",
+        "rollback": "restore database and sidecars and revert path configuration"
+      },
+      {
+        "old_path": "data/step9i_v2_shadow_ledger.db",
+        "proposed_new_path": "data/ledgers/prospective/step9i_v2_shadow_ledger.db",
+        "classification": "active_prospective_ledger",
+        "confidence": "high",
+        "status": "moved_phase_3",
+        "reference_status": "active_references_centralized; historical_hash_records_retain_original_provenance_paths",
+        "move_unit": "database_and_sidecars_as_one_unit",
+        "rollback": "restore database and sidecars and revert path configuration"
+      },
+      {
+        "old_path": "data/step9l_v3_selected_strategy_shadow_ledger.db",
+        "proposed_new_path": "data/ledgers/prospective/step9l_v3_selected_strategy_shadow_ledger.db",
+        "classification": "active_prospective_ledger",
+        "confidence": "high",
+        "status": "moved_phase_3",
+        "reference_status": "active_references_centralized; historical_hash_records_retain_original_provenance_paths",
+        "move_unit": "database_and_sidecars_as_one_unit",
+        "rollback": "restore database and sidecars and revert path configuration"
+      }
+    ],
+    "phase_5_lower_confidence_legacy_research": [
+      {
+        "old_path": "data/step9m_complete_case_2026-05-27_to_2026-07-24",
+        "proposed_new_path": "data/archives/research/legacy/complete_cases/step9m_complete_case_2026-05-27_to_2026-07-24",
+        "classification": "historical_complete_case_snapshot",
+        "confidence": "high_within_lower_confidence_batch",
+        "status": "moved_phase_5",
+        "reference_status": "self_contained_snapshot; no_active_code_consumer_found",
+        "move_unit": "complete_directory",
+        "rollback": "move complete directory back to old_path"
+      },
+      {
+        "old_path": "data/step9n_complete_case_2026-05-27_to_2026-07-24",
+        "proposed_new_path": "data/archives/research/legacy/complete_cases/step9n_complete_case_2026-05-27_to_2026-07-24",
+        "classification": "historical_complete_case_snapshot",
+        "confidence": "high_within_lower_confidence_batch",
+        "status": "moved_phase_5",
+        "reference_status": "self_contained_snapshot; no_active_code_consumer_found",
+        "move_unit": "complete_directory",
+        "rollback": "move complete directory back to old_path"
+      },
+      {
+        "old_path": "data/step9o_complete_case_2026-05-27_to_2026-07-24",
+        "proposed_new_path": "data/archives/research/legacy/complete_cases/step9o_complete_case_2026-05-27_to_2026-07-24",
+        "classification": "historical_complete_case_snapshot",
+        "confidence": "high_within_lower_confidence_batch",
+        "status": "moved_phase_5",
+        "reference_status": "self_contained_snapshot; no_active_code_consumer_found",
+        "move_unit": "complete_directory",
+        "rollback": "move complete directory back to old_path"
+      }
+    ],
+    "phase_6_centralized_legacy_output_families": [
+      {
+        "old_path": "data/v1_validation_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/v1_validation/",
+        "classification": "legacy_validation_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_6",
+        "reference_status": "producers_and_reporting_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/step9ir_*.csv and data/step9ir_historical_replay_ledger.db",
+        "proposed_new_path": "data/archives/research/step9ir_v1/",
+        "classification": "historical_replay_outputs_and_ledger",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_6",
+        "reference_status": "Step_9IR_V1_producers_and_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/step9ir_v2_*.csv and data/step9ir_v2_historical_replay_ledger.db",
+        "proposed_new_path": "data/archives/research/step9ir_v2/",
+        "classification": "historical_replay_outputs_and_ledger",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_6",
+        "reference_status": "Step_9IR_V2_producers_and_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      }
+    ],
+    "phase_8_mixed_regime_research_outputs": [
+      {
+        "old_path": "data/regime_gap_recovery_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/gap_recovery/",
+        "classification": "legacy_regime_gap_recovery_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producers_and_reporting_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_v1_timing_comparison_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/v1_timing/",
+        "classification": "legacy_regime_timing_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producer_and_reporting_consumer_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_feature_*.csv, data/regime_daily_features.csv, data/regime_point_in_time_audit.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/features/",
+        "classification": "legacy_regime_feature_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producer_and_reporting_consumer_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_taxonomy_*.csv and data/regime_daily_taxonomy.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/taxonomy/",
+        "classification": "legacy_regime_taxonomy_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producer_and_reporting_consumer_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_playbook_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/playbook/",
+        "classification": "legacy_regime_playbook_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producers_and_reporting_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_challenger_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/challenger/",
+        "classification": "legacy_regime_challenger_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producers_and_reporting_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/instrument_taxonomy_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/instrument_taxonomy/",
+        "classification": "legacy_instrument_taxonomy_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producer_and_reporting_consumer_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_sector_strategy_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/sector_strategy/",
+        "classification": "legacy_regime_sector_strategy_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producers_and_reporting_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_state_filtered_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/state_filtered/",
+        "classification": "legacy_regime_state_filtered_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producer_and_reporting_consumer_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      },
+      {
+        "old_path": "data/regime_holdout_*.csv",
+        "proposed_new_path": "data/outputs/research/legacy/regime/holdout/",
+        "classification": "legacy_regime_holdout_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_8",
+        "reference_status": "producers_and_reporting_consumers_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert configured family path"
+      }
+    ],
+    "phase_9_root_data_classification": [
+      {
+        "old_path": "data/powerbi_exports.xlsx",
+        "proposed_new_path": "data/outputs/kpi/powerbi_exports.xlsx",
+        "classification": "generated_powerbi_workbook",
+        "confidence": "high",
+        "status": "moved_phase_9",
+        "reference_status": "producer_path_centralized; copy_hash_verified",
+        "move_unit": "single_file",
+        "rollback": "move file back to old_path and revert POWERBI_WORKBOOK"
+      },
+      {
+        "old_path": "data/intraday_prices.db; data/step9h_holdout_intraday_prices.db; data/instrument_*.csv; data/regime_holdout_universe_registry.csv",
+        "proposed_new_path": "deferred",
+        "classification": "active_sources_and_registries",
+        "confidence": "high_classification_deferred_move",
+        "status": "classified_deferred",
+        "reference_status": "active_runtime_or_manifest_references_remain",
+        "move_unit": "file_or_database_with_references",
+        "rollback": "not_applicable_until_reference_map_is_approved"
+      },
+      {
+        "old_path": "data/nasdaq_forward_data.db; data/nasdaq_forward_data.db-wal; data/nasdaq_forward_data.db-shm; data/nasdaq_raw/; data/nasdaq_*.csv",
+        "proposed_new_path": "deferred",
+        "classification": "active_collector_source_state_and_snapshots",
+        "confidence": "high_classification_deferred_move",
+        "status": "classified_deferred",
+        "reference_status": "collector_paths_are_still_root_canonical",
+        "move_unit": "database_sidecars_and_collector_outputs_as_units",
+        "rollback": "not_applicable_until_collector_reference_map_is_approved"
+      },
+      {
+        "old_path": "data/step9i_v2_shadow_*.csv; data/step9l_v3_shadow_*.csv; data/step9r_*.db",
+        "proposed_new_path": "deferred",
+        "classification": "active_shadow_outputs_and_research_ledgers",
+        "confidence": "medium_classification_deferred_move",
+        "status": "classified_deferred",
+        "reference_status": "active_wrappers_evaluators_and_comparison_workflows_still_reference_root_paths",
+        "move_unit": "family_with_ledgers_and_consumers",
+        "rollback": "not_applicable_until_active_reference_map_is_approved"
+      },
+      {
+        "old_path": "data/step9m_*.csv; data/step9n_*.csv; data/step9o_*.csv",
+        "proposed_new_path": "deferred",
+        "classification": "legacy_generated_research_families_with_runnable_producers",
+        "confidence": "medium_classification_deferred_move",
+        "status": "classified_deferred",
+        "reference_status": "Step_9N_and_Step_9O_dependency_chain_requires_family_path_centralization",
+        "move_unit": "matching_file_families_with_producers",
+        "rollback": "not_applicable_until_producer_and_consumer_paths_are_centralized"
+      },
+      {
+        "old_path": "data/july28_ticker_market_performance.csv",
+        "proposed_new_path": "deferred",
+        "classification": "historical_reconciliation_input",
+        "confidence": "medium_classification_deferred_move",
+        "status": "classified_deferred",
+        "reference_status": "Step_9T_verifier_and_install_documentation_reference_root_path",
+        "move_unit": "single_file_with_replay_verification",
+        "rollback": "not_applicable_until_replay_reference_map_is_approved"
+      }
+    ],
+    "phase_10_active_shadow_outputs": [
+      {
+        "old_path": "data/step9i_v2_shadow_*.csv",
+        "proposed_new_path": "data/outputs/shadow/step9i_v2/",
+        "classification": "active_step9i_v2_shadow_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_10",
+        "reference_status": "producer_and_KPI_path_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert shadow_output_dirs"
+      },
+      {
+        "old_path": "data/step9l_v3_shadow_*.csv",
+        "proposed_new_path": "data/outputs/shadow/step9l_v3/",
+        "classification": "active_step9l_v3_shadow_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_10",
+        "reference_status": "producer_comparison_and_KPI_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_family",
+        "rollback": "move matching files back to data root and revert shadow_output_dirs"
+      }
+    ],
+    "phase_11_step9r_databases": [
+      {
+        "old_path": "data/step9r_prospective_selector_shadow_v1.db",
+        "proposed_new_path": "data/ledgers/prospective/step9r_prospective_selector_shadow_v1.db",
+        "classification": "active_step9r_prospective_shadow_ledger",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_11",
+        "reference_status": "stage_registry_KPI_wrapper_validator_and_replay_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "database_and_sidecars_as_one_unit",
+        "rollback": "move database and sidecars back to data root and revert stage registry paths"
+      },
+      {
+        "old_path": "data/step9r_candidate_ranking_research_v1.db",
+        "proposed_new_path": "data/ledgers/research/step9r_candidate_ranking_research_v1.db",
+        "classification": "active_step9r_candidate_ranking_research_database",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_11",
+        "reference_status": "Step_9R_producer_historical_replay_prospective_verifiers_and_morning_validation_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "database_and_sidecars_as_one_unit",
+        "rollback": "move database and sidecars back to data root and revert stage registry paths"
+      }
+    ],
+    "phase_12_step9stuv_outputs_and_ledger_locations": [
+      {
+        "old_path": "data/step9s_historical_contingency_replay_v1/",
+        "proposed_new_path": "data/outputs/research/step9s_historical_contingency_replay_v1/",
+        "classification": "active_historical_replay_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_12",
+        "reference_status": "stage_output_registry_producer_test_and_verifier_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "complete_output_directory",
+        "rollback": "move complete directory back to data root and revert stage output path"
+      },
+      {
+        "old_path": "data/step9t_regime_transition_archetype_research_v1/",
+        "proposed_new_path": "data/outputs/research/step9t_regime_transition_archetype_research_v1/",
+        "classification": "active_historical_archetype_research_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_12",
+        "reference_status": "stage_output_registry_producer_test_verifier_and_Step_9U_consumer_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "complete_output_directory",
+        "rollback": "move complete directory back to data root and revert stage output path"
+      },
+      {
+        "old_path": "data/step9u_historical_contingency_selector_v1/",
+        "proposed_new_path": "data/outputs/research/step9u_historical_contingency_selector_v1/",
+        "classification": "active_historical_selector_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_12",
+        "reference_status": "stage_output_registry_producer_test_and_verifier_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "complete_output_directory",
+        "rollback": "move complete directory back to data root and revert stage output path"
+      },
+      {
+        "old_path": "data/step9v_intraday_regime_transition_observer_v1/",
+        "proposed_new_path": "data/outputs/observer/step9v_intraday_regime_transition_observer_v1/",
+        "classification": "active_observer_outputs",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_12",
+        "reference_status": "stage_output_registry_and_observer_producer_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "complete_output_directory",
+        "rollback": "move complete directory back to data root and revert stage output path"
+      },
+      {
+        "old_path": "configured data/step9s_*.db; data/step9t_*.db; data/step9u_*.db; data/step9v_*.db",
+        "proposed_new_path": "data/ledgers/prospective/",
+        "classification": "configured_prospective_ledger_locations",
+        "confidence": "high_classification_no_physical_files_present",
+        "status": "path_configured_phase_12",
+        "reference_status": "stage_registry_KPI_and_observer_defaults_updated; no database files or sidecars were present to move",
+        "move_unit": "database_and_sidecars_as_one_unit_when_created",
+        "rollback": "revert stage registry and KPI source paths"
+      }
+    ],
+    "phase_13_remaining_data_assets": [
+      {
+        "old_path": "data/intraday_prices.db; data/step9h_holdout_intraday_prices.db",
+        "proposed_new_path": "data/source/market/",
+        "classification": "local_market_source_databases",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_13",
+        "reference_status": "market_source_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "database_and_sidecars_as_one_unit",
+        "rollback": "move databases back to data root and revert market source paths"
+      },
+      {
+        "old_path": "data/instrument_*.csv; data/regime_holdout_universe_registry.csv",
+        "proposed_new_path": "data/source/reference/",
+        "classification": "instrument_taxonomy_and_holdout_reference_data",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_13",
+        "reference_status": "reference_data_paths_centralized; runtime_manifest_paths_updated; copy_rehearsal_hashes_match",
+        "move_unit": "matching_reference_file_family",
+        "rollback": "move files back to data root and revert reference data paths"
+      },
+      {
+        "old_path": "data/nasdaq_forward_data.db with sidecars; data/nasdaq_raw/",
+        "proposed_new_path": "data/source/market/",
+        "classification": "active_nasdaq_collector_source_assets",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_13",
+        "reference_status": "collector source paths centralized; copy_rehearsal_hashes_match",
+        "move_unit": "database_sidecars_and_raw_directory_as_units",
+        "rollback": "move collector database, sidecars, and raw directory back and revert collector paths"
+      },
+      {
+        "old_path": "data/nasdaq_*.csv",
+        "proposed_new_path": "data/outputs/collector/nasdaq/",
+        "classification": "generated_nasdaq_collector_snapshots_and_comparisons",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_13",
+        "reference_status": "collector and PowerBI consumers centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_collector_output_family",
+        "rollback": "move matching files back to data root and revert collector output paths"
+      },
+      {
+        "old_path": "data/step9m_*.csv; data/step9n_*.csv; data/step9o_*.csv",
+        "proposed_new_path": "data/archives/research/step9m/; data/archives/research/step9n/; data/archives/research/step9o/",
+        "classification": "legacy_generated_research_families",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_13",
+        "reference_status": "producer_family_paths_centralized; copy_rehearsal_hashes_match",
+        "move_unit": "matching_file_families",
+        "rollback": "move matching files back to data root and revert legacy family paths"
+      },
+      {
+        "old_path": "data/july28_ticker_market_performance.csv",
+        "proposed_new_path": "data/source/reference/reconciliation/july28_ticker_market_performance.csv",
+        "classification": "historical_step9t_reconciliation_input",
+        "confidence": "high_after_reference_audit",
+        "status": "moved_phase_13",
+        "reference_status": "Step_9T_verifier_path_centralized; copy_hash_verified",
+        "move_unit": "single_file",
+        "rollback": "move file back to data root and revert reconciliation path"
+      }
+    ]
+  },
+  "rules": [
+    "Do not move deferred or active entries until their reference map and rehearsal are accepted.",
+    "Move complete freeze directories and database sidecars as units.",
+    "Update active references before moving active sources or ledgers.",
+    "Run runtime manifest, V2 preflight, V2 validation, and KPI checks after every phase.",
+    "Keep the old-path to new-path map available for rollback until the phase is accepted."
+  ]
+}

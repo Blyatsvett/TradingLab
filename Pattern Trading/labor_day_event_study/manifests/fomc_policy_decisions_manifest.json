@@ -1,0 +1,21 @@
+{
+  "cache_directory": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\fomc_source_cache",
+  "dataset": "Historical public FOMC policy decisions",
+  "date_only_count": 21,
+  "end_year": 2025,
+  "exact_time_count": 90,
+  "generated_at_utc": "2026-07-23T13:57:26.728324+00:00",
+  "historical_url_template": "https://www.federalreserve.gov/monetarypolicy/fomchistorical{year}.htm",
+  "maximum_decision_date": "2025-12-10",
+  "minimum_decision_date": "1998-09-29",
+  "modern_calendar_url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+  "output_path": "data\\raw\\macro_releases\\fomc_policy_decisions_1998_2025.csv",
+  "output_sha256": "af02d1428b2d62b42ddb56b61e5595fbe18c5d09ef16856ef5f79ef918e0f6d2",
+  "row_count": 229,
+  "rule_time_count": 118,
+  "scheduled_count": 215,
+  "selection_rule": "Public FOMC policy statements only. Historical meetings, conference calls, and notation votes require an official plain Statement link. Cancelled meetings and supplementary or strategy-framework statements are excluded.",
+  "source_pages_sha256": "6fbc47f52b6149e0c59d7280e43020e67cedbd7d899f85d7250de18b5e0c2738",
+  "start_year": 1998,
+  "unscheduled_count": 14
+}

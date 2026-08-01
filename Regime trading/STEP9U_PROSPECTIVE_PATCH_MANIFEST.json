@@ -1,0 +1,56 @@
+{
+  "files": [
+    {
+      "bytes": 48947,
+      "path": "RegimeTrading/scripts/step9u_prospective_contingency_selector_v1.py",
+      "sha256": "790d66fe4f6000699a9b1e34ad8fbe488b1f50743bea6e28bec69bf56caf860a"
+    },
+    {
+      "bytes": 2338,
+      "path": "config/step9u_prospective_contingency_selector_v1.json",
+      "sha256": "07c252e250426114cc97469ee1761c9aefe367557534842991fe4e378acef1e3"
+    },
+    {
+      "bytes": 12827,
+      "path": "tests/test_step9u_prospective_contingency_selector_v1.py",
+      "sha256": "a6f9da45b02e82db3cb457b19ca3b058cbc67f43c044b29643935cd82e0bc3f2"
+    },
+    {
+      "bytes": 7976,
+      "path": "tools/verify_step9u_prospective_contingency_selector_v1.py",
+      "sha256": "dc222465b25bb379c95958d2f4817861908b4b98d93e819460dccc673f85d1fb"
+    },
+    {
+      "bytes": 679,
+      "path": "run_step9u_prospective_selection_v1.ps1",
+      "sha256": "e5e8fde038effad6bf05523fefb8fb910661d96741c29ba793de54209f800a1d"
+    },
+    {
+      "bytes": 666,
+      "path": "run_step9u_prospective_eod_v1.ps1",
+      "sha256": "a538e90755aa0481ff65343e9e0be8de1bd31800617774562d496bd633b104e7"
+    },
+    {
+      "bytes": 247,
+      "path": "run_step9u_prospective_audit_v1.ps1",
+      "sha256": "948ba4473f4571bee0dd0161392dee598cac7c7ec330c6584e69f8ba6184793e"
+    },
+    {
+      "bytes": 1285,
+      "path": "STEP9U_PROSPECTIVE_CONTINGENCY_SELECTOR_SHADOW_V1_README.md",
+      "sha256": "233425ef1c4a974399da70c4a5ad930ea30d64b021c3bef6904d5a9c84aaabd9"
+    },
+    {
+      "bytes": 1113,
+      "path": "STEP9U_PROSPECTIVE_V1_SCHEMA_DICTIONARY.csv",
+      "sha256": "5d5948d86ab4ba531078739ec14a933aebfb603a5f8c9084874bc5a9107a28a4"
+    }
+  ],
+  "historical_artifact_set_sha256": "8042ad803be28ccf76fa5ef14aebe80586b7e80cf4c065fc53193d07221a3615",
+  "historical_freeze_id": "8042ad803be28ccf",
+  "mandatory_control_active": false,
+  "orders_enabled": false,
+  "package_id": "STEP9U_PROSPECTIVE_CONTINGENCY_SELECTOR_SHADOW_V1_PATCH_20260728",
+  "real_prospective_ledger_included": false,
+  "router_active": false
+}

@@ -1,0 +1,38 @@
+{
+  "experiment_id": "STEP9T_REGIME_TRANSITION_ARCHETYPE_RESEARCH_V1",
+  "research_status": "RESEARCH_ONLY_READ_ONLY_NOT_ROUTER_ACTIVE",
+  "code_version": "STEP9T_REGIME_TRANSITION_ARCHETYPE_RESEARCH_V1_2026_07_28",
+  "latest_morning_source_label": "09:45",
+  "standardized_entry_label": "09:50",
+  "eod_minimum_label": "17:20",
+  "base_notional_sek": 1000.0,
+  "round_trip_cost_rate": 0.0005,
+  "minimum_valid_tickers": 24,
+  "early_move_threshold": 0.001,
+  "last5_confirmation_threshold": 0.0005,
+  "broad_recovery_min_recovery_share": 0.55,
+  "broad_recovery_min_median_last5_return": 0.0,
+  "weakness_persisting_min_decliner_share": 0.60,
+  "weakness_persisting_max_median_last5_return": -0.0003,
+  "bullish_continuation_min_advancer_share": 0.60,
+  "bullish_continuation_min_continuation_share": 0.55,
+  "leader_failure_min_share": 0.50,
+  "leader_failure_max_median_last5_return": -0.0001,
+  "archetype_priority": [
+    "LAGGARD_RECOVERY_LONG",
+    "LEADER_REVERSAL_SHORT",
+    "BULLISH_CONTINUATION_LONG",
+    "BEARISH_CONTINUATION_SHORT",
+    "NO_CLEAR_SETUP"
+  ],
+  "transition_labels": [
+    "BROAD_RECOVERY",
+    "WEAKNESS_PERSISTING",
+    "BULLISH_CONTINUATION",
+    "LEADER_FAILURE",
+    "MIXED_TRANSITION",
+    "DATA_LIMITED_TRANSITION"
+  ],
+  "router_active": false,
+  "orders_enabled": false
+}

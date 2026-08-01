@@ -1,0 +1,17 @@
+V1 Research Validation Suite - Step 3 patch
+
+New files:
+- RegimeTrading\scripts\v1_validation_execution_stress.py
+- tests\test_v1_validation_execution_stress.py
+- run_v1_validation_step3.ps1
+- README_V1_VALIDATION_SUITE_STEP3.txt
+- PATCH_MANIFEST_STEP3.txt
+
+Updated files:
+- RegimeTrading\scripts\run_daily_research_workflow.py
+- RegimeTrading\scripts\export_powerbi_workbook.py
+- RegimeTrading\scripts\validate_outputs.py
+- run_v1_validation_suite.ps1
+- README_V1_VALIDATION_SUITE_ROADMAP.txt
+
+No files in the original Intraday project are included or modified.

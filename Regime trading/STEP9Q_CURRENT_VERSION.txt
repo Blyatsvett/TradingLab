@@ -1,0 +1,6 @@
+STEP9Q_CURRENT=STEP9Q_B_LITE
+MODULE=RegimeTrading.scripts.step9q_powerbi_excel_feed
+LIVE_MONITOR_MODULE=RegimeTrading.scripts.step9q_b_lite_live_trade_feed
+WORKBOOK=data\powerbi\powerbi_live_master.xlsx
+STATUS=READ_ONLY_INTRADAY_TRADE_MONITOR_NOT_ROUTER_ACTIVE
+FROZEN_ON=2026-07-27

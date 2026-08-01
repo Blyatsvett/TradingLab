@@ -1,0 +1,48 @@
+DAILY RESEARCH REVIEW
+=====================
+Generated at: 2026-07-31 10:55:20
+Review date : 2026-07-31
+
+PRODUCTION ORB
+--------------
+ORB signal rows      : 5
+Triggered signals    : 1
+Not triggered signals: 3
+Invalid signals      : 1
+Paper total trades   : 19
+Paper open trades    : 0
+Paper closed trades  : 19
+Opened today         : 1
+Closed today         : 1
+Realized PnL today   : 7.90 SEK
+Final account equity : 10021.71 SEK
+
+STRATEGY LAB SHADOW
+-------------------
+Shadow strategies ready : 6 / 6
+Shadow latest trades    : 0
+Active shadow trades    : 0
+Watchlist trades        : 0
+Diagnostic trades       : 0
+Production ref trades   : 0
+
+AUDIT
+-----
+Latest audit validation status: PASSED
+Latest audit timestamp        : 2026-07-31 10:53:11
+Operating status              : READY
+
+TODAY'S PAPER TRADES
+--------------------
+                                   trade_id       date   ticker status          entry_time           exit_time  pnl_sek   strategy_version
+PT_202607311010_SHBAST_20260731105306374334 2026-07-31 SHB-A.ST CLOSED 2026-07-31 10:10:00 2026-07-31 10:45:00 7.901023 ORB_BEST_BASKET_V1
+
+TODAY'S SHADOW TRADES
+---------------------
+No Strategy Lab shadow trades on the review date.
+
+OPERATING REMINDER
+------------------
+Trade/simulate only frozen ORB production.
+Strategy Lab shadow strategies are research-only.
+Do not promote strategies or change rules during market hours.

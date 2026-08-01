@@ -1,0 +1,22 @@
+STEP 9N MIRRORED TREND-REGIME RESEARCH — ADDITIVE ROOT PATCH
+
+Adds:
+- RegimeTrading/scripts/step9n_trend_regimes_strategy_research.py
+- tests/test_step9n_trend_regimes_strategy_research.py
+- run_step9n_trend_regimes_research.ps1
+- STEP9N_PATCH_MANIFEST.txt
+
+Research design:
+- TREND_UP and TREND_DOWN are processed in one module.
+- Each regime retains a separate scorecard.
+- A direction-normalized combined report tests mirrored behavior without hiding asymmetry.
+- Three mirrored primary families: close-confirmed ORB, pullback-and-resume 1.5R, directional breakout 2R.
+- Two mirrored controls: early continuation and countertrend delayed reversal.
+
+Dependencies already present in the project:
+- Step 9K research module
+- Step 9G state-filtered experiment framework
+- Step 9I V2 Combined 23 context
+
+This patch does not replace or activate Step 9I or Step 9L.
+No Step 9N result is automatically promoted.

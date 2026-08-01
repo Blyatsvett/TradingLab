@@ -1,0 +1,1212 @@
+{
+  "schema_id": "STEP9_KPI_OUTPUT_SCHEMA_V1",
+  "specification_id": "STEP9KPI_READ_ONLY_EVALUATION_V1",
+  "status": "PROPOSED_LOCK_CANDIDATE_NOT_IMPLEMENTED",
+  "comparison_notional_sek": 1000.0,
+  "comparison_round_trip_cost_rate": 0.0005,
+  "pnl_tie_tolerance_sek": 0.01,
+  "tables": {
+    "dimSession": {
+      "grain": "one row per session",
+      "primary_key": [
+        "session_date",
+        "evidence_status"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "session_status",
+          "type": "string",
+          "nullable": false,
+          "description": "SEALED_COMPLETE, VALID_NO_TRADE, MISSED_SESSION, INCOMPLETE, or EXCLUDED"
+        },
+        {
+          "name": "morning_regime",
+          "type": "string",
+          "nullable": true,
+          "description": "Frozen morning primary regime"
+        },
+        {
+          "name": "realized_eod_regime",
+          "type": "string",
+          "nullable": true,
+          "description": "REALIZED_EOD_REGIME_V1 result using regime-source universe"
+        },
+        {
+          "name": "realized_eod_regime_broad29",
+          "type": "string",
+          "nullable": true,
+          "description": "Diagnostic EOD result using all 29 tickers"
+        },
+        {
+          "name": "last_completed_bar",
+          "type": "datetime",
+          "nullable": true,
+          "description": "Latest canonical completed market bar"
+        },
+        {
+          "name": "source_coverage_pct",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Required source coverage"
+        }
+      ]
+    },
+    "dimEngine": {
+      "grain": "one row per canonical engine/book",
+      "primary_key": [
+        "engine_book_id"
+      ],
+      "columns": [
+        {
+          "name": "engine_book_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Canonical engine/book identifier"
+        },
+        {
+          "name": "engine_id",
+          "type": "string",
+          "nullable": false,
+          "description": "STEP9I, STEP9L, STEP9S, STEP9R, STEP9T, STEP9U, or STEP9V"
+        },
+        {
+          "name": "book_type",
+          "type": "string",
+          "nullable": false,
+          "description": "SELECTED, NATURAL, MANDATORY_CONTROL, OBSERVER, or BENCHMARK"
+        },
+        {
+          "name": "main_chart_eligible",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Whether the series may appear in the main comparable line chart"
+        },
+        {
+          "name": "max_positions",
+          "type": "integer",
+          "nullable": true,
+          "description": "Locked maximum selected positions"
+        },
+        {
+          "name": "max_positions_per_sector",
+          "type": "integer",
+          "nullable": true,
+          "description": "Locked sector cap"
+        },
+        {
+          "name": "result_type",
+          "type": "string",
+          "nullable": false,
+          "description": "Canonical result type enum"
+        }
+      ]
+    },
+    "dimStrategy": {
+      "grain": "one row per canonical strategy variant",
+      "primary_key": [
+        "strategy_variant_id"
+      ],
+      "columns": [
+        {
+          "name": "strategy_variant_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Canonical strategy variant ID"
+        },
+        {
+          "name": "strategy_family",
+          "type": "string",
+          "nullable": false,
+          "description": "Human-readable strategy family"
+        },
+        {
+          "name": "source_engine_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Authoritative source engine"
+        },
+        {
+          "name": "direction_model",
+          "type": "string",
+          "nullable": true,
+          "description": "LONG, SHORT, PAIR, DYNAMIC, or CASH"
+        },
+        {
+          "name": "entry_model",
+          "type": "string",
+          "nullable": true,
+          "description": "Canonical entry mechanics"
+        },
+        {
+          "name": "exit_model",
+          "type": "string",
+          "nullable": true,
+          "description": "Canonical exit mechanics"
+        },
+        {
+          "name": "applicable_regimes",
+          "type": "string",
+          "nullable": true,
+          "description": "Pipe-delimited frozen regime applicability"
+        },
+        {
+          "name": "governance_status",
+          "type": "string",
+          "nullable": false,
+          "description": "SELECTABLE, CONTROL, OBSERVATION_ONLY, BLOCKED, or CASH"
+        },
+        {
+          "name": "comparison_eligible",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Eligible for oracle strategy comparisons"
+        }
+      ]
+    },
+    "tblEngineDaily": {
+      "grain": "one row per session and engine/book",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "engine_book_id"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "engine_book_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Canonical engine/book"
+        },
+        {
+          "name": "run_status",
+          "type": "string",
+          "nullable": false,
+          "description": "COMPLETE, VALID_NO_TRADE, INCOMPLETE, NOT_RUN, or EXCLUDED"
+        },
+        {
+          "name": "selected_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Selected positions"
+        },
+        {
+          "name": "completed_trade_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Completed selected trades"
+        },
+        {
+          "name": "winner_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Completed winners"
+        },
+        {
+          "name": "loss_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Completed losers"
+        },
+        {
+          "name": "no_trigger_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Selected setups without a trigger"
+        },
+        {
+          "name": "native_net_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Authoritative source-ledger P&L"
+        },
+        {
+          "name": "standardized_net_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Cross-engine 1,000 SEK per-position P&L"
+        },
+        {
+          "name": "capital_deployed_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Standardized deployed notional"
+        },
+        {
+          "name": "return_on_deployed_capital",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Standardized P&L divided by deployed capital"
+        },
+        {
+          "name": "source_outcome_batch_id",
+          "type": "string",
+          "nullable": true,
+          "description": "Authoritative source batch"
+        }
+      ]
+    },
+    "tblBenchmarkDaily": {
+      "grain": "one row per session and benchmark variant",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "benchmark_id"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "benchmark_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Oracle benchmark variant"
+        },
+        {
+          "name": "fixed_or_up_to",
+          "type": "string",
+          "nullable": false,
+          "description": "FIXED or UP_TO"
+        },
+        {
+          "name": "feasibility_scope",
+          "type": "string",
+          "nullable": false,
+          "description": "OBSERVED_UNRESTRICTED or MORNING_FEASIBLE"
+        },
+        {
+          "name": "requested_position_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Requested N"
+        },
+        {
+          "name": "actual_position_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Positions included"
+        },
+        {
+          "name": "selected_tickers",
+          "type": "string",
+          "nullable": true,
+          "description": "Pipe-delimited ticker list"
+        },
+        {
+          "name": "selected_strategy_variants",
+          "type": "string",
+          "nullable": true,
+          "description": "Pipe-delimited strategy list aligned to tickers"
+        },
+        {
+          "name": "standardized_net_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Benchmark daily P&L"
+        },
+        {
+          "name": "candidate_ticker_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Unique tickers considered"
+        },
+        {
+          "name": "strategy_outcome_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Complete deduplicated strategy outcomes considered"
+        },
+        {
+          "name": "coverage_status",
+          "type": "string",
+          "nullable": false,
+          "description": "COMPLETE, PARTIAL, or NOT_EVALUABLE"
+        }
+      ]
+    },
+    "tblStrategyOutcome": {
+      "grain": "one row per canonical session/ticker/strategy outcome",
+      "primary_key": [
+        "canonical_outcome_id"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "canonical_outcome_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Hash of canonical outcome key"
+        },
+        {
+          "name": "ticker",
+          "type": "string",
+          "nullable": false,
+          "description": "Ticker"
+        },
+        {
+          "name": "broad_sector",
+          "type": "string",
+          "nullable": true,
+          "description": "Broad sector"
+        },
+        {
+          "name": "strategy_variant_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Canonical strategy variant"
+        },
+        {
+          "name": "direction",
+          "type": "string",
+          "nullable": true,
+          "description": "LONG, SHORT, PAIR, DYNAMIC, or CASH"
+        },
+        {
+          "name": "morning_available_flag",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Could be evaluated/selected with morning information"
+        },
+        {
+          "name": "governance_feasible_flag",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Allowed by frozen governance"
+        },
+        {
+          "name": "outcome_status",
+          "type": "string",
+          "nullable": false,
+          "description": "COMPLETE, NO_TRIGGER, INCOMPLETE, or ZERO_CASH"
+        },
+        {
+          "name": "entry_time",
+          "type": "datetime",
+          "nullable": true,
+          "description": "Entry time"
+        },
+        {
+          "name": "exit_time",
+          "type": "datetime",
+          "nullable": true,
+          "description": "Exit time"
+        },
+        {
+          "name": "native_notional_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Source notional"
+        },
+        {
+          "name": "native_net_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Source P&L"
+        },
+        {
+          "name": "direction_adjusted_gross_return",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Gross return before comparison cost"
+        },
+        {
+          "name": "standardized_cost_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Comparison cost"
+        },
+        {
+          "name": "standardized_net_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Comparison P&L"
+        },
+        {
+          "name": "mfe_return",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Maximum favourable excursion"
+        },
+        {
+          "name": "mae_return",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Maximum adverse excursion"
+        },
+        {
+          "name": "authoritative_source",
+          "type": "string",
+          "nullable": false,
+          "description": "Source database/table"
+        },
+        {
+          "name": "source_engine_memberships",
+          "type": "string",
+          "nullable": true,
+          "description": "Pipe-delimited engines that reference the same outcome"
+        }
+      ]
+    },
+    "tblStrategyAccuracy": {
+      "grain": "one row per session/engine/ticker decision",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "engine_book_id",
+        "ticker"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "engine_book_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Evaluated engine/book"
+        },
+        {
+          "name": "ticker",
+          "type": "string",
+          "nullable": false,
+          "description": "Ticker"
+        },
+        {
+          "name": "decision_universe_flag",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Ticker belongs to engine decision universe"
+        },
+        {
+          "name": "selected_flag",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Ticker selected by engine"
+        },
+        {
+          "name": "applied_strategy_variant_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Applied strategy or CASH_NO_TRADE"
+        },
+        {
+          "name": "applied_standardized_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Applied-action P&L"
+        },
+        {
+          "name": "oracle_best_strategy_variant_id",
+          "type": "string",
+          "nullable": true,
+          "description": "Best no-force strategy/cash"
+        },
+        {
+          "name": "oracle_best_standardized_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Best no-force P&L"
+        },
+        {
+          "name": "strategy_accuracy_state",
+          "type": "string",
+          "nullable": false,
+          "description": "Classification enum from specification"
+        },
+        {
+          "name": "strategy_correct_flag",
+          "type": "boolean",
+          "nullable": true,
+          "description": "Correct/tied-best flag"
+        },
+        {
+          "name": "strategy_opportunity_loss_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Oracle minus applied, floored at zero"
+        },
+        {
+          "name": "evaluated_strategy_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Complete alternatives for ticker"
+        }
+      ]
+    },
+    "tblRegimeAccuracy": {
+      "grain": "one row per session and classifier universe",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "classifier_universe"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "classifier_universe",
+          "type": "string",
+          "nullable": false,
+          "description": "REGIME_SOURCE or BROAD29_DIAGNOSTIC"
+        },
+        {
+          "name": "morning_regime",
+          "type": "string",
+          "nullable": true,
+          "description": "Frozen morning regime"
+        },
+        {
+          "name": "realized_eod_regime",
+          "type": "string",
+          "nullable": true,
+          "description": "Deterministic EOD regime"
+        },
+        {
+          "name": "regime_accuracy_state",
+          "type": "string",
+          "nullable": false,
+          "description": "EXACT_MATCH, MISMATCH, data-limited, or not evaluable"
+        },
+        {
+          "name": "winning_rule_id",
+          "type": "string",
+          "nullable": true,
+          "description": "First true rule by priority"
+        },
+        {
+          "name": "true_rule_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Number of specialist rules true"
+        },
+        {
+          "name": "valid_ticker_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Complete classifier tickers"
+        },
+        {
+          "name": "required_ticker_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Configured universe size"
+        },
+        {
+          "name": "median_eod_return",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Median return from open"
+        },
+        {
+          "name": "advancer_share",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Share above open"
+        },
+        {
+          "name": "decliner_share",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Share below open"
+        },
+        {
+          "name": "range_percentile",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Prior-20-session percentile"
+        },
+        {
+          "name": "volatility_percentile",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Prior-20-session percentile"
+        },
+        {
+          "name": "dispersion_percentile",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Prior-20-session percentile"
+        },
+        {
+          "name": "path_persistence",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Directional path persistence"
+        },
+        {
+          "name": "reversal_strength",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Defined reversal measure"
+        },
+        {
+          "name": "rule_flags_json",
+          "type": "json",
+          "nullable": false,
+          "description": "Every EOD regime rule flag and inputs"
+        }
+      ]
+    },
+    "tblRegimeStrategyAccuracy": {
+      "grain": "one row per session and evaluated engine/book",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "engine_book_id"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "engine_book_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Evaluated selected book"
+        },
+        {
+          "name": "morning_regime",
+          "type": "string",
+          "nullable": true,
+          "description": "Morning regime"
+        },
+        {
+          "name": "realized_eod_regime",
+          "type": "string",
+          "nullable": true,
+          "description": "Realized EOD regime"
+        },
+        {
+          "name": "selected_strategy_set",
+          "type": "string",
+          "nullable": true,
+          "description": "Pipe-delimited selected variants"
+        },
+        {
+          "name": "official_realized_regime_strategy_id",
+          "type": "string",
+          "nullable": true,
+          "description": "Frozen default strategy for realized regime"
+        },
+        {
+          "name": "best_compatible_strategy_id",
+          "type": "string",
+          "nullable": true,
+          "description": "Best observed compatible strategy portfolio"
+        },
+        {
+          "name": "regime_compatible_flag",
+          "type": "boolean",
+          "nullable": true,
+          "description": "All selected variants compatible"
+        },
+        {
+          "name": "selected_strategy_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Selected standardized portfolio P&L"
+        },
+        {
+          "name": "official_mapped_strategy_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Official realized-regime strategy P&L"
+        },
+        {
+          "name": "best_compatible_strategy_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Best compatible strategy P&L"
+        },
+        {
+          "name": "regime_strategy_opportunity_loss_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Best compatible minus selected, floored at zero"
+        },
+        {
+          "name": "accuracy_state",
+          "type": "string",
+          "nullable": false,
+          "description": "Regime-strategy accuracy enum"
+        },
+        {
+          "name": "coverage_status",
+          "type": "string",
+          "nullable": false,
+          "description": "COMPLETE, PARTIAL, or NOT_EVALUABLE"
+        }
+      ]
+    },
+    "tblRankingTicker": {
+      "grain": "one row per session/engine/candidate ticker",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "engine_book_id",
+        "ticker"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "engine_book_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Ranking engine/book"
+        },
+        {
+          "name": "ticker",
+          "type": "string",
+          "nullable": false,
+          "description": "Candidate ticker"
+        },
+        {
+          "name": "broad_sector",
+          "type": "string",
+          "nullable": true,
+          "description": "Broad sector"
+        },
+        {
+          "name": "predicted_score",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Frozen morning score"
+        },
+        {
+          "name": "predicted_rank",
+          "type": "integer",
+          "nullable": true,
+          "description": "Frozen morning ordinal rank"
+        },
+        {
+          "name": "actual_dense_rank",
+          "type": "integer",
+          "nullable": true,
+          "description": "Realized P&L dense rank"
+        },
+        {
+          "name": "actual_ordinal_rank",
+          "type": "integer",
+          "nullable": true,
+          "description": "Realized P&L ordinal rank"
+        },
+        {
+          "name": "rank_error",
+          "type": "integer",
+          "nullable": true,
+          "description": "Predicted minus actual ordinal rank"
+        },
+        {
+          "name": "absolute_rank_error",
+          "type": "integer",
+          "nullable": true,
+          "description": "Absolute rank error"
+        },
+        {
+          "name": "selected_flag",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Actually selected"
+        },
+        {
+          "name": "standardized_net_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Realized comparison P&L"
+        },
+        {
+          "name": "winner_flag",
+          "type": "boolean",
+          "nullable": true,
+          "description": "P&L > 0"
+        },
+        {
+          "name": "outcome_status",
+          "type": "string",
+          "nullable": false,
+          "description": "COMPLETE, NO_TRIGGER, or INCOMPLETE"
+        }
+      ]
+    },
+    "tblRankingDaily": {
+      "grain": "one row per session and ranking engine/book",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "engine_book_id"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "engine_book_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Ranking engine/book"
+        },
+        {
+          "name": "complete_ranked_candidate_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Complete candidates with ranks"
+        },
+        {
+          "name": "selected_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Actual selected count"
+        },
+        {
+          "name": "spearman_rank_correlation",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Null below three candidates"
+        },
+        {
+          "name": "top1_hit_flag",
+          "type": "boolean",
+          "nullable": true,
+          "description": "Predicted top1 equals realized top1/tie set"
+        },
+        {
+          "name": "top2_overlap_count",
+          "type": "integer",
+          "nullable": true,
+          "description": "Overlap count"
+        },
+        {
+          "name": "top2_overlap_pct",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Overlap divided by two or available count"
+        },
+        {
+          "name": "actual_selected_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Actual selected standardized P&L"
+        },
+        {
+          "name": "predicted_top_cap_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Forced top-cap by predicted rank"
+        },
+        {
+          "name": "oracle_fixed_cap_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Forced top-cap by realized P&L"
+        },
+        {
+          "name": "oracle_up_to_cap_no_force_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Positive-only oracle"
+        },
+        {
+          "name": "ranking_regret_fixed_cap_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Oracle fixed minus predicted fixed"
+        },
+        {
+          "name": "total_selection_opportunity_loss_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Oracle no-force minus actual, floored at zero"
+        },
+        {
+          "name": "threshold_effect_vs_forced_rank_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Actual selected minus predicted forced"
+        },
+        {
+          "name": "coverage_status",
+          "type": "string",
+          "nullable": false,
+          "description": "COMPLETE, PARTIAL, or NOT_EVALUABLE"
+        }
+      ]
+    },
+    "tblPortfolioSize": {
+      "grain": "one row per session/engine/mode/N",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "engine_book_id",
+        "simulation_mode",
+        "position_count_n"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "engine_book_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Engine/book"
+        },
+        {
+          "name": "simulation_mode",
+          "type": "string",
+          "nullable": false,
+          "description": "ENGINE_RANKED_FIXED_N, ENGINE_POLICY_UP_TO_N, ORACLE_FIXED_N, or ORACLE_UP_TO_N_NO_FORCE"
+        },
+        {
+          "name": "position_count_n",
+          "type": "integer",
+          "nullable": false,
+          "description": "Requested N, 0 to 4"
+        },
+        {
+          "name": "actual_position_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Positions used"
+        },
+        {
+          "name": "selected_tickers",
+          "type": "string",
+          "nullable": true,
+          "description": "Pipe-delimited tickers"
+        },
+        {
+          "name": "standardized_net_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Portfolio P&L"
+        },
+        {
+          "name": "average_pnl_per_ticker_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "P&L divided by actual positions"
+        },
+        {
+          "name": "capital_deployed_sek",
+          "type": "decimal",
+          "nullable": false,
+          "description": "Actual positions times 1,000"
+        },
+        {
+          "name": "return_on_deployed_capital",
+          "type": "decimal",
+          "nullable": true,
+          "description": "P&L divided by deployed capital"
+        },
+        {
+          "name": "winner_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Positive positions"
+        },
+        {
+          "name": "loss_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Negative positions"
+        },
+        {
+          "name": "win_rate",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Winners divided by complete positions"
+        },
+        {
+          "name": "worst_position_pnl_sek",
+          "type": "decimal",
+          "nullable": true,
+          "description": "Minimum position P&L"
+        },
+        {
+          "name": "constraints_applied",
+          "type": "string",
+          "nullable": false,
+          "description": "Portfolio constraints"
+        },
+        {
+          "name": "evaluation_status",
+          "type": "string",
+          "nullable": false,
+          "description": "COMPLETE, INSUFFICIENT_RANKED_CANDIDATES, PARTIAL, or NOT_EVALUABLE"
+        }
+      ]
+    },
+    "tblDataQuality": {
+      "grain": "one row per session/check/source",
+      "primary_key": [
+        "session_date",
+        "evidence_status",
+        "check_id",
+        "source_id"
+      ],
+      "columns": [
+        {
+          "name": "session_date",
+          "type": "date",
+          "nullable": false,
+          "description": "Trading session date, Stockholm calendar"
+        },
+        {
+          "name": "evidence_status",
+          "type": "string",
+          "nullable": false,
+          "description": "PROSPECTIVE_CONFIRMATORY, PROSPECTIVE_EXCLUDED, MOCK_REHEARSAL, or HISTORICAL_RETROSPECTIVE"
+        },
+        {
+          "name": "check_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Audit check"
+        },
+        {
+          "name": "source_id",
+          "type": "string",
+          "nullable": false,
+          "description": "Source database/table or output table"
+        },
+        {
+          "name": "passed",
+          "type": "boolean",
+          "nullable": false,
+          "description": "Pass flag"
+        },
+        {
+          "name": "rows_checked",
+          "type": "integer",
+          "nullable": true,
+          "description": "Rows checked"
+        },
+        {
+          "name": "failure_count",
+          "type": "integer",
+          "nullable": false,
+          "description": "Failures"
+        },
+        {
+          "name": "detail",
+          "type": "string",
+          "nullable": true,
+          "description": "Diagnostic detail"
+        },
+        {
+          "name": "source_sha256_before",
+          "type": "string",
+          "nullable": true,
+          "description": "Source hash before run"
+        },
+        {
+          "name": "source_sha256_after",
+          "type": "string",
+          "nullable": true,
+          "description": "Source hash after run"
+        }
+      ]
+    }
+  }
+}

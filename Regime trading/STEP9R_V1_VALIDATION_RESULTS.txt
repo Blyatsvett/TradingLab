@@ -1,0 +1,88 @@
+STEP 9R V1 VALIDATION RESULTS
+=============================
+
+Patch: STEP9R_CANDIDATE_RANKING_RESEARCH_V1
+Status: RESEARCH_ONLY_SHADOW_NOT_PRODUCTION
+Validated against a fresh extraction of:
+step9r_candidate_ranking_input_20260727_200313.zip
+
+TEST SUITES
+-----------
+Step 9R: 13 tests passed
+Step 9L compatibility: 31 tests passed
+Step 9Q compatibility: 13 tests passed
+Total: 57 tests passed, 0 failed
+
+EXACT HISTORICAL REPLAY — 2026-05-25 THROUGH 2026-07-27
+-------------------------------------------------------
+Taxonomy sessions: 45
+Candidate rows: 396
+Valid primary candidates: 193
+Triggered primary counterfactuals: 167
+Profitable primary counterfactuals: 76
+All-candidate triggered win rate: 45.5%
+All-candidate P&L: +1.324914 SEK
+Frozen V3-selected P&L: +47.301883 SEK
+Oracle up-to-two P&L: +106.497252 SEK
+Selection regret: 59.195370 SEK
+Authoritative July 27 trades reconciled: 4
+Authoritative reconciliation failures: 0
+Audit pass: True
+Classification: STEP9R_V1_CANDIDATE_DATASET_AND_SELECTOR_RESEARCH_READY
+
+CURRENT RANK AUDIT
+------------------
+Overall Spearman correlation, better rank versus net R: +0.334698
+Rank 1: 27 triggered, 17 winners, 62.96% win rate, +18.670069 SEK
+Rank 2: 19 triggered, 15 winners, 78.95% win rate, +28.631814 SEK
+Ranks 3-5: -19.696875 SEK
+Ranks 6-10: -13.995586 SEK
+Ranks 11+: -12.284508 SEK
+
+HIGH_VOL_REVERSAL remains the weak regime family:
+99 valid candidates, 89 triggered, 29 winners, 32.58% triggered win rate,
+-19.040996 SEK all-candidate P&L.
+
+WALK-FORWARD MODEL COMPARISON
+-----------------------------
+CURRENT_V3_RANK, all evaluated sessions: +47.301883 SEK
+CURRENT_V3_RANK, same OOS window: +28.942419 SEK
+SIMPLE_EXPECTED_R_SCORE: +20.243710 SEK
+RIDGE_NET_R: +2.671113 SEK
+LOGISTIC_WIN_EXPECTED_R: +4.584007 SEK
+NONLINEAR_RIDGE_EXPECTED_R: -1.496411 SEK
+ENSEMBLE_SCORE: +7.503692 SEK
+
+Conclusion: none of the first-generation challengers beats the frozen V3 rank.
+No strategy is promoted and V3 is not replaced.
+
+JULY 27 EXACT FULL-EOD CORRECTION
+---------------------------------
+Valid primary candidates: 23
+Triggered primary candidates: 23
+Profitable candidates: 3
+Exact all-candidate win rate: 13.0%
+Exact all-candidate P&L: -21.584262 SEK
+Frozen V3 selected P&L: -4.663401 SEK
+Profitable candidates:
+- HM-B.ST, rank 11, +1.692646 SEK
+- ATCO-A.ST, rank 16, +1.202096 SEK
+- GETI-B.ST, rank 18, +1.052097 SEK
+
+This supersedes the earlier incomplete 11.1% estimate.
+
+LATE RECONSTRUCTION OF PROSPECTIVE SHADOW SELECTOR
+--------------------------------------------------
+The locked simple expected-R challenger selected ALFA.ST and FABG.ST.
+Their exact EOD combined P&L was approximately -2.55 SEK.
+This is LATE_RECONSTRUCTION_NOT_CONFIRMATORY and is not evidence for promotion.
+
+SAFETY
+------
+Source price database hash unchanged: PASS
+Frozen V3 ledger hash unchanged: PASS
+Guardrails excluded from training and primary P&L: PASS
+All model-eligible features no later than 09:40: PASS
+Router active: False
+Orders enabled: False
+Strategies promoted: 0

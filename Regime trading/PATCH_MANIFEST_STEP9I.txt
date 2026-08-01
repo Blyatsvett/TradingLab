@@ -1,0 +1,33 @@
+STEP 9I PROSPECTIVE SHADOW ROUTER PATCH
+=======================================
+
+ADDED
+-----
+RegimeTrading/scripts/step9i_prospective_shadow_router.py
+RegimeTrading/scripts/collect_step9i_shadow_data.py
+tests/test_step9i_prospective_shadow_router.py
+collect_step9i_shadow_data.ps1
+run_step9i_morning_shadow_router.ps1
+run_step9i_eod_shadow_evaluator.ps1
+export_step9i_shadow_ledgers.ps1
+README_REGIME_SYSTEM_STEP9I.txt
+PATCH_MANIFEST_STEP9I.txt
+
+UNCHANGED
+---------
+- production Intraday project
+- frozen ORB and paper-trading logic
+- Step 9H contract definitions and holdout results
+- Step 9H holdout database
+- original discovery database
+- existing run_regime_research.ps1 workflow
+
+NEW RUNTIME FILES
+-----------------
+data/step9i_shadow_intraday_prices.db
+data/step9i_shadow_ledger.db
+data/step9i_shadow_*.csv
+
+REGRESSION EXPECTATION
+----------------------
+121 tests, all passing.

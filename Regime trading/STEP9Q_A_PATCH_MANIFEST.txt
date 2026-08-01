@@ -1,0 +1,47 @@
+STEP 9Q-A — READ-ONLY EXCEL MONITORING FEED FOR POWER BI
+
+STATUS
+- READ_ONLY_MONITOR
+- SHADOW_ONLY
+- FIXED_POWERBI_SCHEMA_V1
+- ATOMIC_EXCEL_REPLACEMENT
+- NO_LEDGER_MUTATION
+- NO_DECISION_REWRITE
+- NO_ORDER_EMISSION
+- NO_PRODUCTION_ORB_CHANGES
+
+FILES
+- RegimeTrading/scripts/step9q_powerbi_excel_feed.py
+- config/step9q_powerbi_schema_v1.json
+- tests/test_step9q_powerbi_excel_feed.py
+- run_step9q_powerbi_snapshot.ps1
+
+DEFAULT SOURCES
+- data/step9i_v2_shadow_ledger.db
+- data/step9l_v3_selected_strategy_shadow_ledger.db
+- data/step9i_shadow_intraday_prices.db
+
+DEFAULT OUTPUT
+- data/powerbi/powerbi_live_master.xlsx
+
+POWER BI TABLES
+- tblSystemStatus
+- tblEngineStatus
+- tblSignalDecisions
+- tblEngineComparison
+- tblFeedHealth
+
+RUN
+  .\run_step9q_powerbi_snapshot.ps1
+
+RUN FOR A SPECIFIC SESSION
+  .\run_step9q_powerbi_snapshot.ps1 -Date "2026-07-27"
+
+STRICT RUN AFTER BOTH MORNING ENGINES
+  .\run_step9q_powerbi_snapshot.ps1 -RequireBothEngines
+
+NOTES
+- Existing source databases are opened with SQLite mode=ro and PRAGMA query_only=ON.
+- A temporary workbook is built and validated before os.replace publishes it.
+- If validation fails, the previous valid workbook remains untouched.
+- Step 9Q-A exports morning state only. Intraday triggers, positions and P&L belong to Step 9Q-B.

@@ -1,0 +1,39 @@
+ALL-23 TRADABLE V2 ROOT PATCH
+=============================
+
+NEW FILES
+---------
+RegimeTrading/scripts/step9i_v2_core5_plus_holdout18_shadow_router.py
+RegimeTrading/scripts/step9i_v2_preflight.py
+RegimeTrading/scripts/step9ir_v2_historical_walk_forward_replay.py
+RegimeTrading/scripts/step9j_v2_combined23_challenger_redesign.py
+
+tests/test_step9i_v2_core5_plus_holdout18.py
+
+collect_step9i_v2_shadow_data.ps1
+run_step9i_v2_preflight.ps1
+run_step9i_v2_morning_shadow_router.ps1
+run_step9i_v2_eod_shadow_evaluator.ps1
+export_step9i_v2_shadow_ledgers.ps1
+run_step9ir_v2_historical_replay.ps1
+run_step9j_v2_combined23_challenger_redesign.ps1
+
+README_ALL23_TRADABLE_V2.txt
+PATCH_MANIFEST_ALL23_TRADABLE_V2.txt
+
+REPLACED FILES
+--------------
+None.
+
+DATABASE POLICY
+---------------
+Reads/reuses:
+data/step9i_shadow_intraday_prices.db
+
+Creates separately:
+data/step9i_v2_shadow_ledger.db
+data/step9ir_v2_historical_replay_ledger.db
+
+Never modifies:
+data/step9i_shadow_ledger.db
+production ORB databases or code

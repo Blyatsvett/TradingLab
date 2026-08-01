@@ -1,0 +1,30 @@
+STEP 9G PATCH MANIFEST
+======================
+
+New files
+---------
+RegimeTrading/scripts/step9g_state_filtered_contract_experiments.py
+tests/test_step9g_state_filtered_contract_experiments.py
+run_step9g_state_filtered_contract_experiments.ps1
+README_REGIME_SYSTEM_STEP9G.txt
+PATCH_MANIFEST_STEP9G.txt
+
+Modified files
+--------------
+RegimeTrading/scripts/run_daily_research_workflow.py
+RegimeTrading/scripts/export_powerbi_workbook.py
+RegimeTrading/scripts/validate_outputs.py
+
+Scope
+-----
+- Seven fixed state-filtered primary hypotheses
+- Seven explicit complement controls
+- Raw-bar reruns after pre-entry cohort filtering
+- Three exact same-cohort strategy comparisons
+- Date-level bootstrap and sign-flip diagnostics
+- Benjamini-Hochberg correction across the primary family
+- Leave-one-day/company/sector robustness
+- Equal-notional and fixed-risk-capped reconciliation
+- No router activation
+- No automatic strategy promotion
+- No production strategy changes

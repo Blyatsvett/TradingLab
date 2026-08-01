@@ -1,0 +1,98 @@
+hypotheses:
+
+  H1_refiners:
+    title: Gasoline demand build-up and post-summer reversal
+    status: primary
+    expected_pre_event_direction: positive
+    expected_post_event_direction: negative_or_reversal
+
+    mechanism:
+      - Labor Day is a major US road-travel weekend.
+      - Gasoline demand may strengthen before the holiday.
+      - The holiday marks the end of the summer driving season.
+      - Refining margins and gasoline demand may weaken afterward.
+
+    candidate_industries:
+      - oil_and_gas_refining
+      - fuel_retail
+      - gasoline_futures
+
+    alternative_explanations:
+      - crude_oil_price_movements
+      - refinery_outages
+      - hurricanes
+      - EIA_inventory_releases
+      - OPEC_announcements
+      - generic_pre_holiday_effect
+
+  H2_auto_dealers:
+    title: Labor Day vehicle promotions and model-year clearance
+    status: primary
+    expected_pre_event_direction: positive
+    expected_post_event_direction: uncertain
+
+    mechanism:
+      - Dealers use Labor Day promotions to increase vehicle sales.
+      - Outgoing model-year inventory may be discounted.
+      - Dealers may benefit from increased transaction volume.
+      - Manufacturers may experience mixed volume and margin effects.
+
+    candidate_industries:
+      - automotive_dealers
+      - used_vehicle_dealers
+      - automobile_manufacturers
+
+    alternative_explanations:
+      - interest_rates
+      - monthly_auto_sales_reports
+      - manufacturer_incentives
+      - consumer_credit_conditions
+      - selling_day_composition
+
+  H3_domestic_travel:
+    title: Final-summer domestic leisure travel
+    status: primary
+    expected_pre_event_direction: positive
+    expected_post_event_direction: uncertain_or_reversal
+
+    mechanism:
+      - Consumers concentrate leisure travel around the three-day weekend.
+      - Airlines, hotels and booking platforms may experience higher demand.
+      - Investors may anticipate holiday booking and utilization strength.
+
+    candidate_industries:
+      - airlines
+      - hotels
+      - online_travel_agencies
+      - cruise_lines
+      - casinos
+
+    alternative_explanations:
+      - fuel_prices
+      - hurricanes
+      - flight_disruptions
+      - capacity_changes
+      - consumer_confidence
+      - generic_summer_travel_seasonality
+
+  H0_generic_holiday:
+    title: Generic pre-holiday market effect
+    status: control
+    expected_pre_event_direction: positive
+    expected_post_event_direction: uncertain
+
+    mechanism:
+      - Reduced market participation before a three-day weekend.
+      - Recurring investor sentiment and order-flow effects.
+      - The effect may exist across the broad market rather than exposed sectors.
+
+    candidate_industries:
+      - broad_market
+      - sector_etfs
+
+    alternative_explanations:
+      - month_turn
+      - September_seasonality
+      - payrolls
+      - low_volume
+      - general_equity_risk_premium

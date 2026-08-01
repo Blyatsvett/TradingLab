@@ -1,0 +1,31 @@
+STEP 9L SELECTED-STRATEGY SHADOW ENGINE V1
+
+ADDITIVE FILES ONLY — DO NOT REPLACE STEP 9I OR STEP 9J FILES.
+
+Files:
+- RegimeTrading\scripts\step9l_selected_strategy_shadow_engine.py
+- RegimeTrading\scripts\step9l_compare_step9i_v2.py
+- tests\test_step9l_selected_strategy_shadow_engine.py
+- tests\test_step9l_compare_step9i_v2.py
+- run_step9l_morning_research_engine.ps1
+- run_step9l_eod_research_engine.ps1
+- export_step9l_research_ledgers.ps1
+- compare_step9i_v2_vs_step9l.ps1
+- STEP9L_PATCH_MANIFEST.txt
+
+Dependencies:
+- Corrected Step 9I V2 engine
+- Step 9K High Dispersion research module
+
+Separate immutable ledger:
+- data\step9l_selected_strategy_shadow_ledger.db
+
+Step 9L primary contracts:
+1. VOLATILITY_EXPANSION + ALIGNED_WITH_GROUP -> CLOSE_CONFIRMED_ORB
+2. RANGE_LOW_VOL + EARLY_LAGGARD + ALIGNED_WITH_GROUP -> DELAYED_REVERSAL
+   (corrected reproduction of the actual Step 9J winning cohort; old label used trade-direction alignment)
+3. HIGH_DISPERSION + EARLY_LAGGARD + CONTRARIAN_TO_GROUP -> MIDPOINT_CATCHUP
+
+Step 9L High Dispersion guardrails:
+1. Avoid early-leader early continuation.
+2. Avoid aligned-laggard midpoint catch-up.

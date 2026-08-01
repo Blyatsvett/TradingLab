@@ -1,0 +1,12 @@
+STEP 9I-R HISTORICAL WALK-FORWARD REPLAY — ADDITIVE PATCH
+=========================================================
+
+Adds only:
+- RegimeTrading/scripts/step9ir_historical_walk_forward_replay.py
+- run_step9ir_historical_replay.ps1
+- tests/test_step9ir_historical_walk_forward_replay.py
+- README_REGIME_SYSTEM_STEP9IR.txt
+- PATCH_MANIFEST_STEP9IR.txt
+
+Does not replace or modify Step 9H, Step 9I, production Intraday code, frozen contracts, thresholds,
+source databases, or the live prospective shadow ledger.

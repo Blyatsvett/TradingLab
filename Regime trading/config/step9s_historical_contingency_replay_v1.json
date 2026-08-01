@@ -1,0 +1,13 @@
+{
+  "experiment_id": "STEP9S_HISTORICAL_CONTINGENCY_REPLAY_V1",
+  "status": "RESEARCH_ONLY_HISTORICAL_REPLAY_NOT_ROUTER_ACTIVE",
+  "architecture": {
+    "natural_strategy_book": "TRIGGER_BASED_SEPARATE_BOOK",
+    "mandatory_coverage_book": "EXACTLY_ONE_MANDATORY_SHADOW_TRADE_PER_RECOGNIZED_SESSION"
+  },
+  "morning_cutoff_source_label": "09:40",
+  "mandatory_coverage_entry": "FIRST_EXECUTABLE_0945_BAR_OR_FIRST_COMMON_PAIR_BAR",
+  "same_bar_priority": "STOP",
+  "router_active": false,
+  "orders_sent": false
+}

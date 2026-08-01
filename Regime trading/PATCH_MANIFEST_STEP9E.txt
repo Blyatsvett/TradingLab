@@ -1,0 +1,24 @@
+STEP 9E ROOT PATCH MANIFEST
+
+New files
+---------
+RegimeTrading\scripts\step9e_instrument_sector_taxonomy.py
+tests\test_step9e_instrument_sector_taxonomy.py
+run_step9e_instrument_sector_taxonomy.ps1
+README_REGIME_SYSTEM_STEP9E.txt
+PATCH_MANIFEST_STEP9E.txt
+
+Modified files
+--------------
+RegimeTrading\scripts\run_daily_research_workflow.py
+RegimeTrading\scripts\export_powerbi_workbook.py
+RegimeTrading\scripts\validate_outputs.py
+
+Research governance
+-------------------
+- Frozen Step 9D outputs are not modified by Step 9E.
+- The original production project is not modified.
+- Static classifications are versioned descriptive research metadata.
+- Same-day dynamic features stop at the 09:40-labelled bar.
+- Historical ticker characteristics use dates strictly before the classified session.
+- router_active is always False in this step.

@@ -1,0 +1,13 @@
+{
+  "archive_output": "data\\raw\\macro_releases\\bls_empsit_archive_1998_2025.csv",
+  "dataset": "BLS Employment Situation historical release calendar",
+  "maximum_release_date": "2025-12-16",
+  "minimum_release_date": "1998-01-09",
+  "release_time_et": "08:30",
+  "retrieved_at_utc": "2026-07-23T11:47:02.907551+00:00",
+  "row_count": 335,
+  "source_file": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\bls_empsit_archive_index.html",
+  "source_kind": "local_official_html",
+  "source_sha256": "2e55df17109bbf28d47e8b154b76e010b1e815472d61650fbd0a52f099d39fe7",
+  "source_url": "https://www.bls.gov/bls/news-release/empsit.htm"
+}

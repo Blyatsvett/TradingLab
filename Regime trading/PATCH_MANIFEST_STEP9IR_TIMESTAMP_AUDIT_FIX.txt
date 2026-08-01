@@ -1,0 +1,25 @@
+STEP 9I / STEP 9I-R TIMESTAMP AUDIT FIX
+
+Files replaced:
+- RegimeTrading/scripts/step9i_prospective_shadow_router.py
+- tests/test_step9i_prospective_shadow_router.py
+
+Purpose:
+- Prevent the shared Step 9I audit from crashing when historical replay batches
+  contain blank created_at_stockholm values.
+- Parse confirmatory timestamps row-by-row.
+- Treat blank or invalid timestamps as audit failures only for batches claiming
+  PROSPECTIVE_CONFIRMATORY_ELIGIBLE status.
+- Leave non-confirmatory historical replay batches outside the deadline check.
+
+No changes to:
+- Contract definitions
+- Regime definitions
+- Candidate generation
+- Trade execution
+- Decision/outcome ledger schemas
+- Step 9H results
+- Step 9I-R replay results
+- Router activation
+
+Expected test count after installation: 130

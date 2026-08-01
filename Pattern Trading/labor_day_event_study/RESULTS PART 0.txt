@@ -1,0 +1,12 @@
+Excellent — Phase 0 is complete with 289 passing tests.
+
+You now have:
+
+NYSE Labor Day session calendars;
+a 3,113-row verified macro registry;
+571 macro events mapped to the Labor Day grid;
+contamination summaries for all seven windows;
+a reproducible coverage audit;
+proof that no [-5,+5] Labor Day year is macro-clean.
+
+That last finding determines how we build the actual event study: macro contamination must be modelled, not removed through a clean-year comparison.

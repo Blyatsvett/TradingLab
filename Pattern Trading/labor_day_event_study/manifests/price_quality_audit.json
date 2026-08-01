@@ -1,0 +1,78 @@
+{
+  "artifact": "Labor Day price quality and historical coverage audit",
+  "audit_policy": {
+    "adjustment_factor_jump_threshold": 0.2,
+    "estimation_required_sessions": 126,
+    "event_post_sessions": 20,
+    "event_pre_sessions": 20,
+    "exchange_calendar": "XNYS",
+    "extreme_adjusted_return_threshold": 0.5,
+    "unadjusted_jump_threshold": 0.5
+  },
+  "created_utc": "2026-07-23T21:41:53.890548+00:00",
+  "inputs": {
+    "daily_prices": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\daily_prices.csv",
+      "sha256": "c86352e88e77a933a3921a7a054265332f7e1b74eaa82f2285477d82d0ec07ac"
+    },
+    "daily_prices_manifest": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\manifests\\daily_prices_manifest.json",
+      "sha256": "a162f2fddec98016aa4358991023e832960c05b1b2377f0c8d427f611b974daa"
+    },
+    "universe": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\config\\labor_day_universe.csv",
+      "sha256": "278d0715c70fd237621f52c221bdddbfd4323941ec7ae8f460e9c0aa20b61e74"
+    },
+    "year_panel": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\labor_day_universe_by_year.csv",
+      "sha256": "5a0bbfff299f745c54498f91d7d79437b3b75b596204e7c9c54b08a87f311d4b"
+    }
+  },
+  "outputs": {
+    "event_coverage": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\price_coverage_by_event_year.csv",
+      "rows": 613,
+      "sha256": "20ecb473da08cee00bad0bcd133d5d0fc4e6f26b1a595eaa1ccf8b2983a40d59"
+    },
+    "issues": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\price_quality_issues.csv",
+      "rows": 15,
+      "sha256": "1b5ee0fa69051a4d0661febf60b21b677aca99dfc0bf14af9a3c4f29899b521f"
+    },
+    "ticker_coverage": {
+      "path": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\processed\\price_coverage_by_ticker.csv",
+      "rows": 25,
+      "sha256": "57bb1a0bfd1c31ab3072b1e2353e25cb78ad2a335c8a055d9f407e5236b0e228"
+    }
+  },
+  "schema_version": "1.0.0",
+  "status": "PASS_WITH_WARNINGS",
+  "study_range": {
+    "discovery_end_year": 2014,
+    "forward_year": 2026,
+    "start_year": 1998,
+    "validation_end_year": 2025,
+    "validation_start_year": 2015
+  },
+  "summary": {
+    "event_coverage_status_counts": {
+      "complete": 586,
+      "complete_event_short_estimation": 2,
+      "forward_pending": 25
+    },
+    "event_year_rows": 613,
+    "forward_pending_rows": 25,
+    "historical_incomplete_rows": 0,
+    "historical_short_estimation_rows": 2,
+    "issue_counts": {
+      "critical": 0,
+      "info": 6,
+      "warning": 9
+    },
+    "ticker_status_counts": {
+      "PASS": 20,
+      "PASS_WITH_WARNINGS": 5
+    },
+    "tickers": 25
+  }
+}

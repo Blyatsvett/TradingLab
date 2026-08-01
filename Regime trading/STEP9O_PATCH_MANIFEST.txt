@@ -1,0 +1,27 @@
+STEP 9O TREND ASYMMETRY AND CATCH-UP STUDY — ADDITIVE ROOT PATCH
+
+Adds:
+- RegimeTrading/scripts/step9o_trend_asymmetry_catchup_study.py
+- tests/test_step9o_trend_asymmetry_catchup_study.py
+- run_step9o_trend_asymmetry_catchup_study.ps1
+- STEP9O_PATCH_MANIFEST.txt
+
+Focused research design:
+- Three TREND_UP aligned-reversal refinements:
+  1. all eligible aligned early movers,
+  2. aligned EARLY_LEADER subset,
+  3. MEDIUM/HIGH-confidence sessions only.
+- Mirrored TREND_UP and TREND_DOWN contrarian-stock catch-up contracts.
+- Catch-up requires a completed close through the strict early midpoint and next-bar entry.
+- Same-cohort immediate 09:45 catch-up controls isolate confirmation value.
+- A TREND_UP aligned immediate-continuation control compares fade versus continuation.
+
+Dependencies already present:
+- Step 9N trend-regime research module
+- Step 9K research utilities
+- Step 9G state-filtered experiment framework
+- Step 9I V2 Combined 23 context
+
+This patch is simulation-only and additive.
+It does not modify or activate Step 9I, Step 9L V1, or Step 9L V2.
+No Step 9O result is automatically promoted.

@@ -1,0 +1,14 @@
+{
+  "strategy_name": "swedish_momentum_next_open_v1",
+  "initial_capital": 10000.0,
+  "momentum_window": 5,
+  "regime_window": 20,
+  "bull_threshold": 0.03,
+  "bear_threshold": -0.03,
+  "exclude_bear_regime": true,
+  "top_n": 2,
+  "rebalance_every_sessions": 3,
+  "trading_cost_bps_per_side": 5.0,
+  "start_date": null,
+  "end_date": null
+}

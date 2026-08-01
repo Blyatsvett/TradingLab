@@ -1,0 +1,11 @@
+STEP 9M TRADING_TICKERS FIX
+
+Replaces:
+- RegimeTrading/scripts/step9m_high_vol_reversal_strategy_research.py
+- tests/test_step9m_high_vol_reversal_strategy_research.py
+
+Fix:
+- Uses the actual Step 9I V2 Combined-23 constant TRADING_TICKERS instead of the nonexistent TRADABLE_TICKERS.
+- Adds a regression test for the 23-ticker HVR diagnostic coverage audit.
+
+No strategy definitions, execution rules, ledgers, or frozen Step 9I/Step 9L files are changed.

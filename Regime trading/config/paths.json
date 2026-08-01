@@ -1,0 +1,45 @@
+{
+  "data_dir": "data",
+  "log_dir": "logs",
+  "source_intraday_db": "../Intraday/data/intraday_prices.db",
+  "market_source_dir": "data/source/market",
+  "reference_data_dir": "data/source/reference",
+  "reconciliation_data_dir": "data/source/reference/reconciliation",
+  "snapshot_dir": "data/step9_morning_v2_snapshots",
+  "session_registry_dir": "data/outputs/sessions/prospective_session_registry",
+  "kpi_output_dir": "data/outputs/kpi",
+  "powerbi_dir": "data/powerbi",
+  "validation_output_dir": "data/v2_validation",
+  "nasdaq_raw_dir": "data/source/market/nasdaq_raw",
+  "nasdaq_output_dir": "data/outputs/collector/nasdaq",
+  "shadow_output_dirs": {
+    "step9i_v2": "data/outputs/shadow/step9i_v2",
+    "step9l_v3": "data/outputs/shadow/step9l_v3"
+  },
+  "freeze_dirs": {
+    "step9s": "data/archives/freezes/step9s_historical_contingency_replay_v1/freeze_v1",
+    "step9t": "data/archives/freezes/step9t_regime_transition_archetype_research_v1/freeze_92b274cb24cad391",
+    "step9u": "data/archives/freezes/step9u_historical_contingency_selector_v1/freeze_8042ad803be28ccf"
+  },
+  "legacy_output_dirs": {
+    "v1_validation": "data/outputs/research/legacy/v1_validation",
+    "step9ir_v1": "data/archives/research/step9ir_v1",
+    "step9ir_v2": "data/archives/research/step9ir_v2",
+    "step9j": "data/archives/research/step9j",
+    "step9j_v2": "data/archives/research/step9j_v2",
+    "step9k": "data/archives/research/step9k",
+    "step9m": "data/archives/research/step9m",
+    "step9n": "data/archives/research/step9n",
+    "step9o": "data/archives/research/step9o",
+    "gap_recovery": "data/outputs/research/legacy/regime/gap_recovery",
+    "v1_timing": "data/outputs/research/legacy/regime/v1_timing",
+    "regime_features": "data/outputs/research/legacy/regime/features",
+    "regime_taxonomy": "data/outputs/research/legacy/regime/taxonomy",
+    "regime_playbook": "data/outputs/research/legacy/regime/playbook",
+    "regime_challenger": "data/outputs/research/legacy/regime/challenger",
+    "instrument_taxonomy": "data/outputs/research/legacy/regime/instrument_taxonomy",
+    "regime_sector_strategy": "data/outputs/research/legacy/regime/sector_strategy",
+    "regime_state_filtered": "data/outputs/research/legacy/regime/state_filtered",
+    "regime_holdout": "data/outputs/research/legacy/regime/holdout"
+  }
+}

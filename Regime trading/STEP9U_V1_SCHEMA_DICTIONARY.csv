@@ -1,0 +1,23 @@
+file,field,purpose
+step9u_policy_registry.csv,rule_id,Frozen Step 9U V1 rule identifier
+step9u_policy_registry.csv,action,Selectable blocked or observation-only action
+step9u_session_assignments.csv,session_date,Historical market session
+step9u_session_assignments.csv,selected_count,Number selected from zero to two
+step9u_session_assignments.csv,selected_tickers,Deterministically selected tickers
+step9u_all_candidates.csv,candidate_id,Immutable historical candidate identifier
+step9u_all_candidates.csv,policy_action,Frozen Step 9U V1 action
+step9u_all_candidates.csv,selection_eligible,Point-in-time selection eligibility
+step9u_all_candidates.csv,signal_strength,Morning-only deterministic ranking strength
+step9u_all_candidates.csv,selected,Historical V1 selection flag
+step9u_all_candidates.csv,outcome_status,Frozen Step 9T counterfactual outcome status
+step9u_selected_outcomes.csv,net_pnl_sek,Standardized selected diagnostic net P&L
+step9u_performance.csv,scope,Aggregate performance grouping
+step9u_selection_regret.csv,selection_regret_sek,Future-information diagnostic opportunity cost
+step9u_daily_pnl.csv,cumulative_net_pnl_sek,Cumulative standardized diagnostic P&L
+step9u_daily_pnl.csv,drawdown_sek,Diagnostic drawdown from running peak
+step9u_step9s_benchmark_comparison.csv,direct_pnl_comparison_allowed,Always false because contracts differ
+step9u_audit.csv,passed,Independent audit result
+step9u_summary.csv,prospective_validation_status,Must remain not yet prospectively validated
+step9u_source_hashes.json,source_hashes,Pinned source provenance
+step9u_selection_regret.csv,oracle_positions,Number of feasible future-information oracle positions from zero to two
+step9u_selection_regret.csv,oracle_contract,Oracle constraint contract; diagnostic only

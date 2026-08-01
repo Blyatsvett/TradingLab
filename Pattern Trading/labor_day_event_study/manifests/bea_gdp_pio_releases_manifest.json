@@ -1,0 +1,25 @@
+{
+  "archive_url": "https://www.bea.gov/news/archive",
+  "cache_directory": "C:\\Users\\User\\Desktop\\Kaizen\\TradingLab\\Pattern Trading\\labor_day_event_study\\data\\raw\\macro_releases\\bea_source_cache",
+  "dataset": "Historical BEA national GDP and Personal Income and Outlays releases",
+  "date_only_count": 6,
+  "end_year": 2025,
+  "exact_time_count": 653,
+  "generated_at_utc": "2026-07-23T15:26:10.493846+00:00",
+  "maximum_release_date": "2025-12-23",
+  "minimum_release_date": "1998-01-30",
+  "output_path": "data\\raw\\macro_releases\\bea_gdp_pio_releases_1998_2025.csv",
+  "output_sha256": "1185ee6b43fcb5facfa909c1940e17c65dae2f3bcd155d591cf31dddabd7b3b8",
+  "product_ids": {
+    "gdp": "451",
+    "personal_income_outlays": "476"
+  },
+  "row_count": 659,
+  "selection_rule": "Official BEA national GDP estimate releases and regular Personal Income and Outlays releases only. State, county, territorial, and standalone data-update notices are excluded. Release-page header dates and times are preferred; archive publication dates are retained without assumed times when headers cannot be parsed.",
+  "series_counts": {
+    "gdp": 332,
+    "personal_income_outlays": 327
+  },
+  "source_pages_sha256": "a61298443d63fcced662f9c63e70d2f88ae08b324f194f2f7094bd750d6441ac",
+  "start_year": 1998
+}

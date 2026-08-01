@@ -1,0 +1,29 @@
+{
+  "experiment_id": "STEP9R_CANDIDATE_RANKING_RESEARCH_V1",
+  "research_status": "RESEARCH_ONLY_SHADOW_NOT_PRODUCTION",
+  "code_version": "STEP9R_CANDIDATE_RANKING_V1_1_2026_07_28_FULL_CANDIDATE_OUTCOMES",
+  "frozen_baseline_engine": "STEP9L_V3",
+  "selector_model": "SIMPLE_EXPECTED_R_SCORE_V1",
+  "max_shadow_positions": 2,
+  "max_positions_per_ticker": 1,
+  "latest_feature_bar_label": "09:40",
+  "minimum_training_sessions": 10,
+  "minimum_training_rows": 60,
+  "router_active": false,
+  "orders_enabled": false,
+  "strategies_promoted": 0,
+  "guardrails_model_eligible": false,
+  "phase_a": {
+    "preserve_all_candidates": "HISTORICAL_AND_PROSPECTIVE_EOD",
+    "exact_v3_historical_replay": true,
+    "audit_current_rank": true
+  },
+  "phase_b": {
+    "simple_expected_r_score": "SHADOW_CHALLENGER",
+    "statistical_challengers": "HISTORICAL_RESEARCH_ONLY",
+    "prospective_selector": "SHADOW_ONLY_0_TO_2_WITH_ALL_CANDIDATE_EOD_OUTCOMES",
+    "replace_v3": false
+  },
+  "prospective_all_candidate_outcomes": true,
+  "train_only_categorical_encoding": true
+}

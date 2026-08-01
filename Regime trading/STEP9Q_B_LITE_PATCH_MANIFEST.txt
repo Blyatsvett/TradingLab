@@ -1,0 +1,46 @@
+STEP 9Q-B LITE PATCH
+=====================
+
+STATUS
+- READ_ONLY_INTRADAY_TRADE_MONITOR_NOT_ROUTER_ACTIVE
+- SHADOW_ONLY
+- NO_ORDER_EMISSION
+- NO_LEDGER_MUTATION
+- NO_MORNING_DECISION_REWRITE
+- NO_PRODUCTION_ORB_CHANGES
+
+NEW FILES
+- RegimeTrading/scripts/step9q_b_lite_live_trade_feed.py
+- tests/test_step9q_b_lite_live_trade_feed.py
+- STEP9Q_B_LITE_INSTALL.md
+- STEP9Q_B_LITE_PATCH_MANIFEST.txt
+- STEP9Q_CURRENT_VERSION.txt
+
+REPLACED STEP 9Q FILES
+- RegimeTrading/scripts/step9q_powerbi_excel_feed.py
+- config/step9q_powerbi_schema_v1.json
+- tests/test_step9q_powerbi_excel_feed.py
+- run_step9q_powerbi_snapshot.ps1
+
+UNCHANGED
+- RegimeTrading/scripts/step9i_prospective_shadow_router.py
+- RegimeTrading/scripts/step9i_v2_core5_plus_holdout18_shadow_router.py
+- RegimeTrading/scripts/step9l_selected_strategy_shadow_engine.py
+- RegimeTrading/scripts/step9l_v2_selected_strategy_shadow_engine.py
+- RegimeTrading/scripts/step9l_v3_selected_strategy_shadow_engine.py
+- all Step 9I and Step 9L ledgers
+- all production ORB files and behavior
+
+EXCEL TABLES ADDED
+- tblLiveTradeStatus
+- tblTradeHistory
+- tblAccountSnapshot
+
+VALIDATION PERFORMED
+- 13 focused Step 9Q tests passed.
+- 31 frozen Step 9L compatibility tests passed.
+- Real July 27 V3 read-only replay produced 32 live-status rows.
+- The two selected primary HVR trades were reconstructed as provisional completed trades.
+- Primary operational risk-capped net PnL reconstructed as approximately -4.66 SEK.
+- Guardrail trades were excluded from primary PnL and equity.
+- July 27 confirmatory equity remained 10,000 SEK because the morning batch was a late non-confirmatory reconstruction.

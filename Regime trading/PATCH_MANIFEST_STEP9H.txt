@@ -1,0 +1,19 @@
+STEP 9H PATCH MANIFEST
+======================
+
+Added:
+- RegimeTrading/scripts/step9h_cross_sectional_holdout_transport.py
+- RegimeTrading/scripts/collect_step9h_holdout_data.py
+- run_step9h_cross_sectional_holdout_transport.ps1
+- collect_step9h_holdout_data.ps1
+- README_REGIME_SYSTEM_STEP9H.txt
+- PATCH_MANIFEST_STEP9H.txt
+- tests/test_step9h_cross_sectional_holdout_transport.py
+
+Updated:
+- requirements.txt
+- RegimeTrading/scripts/run_daily_research_workflow.py
+- RegimeTrading/scripts/export_powerbi_workbook.py
+- README_REGIME_SYSTEM_ROADMAP.txt
+
+No production ORB file, frozen V1 strategy definition, Step 9G contract result, or original intraday database is changed.

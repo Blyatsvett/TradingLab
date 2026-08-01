@@ -1,0 +1,16 @@
+Paper simulation → stable workflow → dashboard confidence → manual live micro-trades → semi-automation → full automation
+
+
+
+Before any automatic buying/selling, the system needs to prove:
+
+1. Signals are correct
+2. Paper trades are created correctly
+3. Open trades are updated correctly
+4. Stop/target/EOD logic works every time
+5. Power BI refresh is stable
+6. No duplicate trades
+7. No accidental overnight holds
+8. No wrong ticker selection
+9. No stale data used for decisions
+10. Every decision is logged

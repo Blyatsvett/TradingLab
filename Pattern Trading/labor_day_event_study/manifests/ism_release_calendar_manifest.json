@@ -1,0 +1,23 @@
+{
+  "contains_pmi_values": false,
+  "dataset": "Historical ISM Manufacturing and Services release dates",
+  "end_year": 2025,
+  "generated_at_utc": "2026-07-23T12:16:04.154159+00:00",
+  "generated_csv_sha256": "42c6a73c68a7b459777bc3b22f216f0104948757804e8854857db62a5ea2db8e",
+  "generation_method": "Declared ISM release rules applied to the NYSE session calendar",
+  "manufacturing_rule": "First NYSE business session",
+  "maximum_release_date": "2025-10-03",
+  "minimum_release_date": "1998-08-03",
+  "official_source_url": "https://www.ismworld.org/supply-management-news-and-reports/reports/rob-report-calendar/",
+  "output_path": "data\\raw\\macro_releases\\ism_release_calendar_1998_2025.csv",
+  "release_months": [
+    8,
+    9,
+    10
+  ],
+  "release_time_et": "10:00",
+  "row_count": 168,
+  "services_rule": "Third NYSE business session",
+  "start_year": 1998,
+  "verification_status": "official_rule_derived"
+}

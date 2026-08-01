@@ -1,0 +1,12 @@
+COMBINED INSTALL BUNDLE
+=======================
+
+This bundle includes:
+- Original STEP9J_CHALLENGER_REGIME_STRATEGY_REDESIGN_V1
+- All-23 Step 9I V2 prospective router
+- All-23 Step 9I-R V2 historical replay
+- All-23 Step 9J V2 challenger extension
+- V2 preflight and PowerShell launchers
+
+Extract once into the Regime trading project root. All files are additive.
+No existing production or Step 9I V1 file is replaced.

@@ -1,0 +1,23 @@
+V1 RESEARCH VALIDATION SUITE - STEP 6 RECONCILIATION PATCH
+===========================================================
+
+New:
+- RegimeTrading/scripts/v1_validation_exposure_reconciliation.py
+- tests/test_v1_validation_exposure_reconciliation.py
+- README_V1_VALIDATION_STEP6_RECONCILIATION.txt
+
+Updated:
+- RegimeTrading/scripts/run_daily_research_workflow.py
+- RegimeTrading/scripts/export_powerbi_workbook.py
+- RegimeTrading/scripts/validate_outputs.py
+- run_v1_validation_step6.ps1
+- run_v1_validation_suite.ps1
+
+New output:
+- data/v1_validation_exposure_reconciliation.csv
+
+Safety:
+- Research-only isolated project
+- No V1 strategy-rule changes
+- No production or paper-trading changes
+- Workflow stops if Step 1 and Step 6 fail to reconcile exactly

@@ -1,0 +1,11 @@
+STEP9L WINDOWS SQLITE CLEANUP FIX
+
+Purpose:
+- Explicitly close SQLite connections in the Step 9L comparison reader and its test fixture.
+- Fix Windows WinError 32 when TemporaryDirectory removes frozen.db/research.db.
+
+Files replaced:
+- RegimeTrading\scripts\step9l_compare_step9i_v2.py
+- tests\test_step9l_compare_step9i_v2.py
+
+No strategy definitions, routing rules, ledgers, or Step 9I files are changed.

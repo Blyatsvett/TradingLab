@@ -1,0 +1,26 @@
+STEP 9C PATCH MANIFEST
+======================
+
+New files
+---------
+RegimeTrading/scripts/step9c_playbook_loss_diagnostics.py
+run_step9c_playbook_loss_diagnostics.ps1
+tests/test_step9c_playbook_loss_diagnostics.py
+README_REGIME_SYSTEM_STEP9C.txt
+PATCH_MANIFEST_STEP9C.txt
+
+Modified files
+--------------
+RegimeTrading/scripts/run_daily_research_workflow.py
+RegimeTrading/scripts/export_powerbi_workbook.py
+RegimeTrading/scripts/validate_outputs.py
+
+Unchanged guarantees
+--------------------
+- Production Intraday project is not touched.
+- Frozen REGIME_AWARE_GAP_RECOVERY_V1 is not router eligible.
+- Strict point-in-time recovery V2 remains the recovery research candidate.
+- Same-day outcomes are not classifier inputs.
+- Step 9B trades are not rewritten or optimized.
+- Step 9C remains simulation-only and does not run a shared account.
+- Screening actions are diagnostic hypotheses, not strategy promotions.

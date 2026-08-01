@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "path": "RegimeTrading/scripts/step9t_regime_transition_archetype_research_v1.py",
+      "sha256": "c313c0d373f4e5efa9c52af4bad4d0179fc47eaa6b3f815462166130d98d6ad9",
+      "size_bytes": 31989
+    },
+    {
+      "path": "STEP9T_HISTORICAL_REPLAY_V1_INSTALL.md",
+      "sha256": "2b8555bcb4fec782abe5410c6ecfa4d2d8f0672a6290675c5ae8b4faafb8aca9",
+      "size_bytes": 1010
+    },
+    {
+      "path": "STEP9T_REGIME_TRANSITION_ARCHETYPE_RESEARCH_V1_BUILD_SPEC.md",
+      "sha256": "5685e6a7d1f791e4e8e34a1acdeba0a44c02abf55759e6444c4cbed2ff31d3d7",
+      "size_bytes": 7005
+    },
+    {
+      "path": "STEP9T_REGIME_TRANSITION_ARCHETYPE_RESEARCH_V1_README.md",
+      "sha256": "ad8c57deaf2919d6658b5719bf77bb35febb6c876a5fafe2e365c49b92ba4859",
+      "size_bytes": 1809
+    },
+    {
+      "path": "STEP9T_V1_SCHEMA_DICTIONARY.csv",
+      "sha256": "40b719dc5bc744ceec58af48af955482867b7e90eb35ba515b2432450b9e61fd",
+      "size_bytes": 3211
+    },
+    {
+      "path": "config/step9t_regime_transition_archetype_research_v1.json",
+      "sha256": "b90eea17780909ff206bba35483883fa33f667fbef18ee7e50bd53705097523b",
+      "size_bytes": 1311
+    },
+    {
+      "path": "run_step9t_historical_replay_v1.ps1",
+      "sha256": "f7be46f670765852db8650597bd6af135105a3c0f71f4cd226c5629700a80687",
+      "size_bytes": 400
+    },
+    {
+      "path": "tests/test_step9t_regime_transition_archetype_research_v1.py",
+      "sha256": "410920af8af1211310002d58d0acf5388fef6bce5d03bceb4252f199cef504ee",
+      "size_bytes": 6647
+    },
+    {
+      "path": "tools/verify_step9t_historical_replay_v1.py",
+      "sha256": "74ebaccde9f058e71cacbec254da74b0eb85bf2985d8235c6c8dd00e1771fb0b",
+      "size_bytes": 7832
+    }
+  ],
+  "hotfixes": [
+    "STEP9T_DUPLICATE_MINUTE_CANONICALIZATION_V1"
+  ],
+  "orders_enabled": false,
+  "patch_id": "STEP9T_HISTORICAL_REPLAY_V1_PATCH_20260728",
+  "router_active": false,
+  "source_duplicate_policy": {
+    "conflicting_rows_averaged": false,
+    "historical_replay_policy": "latest_rowid",
+    "policy_id": "LATEST_SQLITE_ROWID_PER_TICKER_MINUTE_V1",
+    "raw_rows_deleted": false,
+    "raw_rows_modified": false,
+    "source_access": "READ_ONLY",
+    "strict_test_default": "error"
+  }
+}

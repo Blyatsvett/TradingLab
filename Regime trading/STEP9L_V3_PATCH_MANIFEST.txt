@@ -1,0 +1,44 @@
+STEP 9L V3 SELECTED-STRATEGY SHADOW ENGINE
+==========================================
+
+Additive versioned engine. Step 9I, Step 9L V1, and Step 9L V2 remain unchanged.
+The four stable "step9l_current" wrappers point to V3 and become the daily commands.
+
+Adds:
+- RegimeTrading/scripts/step9l_v3_selected_strategy_shadow_engine.py
+- RegimeTrading/scripts/step9l_v3_compare_step9i_v2.py
+- tests/test_step9l_v3_selected_strategy_shadow_engine.py
+- tests/test_step9l_v3_compare_step9i_v2.py
+- run_step9l_v3_morning_research_engine.ps1
+- run_step9l_v3_eod_research_engine.ps1
+- export_step9l_v3_research_ledgers.ps1
+- compare_step9i_v2_vs_step9l_v3.ps1
+- run_step9l_current_morning.ps1
+- run_step9l_current_eod.ps1
+- export_step9l_current.ps1
+- compare_step9i_v2_vs_step9l_current.ps1
+- STEP9L_CURRENT_VERSION.txt
+- STEP9L_V3_PATCH_MANIFEST.txt
+
+V3 preserves all seven V2 contracts exactly and adds one primary challenger:
+- TREND_UP
+- upward early move aligned with the stock's sector
+- delayed midpoint-reversal confirmation
+- SHORT trade
+- 1R target
+- status: PROSPECTIVE_TREND_UP_REVERSAL_CHALLENGER
+
+TREND_DOWN remains diagnostic/no-trade.
+
+V3 contract totals:
+- 5 primary hypotheses
+- 3 negative guardrails
+- 8 contracts total
+
+Separate immutable ledger:
+- data\step9l_v3_selected_strategy_shadow_ledger.db
+
+Archived ledgers remain unchanged:
+- data\step9l_selected_strategy_shadow_ledger.db
+- data\step9l_v2_selected_strategy_shadow_ledger.db
+- data\step9i_v2_shadow_ledger.db

@@ -1,0 +1,13 @@
+table,field,purpose
+step9u_prospective_assignment_batches,assignment_batch_id,Immutable morning assignment batch
+step9u_prospective_assignment_batches,source_step9t_batch_id,Sealed Step 9T morning source batch
+step9u_prospective_assignment_batches,source_regime,Immutable opening regime
+step9u_prospective_assignment_batches,transition_state,Immutable Step 9T transition state
+step9u_prospective_assignment_batches,selected_count,Zero to two shadow selections
+step9u_prospective_candidates,candidate_id,Immutable directional candidate identity
+step9u_prospective_candidates,policy_action,Selectable blocked or observation-only classification
+step9u_prospective_candidates,selected_rank,Frozen morning rank for selected candidates
+step9u_prospective_outcome_batches,source_step9t_outcome_batch_id,Immutable Step 9T EOD source batch
+step9u_prospective_outcome_batches,selected_net_pnl_sek,Selected standardized diagnostic P&L
+step9u_prospective_candidate_outcomes,candidate_id,One EOD outcome per morning candidate
+step9u_prospective_candidate_outcomes,net_pnl_sek,Inherited Step 9T standardized counterfactual P&L

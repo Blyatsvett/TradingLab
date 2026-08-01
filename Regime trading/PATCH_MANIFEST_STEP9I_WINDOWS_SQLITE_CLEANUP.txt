@@ -1,0 +1,15 @@
+STEP 9I WINDOWS SQLITE TEST CLEANUP
+
+Purpose
+- Fix WinError 32 during TemporaryDirectory cleanup in two Step 9I tests.
+
+Cause
+- sqlite3.Connection used as a context manager commits/rolls back but does not close.
+- Windows refuses to delete ledger.db while the test readback connection remains open.
+
+Changed file
+- tests/test_step9i_prospective_shadow_router.py
+
+Behavioral impact
+- Test-only cleanup fix.
+- No production code, contracts, ledgers, strategies, data, or research results are changed.

@@ -1,0 +1,27 @@
+Name: Thanksgiving Core
+Assets: AMZN and WMT
+Weights: 50% / 50%
+Direction: Long-only
+Entry: Adjusted close on relative trading day −4
+Exit: Adjusted close on relative trading day +1
+Holding returns: Days −3, −2, −1, 0 and +1
+Base transaction cost: 25 bps round trip
+Stress transaction cost: 50 bps round trip
+Rebalancing: None during the trade
+Stop loss: None
+Profit target: None
+Hedging: None
+Primary historical sample: 2010–2025
+
+
+Name: Thanksgiving Satellite
+Assets: AMZN, WMT and ETSY
+Weights: 40% / 40% / 20%
+Direction: Long-only
+Entry and exit: Same as primary strategy
+Base cost: 25 bps
+Stress cost: 50 bps
+Rebalancing: None
+Stop loss: None
+Hedging: None
+Primary historical sample: 2019–2025

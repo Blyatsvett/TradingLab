@@ -1,0 +1,25 @@
+STEP 8 ROOT PATCH CONTENTS
+==========================
+
+New files
+---------
+RegimeTrading/scripts/step8_provisional_regime_taxonomy.py
+run_step8_provisional_regime_taxonomy.ps1
+tests/test_step8_provisional_regime_taxonomy.py
+README_REGIME_SYSTEM_STEP8.txt
+PATCH_MANIFEST_STEP8.txt
+
+Modified files
+--------------
+RegimeTrading/scripts/run_daily_research_workflow.py
+RegimeTrading/scripts/export_powerbi_workbook.py
+RegimeTrading/scripts/validate_outputs.py
+
+Research guarantees
+-------------------
+- Simulation only.
+- Frozen legacy V1 is not modified.
+- Point-in-time cutoff remains 09:45 using labels through 09:40.
+- Same-day outcome diagnostics are not used for classification.
+- Every observed session receives one active candidate response.
+- All candidate playbooks remain unvalidated research concepts.

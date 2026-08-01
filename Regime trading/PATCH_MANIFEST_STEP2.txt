@@ -1,0 +1,15 @@
+V1 Research Validation Suite Step 2 patch
+
+New files:
+- RegimeTrading/scripts/v1_validation_concentration.py
+- tests/test_v1_validation_concentration.py
+- run_v1_validation_step2.ps1
+- README_V1_VALIDATION_SUITE_STEP2.txt
+- PATCH_MANIFEST_STEP2.txt
+
+Updated files:
+- RegimeTrading/scripts/run_daily_research_workflow.py
+- RegimeTrading/scripts/export_powerbi_workbook.py
+- RegimeTrading/scripts/validate_outputs.py
+- run_v1_validation_suite.ps1
+- README_V1_VALIDATION_SUITE_ROADMAP.txt

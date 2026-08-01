@@ -1,0 +1,31 @@
+STEP 7B PATCH MANIFEST
+======================
+
+New files
+---------
+RegimeTrading\scripts\step7b_v1_regime_timing_comparison.py
+run_step7b_v1_regime_timing_comparison.ps1
+tests\test_step7b_v1_regime_timing_comparison.py
+README_REGIME_SYSTEM_STEP7B.txt
+PATCH_MANIFEST_STEP7B.txt
+
+Modified files
+--------------
+RegimeTrading\scripts\step7_regime_feature_foundation.py
+RegimeTrading\scripts\run_daily_research_workflow.py
+RegimeTrading\scripts\export_powerbi_workbook.py
+RegimeTrading\scripts\validate_outputs.py
+
+Generated at runtime
+--------------------
+data\regime_v1_timing_comparison_summary.csv
+data\regime_v1_timing_comparison_daily.csv
+data\regime_v1_timing_comparison_candidates.csv
+data\regime_v1_timing_comparison_trades.csv
+
+Safety boundary
+---------------
+No production ORB file is included.
+Frozen Gap Recovery V1 is not modified.
+The strict 09:40 implementation is shadow research only.
+No live or paper order functionality is added.

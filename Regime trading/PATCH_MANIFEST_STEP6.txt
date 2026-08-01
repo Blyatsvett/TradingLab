@@ -1,0 +1,21 @@
+V1 RESEARCH VALIDATION SUITE STEP 6 - PATCH MANIFEST
+====================================================
+
+New files
+---------
+RegimeTrading\scripts\v1_validation_exposure_efficiency.py
+run_v1_validation_step6.ps1
+README_V1_VALIDATION_SUITE_STEP6.txt
+tests\test_v1_validation_exposure_efficiency.py
+PATCH_MANIFEST_STEP6.txt
+
+Updated files
+-------------
+RegimeTrading\scripts\run_daily_research_workflow.py
+RegimeTrading\scripts\export_powerbi_workbook.py
+RegimeTrading\scripts\validate_outputs.py
+run_v1_validation_suite.ps1
+README_V1_VALIDATION_SUITE_ROADMAP.txt
+
+No production Intraday files are included.
+No V1 strategy rules are changed.

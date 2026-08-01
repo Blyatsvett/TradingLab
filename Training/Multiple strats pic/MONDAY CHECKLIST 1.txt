@@ -1,0 +1,15 @@
+Before market open:
+- Run workflow
+- Check ORB latest signals
+- Confirm Power BI refresh
+- Confirm shadow status
+
+During market:
+- Monitor frozen ORB only
+- Do not trade shadow strategies
+- Log observations
+
+After market close:
+- Run workflow again
+- Refresh Power BI
+- Review paper trades + shadow latest trades

@@ -1,0 +1,976 @@
+{
+  "schema_version": "POWERBI_MONITOR_SCHEMA_V1",
+  "description": "Stable read-only Excel reporting contract for Step 9I V2, Step 9L V3, and Step 9Q-B Lite intraday monitoring.",
+  "universe": {
+    "regime_source_tickers": [
+      "ALFA.ST",
+      "ATCO-A.ST",
+      "ATCO-B.ST",
+      "AZN.ST",
+      "BOL.ST",
+      "ERIC-B.ST",
+      "EVO.ST",
+      "SAND.ST",
+      "SEB-A.ST",
+      "SHB-A.ST",
+      "SWED-A.ST"
+    ],
+    "tradable_tickers": [
+      "SHB-A.ST",
+      "ERIC-B.ST",
+      "ALFA.ST",
+      "SEB-A.ST",
+      "ATCO-A.ST",
+      "ABB.ST",
+      "ASSA-B.ST",
+      "VOLV-B.ST",
+      "SKF-B.ST",
+      "NDA-SE.ST",
+      "INVE-B.ST",
+      "SOBI.ST",
+      "GETI-B.ST",
+      "ESSITY-B.ST",
+      "HM-B.ST",
+      "ELUX-B.ST",
+      "TEL2-B.ST",
+      "TELIA.ST",
+      "HEXA-B.ST",
+      "SSAB-A.ST",
+      "SCA-B.ST",
+      "CAST.ST",
+      "FABG.ST"
+    ]
+  },
+  "tables": {
+    "System_Status": {
+      "excel_table_name": "tblSystemStatus",
+      "columns": [
+        {
+          "name": "SchemaVersion",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "GeneratedAtStockholm",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "WorkbookStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "PublishMode",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "SourceAccessMode",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "PowerBIRefreshMode",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "Step9ILedgerExists",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "Step9LLedgerExists",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "PriceDbExists",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "FeedStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "Notes",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    },
+    "Engine_Status": {
+      "excel_table_name": "tblEngineStatus",
+      "columns": [
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "Engine",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "ExperimentID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "BatchID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "SealTimeStockholm",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "ProspectiveStatus",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "PrimaryRegime",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "RegimeConfidence",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "ConfidenceBand",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "DirectionBias",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "DecisionCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "EligibleCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "ActiveGuardrailCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "RegimeSourceTickersObserved",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "TradableTickersObserved",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "SourceMaxDateTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "EngineStatus",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    },
+    "Signal_Decisions": {
+      "excel_table_name": "tblSignalDecisions",
+      "columns": [
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "Engine",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "DecisionID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "BatchID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "ContractID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "ContractType",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "TestRole",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "Ticker",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "CompanyID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "BroadSector",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "PrimaryRegime",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "RegimeMatch",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "TickerRelativeState",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "VolatilityBucket",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "RangeState",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "SectorDirectionState",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "SectorDirectionAlignment",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "IntendedSide",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "ContractEligible",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "IsPrimary",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "IsGuardrail",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "DecisionAction",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "DecisionReason",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "PointInTimePass",
+          "type": "boolean",
+          "nullable": true
+        },
+        {
+          "name": "MaxRouterSourceLabel",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "SealedAtStockholm",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "DecisionStatus",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    },
+    "Engine_Comparison": {
+      "excel_table_name": "tblEngineComparison",
+      "columns": [
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "Step9IStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "Step9LStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "RegimeAgreement",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "ConfidenceAgreement",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "Step9IRegime",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "Step9LRegime",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "Step9IConfidence",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "Step9LConfidence",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "Step9IDecisionCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "Step9LDecisionCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "Step9IEligibleCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "Step9LEligibleCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "EligibleDifference",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "Step9IActiveGuardrails",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "Step9LActiveGuardrails",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "BothProspective",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "ComparisonStatus",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    },
+    "Feed_Health": {
+      "excel_table_name": "tblFeedHealth",
+      "columns": [
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "LastBarDateTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "LastBarLabel",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "ExpectedUniverseTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "ReceivedUniverseTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "MissingUniverseTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "MissingUniverseTickers",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "ExpectedRegimeSourceTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "ReceivedRegimeSourceTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "MissingRegimeSourceTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "MissingRegimeSourceTickers",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "ExpectedTradableTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "ReceivedTradableTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "MissingTradableTickerCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "MissingTradableTickers",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "DataRowsForSession",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "DuplicateBarCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "InvalidOHLCCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "LatestCollectionUTC",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "DataFreshnessMinutes",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "FeedStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "Notes",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    },
+    "Live_Trade_Status": {
+      "excel_table_name": "tblLiveTradeStatus",
+      "columns": [
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "SnapshotTimeStockholm",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "ProspectiveStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "EvidenceEligible",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "DecisionID",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "ContractID",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "BaseChallengerID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "SelectionStatus",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "TestRole",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "IsPrimary",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "IsGuardrail",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "Ticker",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "CompanyID",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "BroadSector",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "Direction",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "SelectionRank",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "SelectedForSimulation",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "TradeStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "IsOpenForTrade",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "IsCurrentlyTraded",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "SetupStatus",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "TriggerStatus",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "SignalTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "EntryTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "EntryPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "CurrentPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "CurrentPriceTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "StopPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "TargetPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "ExitTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "ExitPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "ExitReason",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "RiskCappedNotionalSEK",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "UnrealizedPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "ProvisionalRealizedPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "DisplayPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "PnLIncludedInEquity",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "LastCompletedBar",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "ReplayStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "PointInTimePass",
+          "type": "boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "Trade_History": {
+      "excel_table_name": "tblTradeHistory",
+      "columns": [
+        {
+          "name": "TradeRecordID",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "RecordStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "IsAuthoritative",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "ProspectiveStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "EvidenceEligible",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "ContractID",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "TestRole",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "Ticker",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "Direction",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "EntryTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "EntryPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "StopPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "TargetPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "ExitTime",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "ExitPrice",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "ExitReason",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "NetPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "WinningTrade",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "PnLIncludedInEquity",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "PointInTimePass",
+          "type": "boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "Account_Snapshot": {
+      "excel_table_name": "tblAccountSnapshot",
+      "columns": [
+        {
+          "name": "SessionDate",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "SnapshotTimeStockholm",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "InitialCapitalSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "RealizedPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "UnrealizedPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "TotalPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "CurrentEquitySEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "ConfirmatoryTotalPnLSEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "ConfirmatoryEquitySEK",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "OpenForTradeCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "OpenTradeCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "ClosedTradeCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "WinningTradeCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "WinRatePct",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "ConfirmatoryClosedTradeCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "ConfirmatoryWinningTradeCount",
+          "type": "integer",
+          "nullable": false
+        },
+        {
+          "name": "ConfirmatoryWinRatePct",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "LastCompletedBar",
+          "type": "datetime",
+          "nullable": true
+        },
+        {
+          "name": "ReplayStatus",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "EquityBasis",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "Notes",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    }
+  }
+}
