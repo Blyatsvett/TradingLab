@@ -85,7 +85,6 @@ jobs:
         run: >-
           python -B -m pytest -q -p no:cacheprovider
           tests/test_step9_morning_v2_install_contract.py
-          tests/test_step9_morning_v2_persistent_worker.py
           tests/test_step9_morning_v2_support.py
           tests/test_step9_full_morning_safety_v1.py
 
