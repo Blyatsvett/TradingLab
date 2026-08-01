@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 import pytest
 
-from RegimeTrading.core.paths import DATA_DIR
+from RegimeTrading.core.paths import legacy_output_path
 from RegimeTrading.core.stage_registry import resolve_stage_path
 from RegimeTrading.scripts import step9s_prospective_contingency_shadow_v1 as step9s
 
@@ -192,7 +192,7 @@ def test_database_triggers_and_conflicting_insert_protect_immutability(tmp_path:
 
 def test_local_natural_evaluators_cover_all_non_step9l_regimes() -> None:
     prices = step9s._load_prices_read_only(SOURCE_DB)
-    taxonomy = pd.read_csv(DATA_DIR / "regime_daily_taxonomy.csv")
+    taxonomy = pd.read_csv(legacy_output_path("regime_daily_taxonomy.csv"))
     expected = {
         "RECOVERY": "2026-07-08",
         "TREND_DOWN": "2026-07-14",

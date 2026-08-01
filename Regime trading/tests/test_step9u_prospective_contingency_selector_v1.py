@@ -11,14 +11,13 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 import pytest
 
-from RegimeTrading.core.paths import DATA_DIR
 from RegimeTrading.core.stage_registry import resolve_stage_path
 from RegimeTrading.scripts import step9t_prospective_regime_transition_archetype_v1 as step9t
 from RegimeTrading.scripts import step9u_prospective_contingency_selector_v1 as step9u
 
 
 STOCKHOLM = ZoneInfo("Europe/Stockholm")
-SOURCE_DB = DATA_DIR / "step9i_shadow_intraday_prices.db"
+SOURCE_DB = resolve_stage_path("prices")
 STEP9L_LEDGER = resolve_stage_path("step9l")
 
 

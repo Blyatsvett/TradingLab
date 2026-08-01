@@ -51,6 +51,17 @@ U_MOCK_STATUSES = {
     "SOURCE_STEP9T_NOT_CONFIRMATORY",
 }
 
+_MANIFEST_TEXT_SUFFIXES = {
+    ".json",
+    ".md",
+    ".py",
+    ".ps1",
+    ".toml",
+    ".txt",
+    ".yaml",
+    ".yml",
+}
+
 
 class MorningV2Error(RuntimeError):
     pass
@@ -62,6 +73,14 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _manifest_sha256(path: Path) -> str:
+    """Hash manifest text canonically across Windows and Unix checkouts."""
+    payload = path.read_bytes()
+    if path.suffix.lower() in _MANIFEST_TEXT_SUFFIXES:
+        payload = payload.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def _safe_relative_path(root: Path, relative: str) -> Path:
@@ -90,7 +109,7 @@ def verify_runtime_manifest(manifest_path: Path, root: Path = ROOT) -> dict[str,
         path = _safe_relative_path(Path(root), str(relative))
         if not path.is_file():
             raise MorningV2Error(f"Required runtime dependency is missing: {relative}")
-        actual = _sha256(path)
+        actual = _manifest_sha256(path)
         if actual.lower() != str(expected).lower():
             raise MorningV2Error(
                 f"Runtime dependency differs from the audited source: {relative}"
