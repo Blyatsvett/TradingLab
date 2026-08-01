@@ -38,6 +38,10 @@ Invoke-Checked -Label "PYTHON COMPILE CHECK" -Arguments @(
     "-m", "compileall", "-q", "RegimeTrading", "tests", "tools"
 )
 
+Invoke-Checked -Label "CANONICAL PIPELINE CONTRACT CHECK" -Arguments @(
+    "tools\validate_canonical_pipeline.py"
+)
+
 $JsonFiles = @(Get-ChildItem -LiteralPath "config" -Filter "*.json" -File -Recurse)
 foreach ($JsonFile in $JsonFiles) {
     try {

@@ -33,7 +33,7 @@
     "RegimeTrading/scripts/step9l_v2_selected_strategy_shadow_engine.py": "b5f3f9c34eabd0eb93a71b5078565435fe648919ea1c205ffe988ae1278edb44",
     "RegimeTrading/scripts/step9l_v3_selected_strategy_shadow_engine.py": "0dc8e72a64192fac4174ba436c01eaa9b83024b2338d43e89e5bad74f8fb6535",
     "RegimeTrading/scripts/step9r_v1_candidate_ranking_research.py": "55ea4dcc2182baa8cdf413f2d734fef71954e842da11451cd45cbaeb16ff4d0c",
-    "RegimeTrading/scripts/step9s_historical_contingency_replay_v1.py": "40f99f2c15a3f1bb9dfaa19f80f850ee96ef23ee69f6d9f6f737f84ed7b22ef3",
+    "RegimeTrading/scripts/step9s_historical_contingency_replay_v1.py": "043f9bd7b0c472003c019db4f76ff6c59eb37bf87933eb1ba44b51b4079fc110",
     "RegimeTrading/scripts/step9s_prospective_contingency_shadow_v1.py": "1ce044e16d55dbcc3448bac12a204dad2785fc0fa423328b5acc79af010e6de1",
     "RegimeTrading/scripts/step9t_prospective_regime_transition_archetype_v1.py": "a2ee8e967b73111d8f0e75480ca1eeae4cfac4e862d5b317b38dff166761f7df",
     "RegimeTrading/scripts/step9t_regime_transition_archetype_research_v1.py": "c54873dc998f645cc5645c54d5b72cfd7b89fa4d4769eea0fb798bfe2f53f408",
@@ -62,7 +62,7 @@
     "tests/test_step9_morning_v2_persistent_worker.py": "3dc8479f2138e75faa588529d364ee2e9ac54eecf56b4fa24ba3d2addca851fc",
     "tools/step9_morning_v2_exit_code.ps1": "46b490513e1e1615e46f43050907e2f42a4f41aa58ba11e70fcea4732cec1347",
     "tools/step9_morning_v2_support.py": "48b3597057af24699f583a280ac1b88302bde2667a4bf3b6b9c8f8c78a5f7a77",
-    "config/stage_registry.json": "af010fa3db9dd8b6a017011add8ed9e0ff54a41d070035e11e30e7ef8893cd25",
+    "config/stage_registry.json": "571862e7598d4c7398e2d4777c6482bfdd16e6ccc46c357d354c3272403f351c",
     "config/paths.json": "414be96bee0ec3943b93b5095b60c940c53828c39e90237d762218a94123bd77"
   },
   "manifest_id": "STEP9_MORNING_V2_RUNTIME_CLOSURE_20260731_V8_DEFERRED_CORE_SENSITIVITY"

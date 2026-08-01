@@ -13,7 +13,14 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from RegimeTrading.core.paths import legacy_output_path
 from RegimeTrading.core.stage_registry import resolve_stage_output_dir, resolve_stage_path
+from RegimeTrading.scripts.step9s_historical_contingency_replay_v1 import (
+    BASELINE_CANDIDATE_FILE,
+    BASELINE_TRADE_FILE,
+    PRICE_DB,
+    TAXONOMY_FILE,
+)
 
 
 EXPERIMENT_ID = "STEP9S_HISTORICAL_CONTINGENCY_REPLAY_V1"
@@ -90,15 +97,14 @@ def _load_outputs(output_dir: Path) -> dict[str, Any]:
 
 
 def _source_path_map(project_root: Path, registry: pd.DataFrame) -> dict[str, Path]:
-    data_dir = project_root / "data"
     mapping = {
-        "taxonomy": data_dir / "regime_daily_taxonomy.csv",
-        "baseline_candidates": data_dir / "regime_playbook_baseline_candidates.csv",
-        "baseline_trades": data_dir / "regime_playbook_baseline_trades.csv",
-        "price_db": data_dir / "intraday_prices.db",
+        "taxonomy": TAXONOMY_FILE,
+        "baseline_candidates": BASELINE_CANDIDATE_FILE,
+        "baseline_trades": BASELINE_TRADE_FILE,
+        "price_db": PRICE_DB,
     }
     for row in registry.itertuples(index=False):
-        mapping[f"natural_{row.regime}"] = data_dir / str(row.natural_source_file)
+        mapping[f"natural_{row.regime}"] = legacy_output_path(str(row.natural_source_file))
     return mapping
 
 
@@ -108,7 +114,7 @@ def _protected_paths(project_root: Path, source_paths: dict[str, Path]) -> list[
         project_root / "config/step9s_historical_contingency_replay_v1.json",
         resolve_stage_path("step9i"),
         resolve_stage_path("step9l"),
-        project_root / "data/step9i_shadow_intraday_prices.db",
+        resolve_stage_path("prices"),
     ]
     result: list[Path] = []
     seen: set[Path] = set()

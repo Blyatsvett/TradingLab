@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from RegimeTrading.core.paths import INTRADAY_DB
+from RegimeTrading.core.paths import DATA_DIR
 from RegimeTrading.scripts import step9s_historical_contingency_replay_v1 as step9s
 
 
@@ -32,10 +32,10 @@ def test_registry_covers_exactly_the_nine_recognized_regimes() -> None:
 
 def test_full_historical_replay_has_one_mandatory_trade_per_session(tmp_path: Path) -> None:
     protected = [
-        INTRADAY_DB,
-        DATA_DIR / "regime_daily_taxonomy.csv",
-        DATA_DIR / "regime_playbook_baseline_candidates.csv",
-        DATA_DIR / "regime_playbook_baseline_trades.csv",
+        step9s.PRICE_DB,
+        step9s.TAXONOMY_FILE,
+        step9s.BASELINE_CANDIDATE_FILE,
+        step9s.BASELINE_TRADE_FILE,
     ]
     before = {path: _hash(path) for path in protected}
 
