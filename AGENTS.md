@@ -18,6 +18,7 @@ The projects are currently in research and backtesting. Live-trading infrastruct
 - Its authoritative project map is maintained in `Regime trading/docs/ACTIVE_SYSTEM_GUIDE.md`.
 - Data migration and classification records are maintained in `Regime trading/docs/DATA_MIGRATION_MANIFEST_V1.md`, `Regime trading/docs/DATA_SEPARATION_MAP.md`, and `Regime trading/docs/ROOT_DATA_CLASSIFICATION_V1.md`.
 - This root `AGENTS.md` is the single project-wide working-agreement file. Update it when the project structure or operating rules change.
+- The concise project ownership and command map is maintained in `docs/PROJECT_MAP.md`.
 
 ## Regime Trading data layout
 
@@ -33,6 +34,15 @@ The projects are currently in research and backtesting. Live-trading infrastruct
 - Keep existing scripts and pipelines runnable, including legacy research scripts, while routing their outputs through configured path helpers.
 - Treat databases and SQLite sidecars as one migration unit.
 - Preserve frozen manifests, source hashes, and historical provenance strings even when their referenced live files have moved.
+
+## Independent project environments
+
+- Regime Trading: `Regime trading/setup_regime_trading.ps1`, then `Regime trading/tools/run_project_validation.ps1`.
+- Swing: `Swing/setup_swing.ps1`, then `Swing/validate_swing.ps1` or `Swing/run_swing_backtest.ps1`.
+- Pattern Trading: `Pattern Trading/setup_pattern_trading.ps1`, then `Pattern Trading/validate_pattern_trading.ps1`.
+- Intraday: `Intraday/setup_intraday.ps1`, then `Intraday/validate_intraday.ps1` or `Intraday/run_intraday_workflow.ps1`.
+
+Run each command from its owning project folder. Do not use the root workspace environment as a substitute for a project environment.
 
 ## Safety and reproducibility
 

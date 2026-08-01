@@ -161,6 +161,18 @@ Generated CSVs, audit tables, Power BI workbooks, and freeze manifests are evide
 
 Historical material is retained for reproducibility. Do not delete or rewrite it during normal development.
 
+## Consolidated note index
+
+Older Regime Trading notes remain available as provenance, but the following rules now govern their use:
+
+- `README_REGIME_SYSTEM_ROADMAP.txt` and the Step 7–9 README files describe development history; the canonical current chain is the pipeline documented above.
+- `ROUTINE AND SCRIPS.txt`, `Scripts and Routines.txt`, and `UPDATED STRATEGY ADJUSTED.txt` are historical operating notes; use the approved entry-point table and `docs/REPRODUCIBILITY.md` for current commands.
+- `PATCH_MANIFEST*`, `INSTALL_*`, and `STEP9*_PATCH_MANIFEST*` files are installation/provenance evidence. They do not override the current configuration or path registry.
+- Step 9R/9S/9T/9U/9V README and specification files remain the detailed stage contracts; their active status is governed by the current configs, ledgers, hashes, and tests.
+- Screenshots under `prt screens/`, frozen material under `backups/`, and installer material under `Zip bod installation/` support historical interpretation only.
+
+When an older note conflicts with current code, the precedence order is: current source and tests, current config/registry, current manifests and ledgers, then historical notes and installer bundles.
+
 ## Verification baseline
 
 The active project currently has approximately 50 Python test files and 389 test functions by source inspection. The primary Python source compiles successfully, and the main V2 PowerShell entry points pass parser validation. The project-local `.venv` must contain NumPy, Pandas, SciPy, OpenPyXL, pytest, and yfinance; run `tools/check_dependencies.py` before treating missing verifier output as a code failure. The Codex-bundled Python runtime does not include SciPy and is suitable only for static checks unless separately provisioned.

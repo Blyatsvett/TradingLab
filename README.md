@@ -29,6 +29,8 @@ The overall system is currently research/backtesting only. Live trading is a fut
 
 Open this `TradingLab` folder as the project in the desktop app. Read `AGENTS.md` before making changes. Start with an inventory and a baseline test run before refactoring project internals.
 
+For the current folder ownership and independent project commands, see [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md).
+
 ## Repository boundary
 
 Source code, configurations, project documentation, and reproducible research definitions belong in Git. Local databases, downloaded/raw data, generated outputs, archives, virtual environments, and proprietary dashboard exports remain local and are excluded by `.gitignore`.
